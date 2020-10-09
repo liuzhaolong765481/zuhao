@@ -32,7 +32,7 @@ class AuthController extends Controller
             $this->validateInput($rules);
 
             $admin = Admin::where('name', $this->validated['name'])
-                ->where('password', $this->validated['password'])
+                ->where('password', encrypt_psd($this->validated['password']))
                 ->first();
 
             // 登录
