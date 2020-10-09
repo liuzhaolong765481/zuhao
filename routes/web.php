@@ -20,6 +20,15 @@
 //});
 
 
+Route::group(['prefix' => 'index'], function ($r){
+    /**
+     * @var $r Route
+     */
+
+    $r->get('/', 'IndexController@index')->name('index');
+    $r->get('404', 'IndexController@notFund')->name('404');
+    $r->get('500', 'IndexController@serverError')->name('500');
+});
 
 Route::group(['prefix' => 'auth'], function ($r){
     /**
