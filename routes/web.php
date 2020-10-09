@@ -11,17 +11,20 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::group(['middleware' => 'auth'], function ($r) {
 
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
+//});
 
 
 Route::group(['prefix' => 'auth'], function ($r){
     /**
      * @var $r Route
      */
-    $r->get('login','AuthController@login');
+    $r->get('login','AuthController@login')->name('login');
     $r->get('logout','AuthController@logout');
 
 });

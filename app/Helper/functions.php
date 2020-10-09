@@ -54,15 +54,6 @@ function is_assoc($array)
     return array_keys($array) !== range(0, count($array));
 }
 
-/**
- * 生成 appToken
- * @param $id
- * @return string
- */
-function get_app_token($id)
-{
-    return md5($id . time() . "cpiaoju");
-}
 
 /**
  * 大写日期转小写
@@ -161,13 +152,7 @@ function add_mosaic($str, $start, $len)
     return substr_replace($str, $modify, $start, $len);
 }
 
-function get_company_auth_status(){
-    return \App\Models\Company::getCompanyStatus();
-}
 
-function get_bank_auth_status(){
-    return   (new \App\Models\Bank())->getBankStatus();
-}
 
 function is_ssl($str, $resize = false)
 {
@@ -253,10 +238,6 @@ function format_amount($amount, $type = 0, $status = true)
     return $status ? number_format($amount / 100, 2) . $prefix : number_format($amount, 2) . $prefix;
 }
 
-function get_qr_code($params)
-{
-    return 'cpiaoju://' . json_encode($params);
-}
 
 function img_base64($url)
 {
@@ -276,4 +257,10 @@ function get_hash()
     $random  = $chars[mt_rand(0, 73)] . $chars[mt_rand(0, 73)] . $chars[mt_rand(0, 73)] . $chars[mt_rand(0, 73)] . $chars[mt_rand(0, 73)];
     $content = uniqid() . $random;
     return sha1($content);
+}
+
+
+function starts_with($str, $pattern)
+{
+    return strpos($str, $pattern) === 0 ? true : false ;
 }

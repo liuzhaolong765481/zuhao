@@ -1,0 +1,58 @@
+/*报错*/
+.error404{
+    display: block;
+    padding-top: 30px;
+}
+.error404 img{
+    display: block;
+    margin: 0 auto;
+}
+.error404>span{
+    display: block;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 50px;
+}
+.error404>a{
+    display: block;
+    background: #00a1f1;
+    width: 200px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+    margin: 40px auto 0;
+    text-decoration: none;
+    border-radius: 5px;
+}
+.center{
+    width: 1200px;
+    margin: 0 auto;
+}
+
+/*请求成功*/
+.submitState{
+    padding-top: 100px;
+    padding-bottom: 70px;
+}
+.submitState img{
+    display: block;
+    margin: 0 auto;
+}
+.submitState h6{
+    font-size: 24px;
+    text-align: center;
+    margin-top: 60px;
+}
+.submitState p{
+    text-align: center;
+    margin-top: 30px;
+}
+.submitState p em{
+    color: #d82b24;
+}
+.submitState p a{
+    color: #d82b24;
+    text-decoration: underline;
+}

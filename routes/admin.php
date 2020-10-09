@@ -5,13 +5,17 @@
  * Time: 13:06
  */
 
-Route::group(['prefix' => 'auth'], function ($r){
+Route::group(['middleware' => 'auth'], function ($r) {
 
-    /**
-     * @var $r Route
-     */
-    $r->get('login','AuthController@login');
-    $r->get('logout','AuthController@logout');
+    Route::group(['prefix' => 'auth'], function ($r){
 
+        /**
+         * @var $r Route
+         */
+        $r->any('login','AuthController@login')->name('admin.login');
+        $r->get('logout','AuthController@logout');
+
+
+    });
 
 });

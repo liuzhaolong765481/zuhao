@@ -2,8 +2,13 @@
 
 namespace App\Exceptions;
 
+use App\Http\Controllers\Controller;
 use Exception;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Support\Facades\Route;
 
 class Handler extends ExceptionHandler
 {
@@ -39,17 +44,112 @@ class Handler extends ExceptionHandler
         parent::report($exception);
     }
 
+
     /**
-     * Render an exception into an HTTP response.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @throws \Exception
+     * @param \Illuminate\Http\Request $request
+     * @param Exception $exception
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector|mixed|\Symfony\Component\HttpFoundation\Response
+     * @throws Exception
      */
     public function render($request, Exception $exception)
     {
-        return parent::render($request, $exception);
+        // 测试环境正常输出错误信息
+        if (config('app.debug')) {
+            return parent::render($request, $exception);
+        }
+
+        if ($request->isMethod('get')) {
+            return $this->get($exception);
+        }
+
+
+        if ($request->isMethod('post')) {
+            return $this->post($exception);
+        }
+
+        return 'BAD ERROR';
     }
+
+    /**
+     * get 异常跳转
+     * @param Exception $exception
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
+     */
+    public function get(Exception $exception)
+    {
+        // 400 请求参数错误
+        if ($exception instanceof RequestException) {
+            return redirect('/');
+        }
+
+        // 302 跳转
+        if ($exception instanceof RedirectException) {
+            return response()->view('template.jump', [
+                'msg' => $exception->getMessage(),
+                'url' => '/',
+                'ok'  => false
+            ]);
+        }
+
+        // 404 页面跳转
+        if ($exception instanceof NotFoundHttpException) {
+            return redirect('404');
+        }
+
+        // 登录 跳转
+        if ($exception instanceof AuthenticationException) {
+            return redirect(route('login'));
+        }
+
+        return redirect('500');
+    }
+
+    /**
+     * post异常跳转
+     * @param Exception $exception
+     * @return mixed
+     */
+    public function post(Exception $exception)
+    {
+        $outPut = new Controller();
+        // 请求参数错误
+        if ($exception instanceof RequestException) {
+            return $outPut->badRequestError($exception->getMessage());
+        }
+
+        // 模型数据 查询错误
+        if ($exception instanceof ModelNotFoundException) {
+            return $outPut->noDataError();
+        }
+
+        // 身份认证失败
+        if ($exception instanceof AuthenticationException) {
+            return $outPut->invalidTokenError();
+        }
+
+        // 404 页面跳转
+        if ($exception instanceof NotFoundHttpException) {
+            return $outPut->notFoundError();
+        }
+
+        return $outPut->internalServerError();
+    }
+
+    /**
+     * 处理admin用户跳转
+     * @param \Illuminate\Http\Request $request
+     * @param AuthenticationException $exception
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Symfony\Component\HttpFoundation\Response
+     */
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+
+        return starts_with(Route::currentRouteName(), 'admin')
+
+            ? redirect(route('admin.login'))
+
+            : parent::unauthenticated($request, $exception);
+
+    }
+
 }

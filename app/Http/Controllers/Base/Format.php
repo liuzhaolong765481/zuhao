@@ -112,7 +112,7 @@ trait Format
      */
     public function invalidTokenError()
     {
-        return $this->error(self::INVALID_TOKEN, trans('message.token.invalid'));
+        return $this->error(self::INVALID_TOKEN, trans('message.token.login'));
     }
 
     /**
@@ -139,16 +139,26 @@ trait Format
     }
 
 
-
+    /**
+     * 成功跳转
+     * @param string $msg
+     * @param string $url
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function successJump($msg = "成功" , $url = "/"){
 
-        return view('template.success' , ['msg' => $msg , 'url' => $url , 'ok' => true]);
+        return view('template.jump' , ['msg' => $msg , 'url' => $url , 'ok' => true]);
     }
 
-
+    /**
+     * 失败跳转
+     * @param string $msg
+     * @param string $url
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function failJump($msg = "失败" , $url = "/"){
 
-        return view('template.fail' , ['msg' => $msg , 'url' => $url , 'ok' => false]);
+        return view('template.jump' , ['msg' => $msg , 'url' => $url , 'ok' => false]);
     }
 
 
