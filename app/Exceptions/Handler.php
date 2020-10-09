@@ -93,7 +93,12 @@ class Handler extends ExceptionHandler
 
         // 404 页面跳转
         if ($exception instanceof NotFoundHttpException) {
-            return redirect('404');
+
+            return starts_with(\Request::path(), 'admin')
+
+                ? redirect(route('admin.login'))
+
+                :redirect('404');
         }
 
         // 登录 跳转
@@ -136,6 +141,7 @@ class Handler extends ExceptionHandler
     }
 
     /**
+     * TODO 暂未生效，有时间再找原因
      * 处理admin用户跳转
      * @param \Illuminate\Http\Request $request
      * @param AuthenticationException $exception
@@ -144,7 +150,7 @@ class Handler extends ExceptionHandler
     protected function unauthenticated($request, AuthenticationException $exception)
     {
 
-        return starts_with(Route::currentRouteName(), 'admin')
+        return starts_with(\Request::path(), 'admin')
 
             ? redirect(route('admin.login'))
 

@@ -20,11 +20,14 @@
 //});
 
 
+
 Route::group(['prefix' => 'auth'], function ($r){
     /**
      * @var $r Route
      */
     $r->get('login','AuthController@login')->name('login');
+    $r->post('login-psd','AuthController@loginPsd');
+    $r->post('login-code','AuthController@loginCode');
     $r->get('logout','AuthController@logout');
 
 });

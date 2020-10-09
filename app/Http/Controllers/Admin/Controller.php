@@ -43,4 +43,11 @@ class Controller extends BaseController
     {
         return [];
     }
+
+
+    public function rView($url)
+    {
+        return view('admin.'.$url);
+    }
+
 }

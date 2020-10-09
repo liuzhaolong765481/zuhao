@@ -19,26 +19,35 @@ class AuthController extends Controller
      */
     public function login()
     {
-        $rules = [
-            'name' => 'required|string',
-            'password' => 'required',
-        ];
-
-        $this->validateInput($rules);
-
-        $admin = Admin::where('name', $this->validated['name'])
-            ->where('password', encrypt_psd($this->validated['password']))
-            ->first();
-
-        // 登录
-        if ($admin instanceof Admin) {
-
-            \Auth::guard('admin')->login($admin);
-
-            return $this->success();
+        if(auth('admin')->check()){
+            return redirect(route('admin.home'));
         }
 
-        return $this->badRequestError(trans('message.auth.login_failed'));
+        if($this->request->isMethod('post')){
+            $rules = [
+                'name' => 'required|string',
+                'password' => 'required',
+            ];
+
+            $this->validateInput($rules);
+
+            $admin = Admin::where('name', $this->validated['name'])
+                ->where('password', $this->validated['password'])
+                ->first();
+
+            // 登录
+            if ($admin instanceof Admin) {
+
+                \Auth::guard('admin')->login($admin);
+
+                return $this->success();
+            }
+
+            return $this->badRequestError(trans('message.auth.login_failed'));
+        }
+
+        return $this->rView('auth.login');
+
     }
 
 

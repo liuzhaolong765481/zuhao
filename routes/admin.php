@@ -5,16 +5,18 @@
  * Time: 13:06
  */
 
-Route::group(['middleware' => 'auth'], function ($r) {
+Route::any('auth/login','AuthController@login')->name('admin.login');
+
+Route::group(['middleware' => 'admin'], function ($r) {
 
     Route::group(['prefix' => 'auth'], function ($r){
 
         /**
          * @var $r Route
          */
-        $r->any('login','AuthController@login')->name('admin.login');
-        $r->get('logout','AuthController@logout');
 
+        $r->get('logout','AuthController@logout');
+        $r->get('home','IndexController@home')->name('admin.home');
 
     });
 
