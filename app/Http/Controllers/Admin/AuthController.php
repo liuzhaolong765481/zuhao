@@ -1,0 +1,52 @@
+<?php
+/**
+ * Created by lzl
+ * Date: 2020 2020/10/9
+ * Time: 13:14
+ */
+
+namespace App\Http\Controllers\Admin;
+
+use App\Models\Admin;
+
+class AuthController extends Controller
+{
+
+    /**
+     * 管理员登录
+     * @return mixed
+     * @throws \App\Exceptions\RequestException
+     */
+    public function login()
+    {
+        $rules = [
+            'name' => 'required|string',
+            'password' => 'required',
+        ];
+
+        $this->validateInput($rules);
+
+        $admin = Admin::where('name', $this->validated['name'])
+            ->where('password', encrypt_psd($this->validated['password']))
+            ->first();
+
+        // 登录
+        if ($admin instanceof Admin) {
+
+            \Auth::guard('admin')->login($admin);
+
+            return $this->success();
+        }
+
+        return $this->badRequestError(trans('message.auth.login_failed'));
+    }
+
+
+    /**
+     * 退出登录
+     */
+    public function logout()
+    {
+        \Auth::guard('admin')->logout();
+    }
+}
