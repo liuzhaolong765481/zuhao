@@ -3,7 +3,6 @@
 namespace App\Services;
 
 
-
 class AuthService extends BaseServices
 {
 
@@ -13,10 +12,12 @@ class AuthService extends BaseServices
      */
     public static function login($members)
     {
-        \Auth::login($members);
+        \Auth::guard('web')->login($members);
 
         return [
             auth()->id(),
         ];
+
     }
+
 }

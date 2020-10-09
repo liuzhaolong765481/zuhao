@@ -14,3 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+
+Route::group(['prefix' => 'auth'], function ($r){
+    /**
+     * @var $r Route
+     */
+    $r->get('login','AuthController@login');
+    $r->get('logout','AuthController@logout');
+
+});

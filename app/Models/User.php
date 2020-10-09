@@ -11,9 +11,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    protected $table = '';
+    protected $table = 'xf_user';
 
-    protected $fillable = [];
+    protected $fillable = ['user_phone', 'password'];
 
     protected $hidden = [
         'password'
