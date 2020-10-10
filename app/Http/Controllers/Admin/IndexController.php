@@ -11,6 +11,11 @@ class IndexController extends Controller
 
     public function home()
     {
+        return $this->rView('home');
+    }
 
+    public function console()
+    {
+        return $this->rView('console');
     }
 }

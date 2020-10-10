@@ -27,6 +27,7 @@ class AuthController extends Controller
             $rules = [
                 'name' => 'required|string',
                 'password' => 'required',
+                'captcha' => 'required|captcha',
             ];
 
             $this->validateInput($rules);
@@ -57,5 +58,22 @@ class AuthController extends Controller
     public function logout()
     {
         \Auth::guard('admin')->logout();
+        return $this->rView('auth.login');
+
     }
+
+
+
+    public function userList()
+    {
+        return $this->rView('auth.user_list');
+    }
+
+    public function managerList()
+    {
+        return $this->rView('auth.manager_list');
+    }
+
+
+
 }
