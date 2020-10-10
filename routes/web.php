@@ -13,9 +13,7 @@
 
 //Route::group(['middleware' => 'auth'], function ($r) {
 
-    Route::get('/', function () {
-        return view('welcome');
-    });
+    Route::get('/', 'IndexController@index')->name('index');
 
 //});
 
@@ -24,8 +22,6 @@ Route::group(['prefix' => 'index'], function ($r){
     /**
      * @var $r Route
      */
-
-    $r->get('/', 'IndexController@index')->name('index');
     $r->get('404', 'IndexController@notFund')->name('404');
     $r->get('500', 'IndexController@serverError')->name('500');
 });
@@ -38,5 +34,17 @@ Route::group(['prefix' => 'auth'], function ($r){
     $r->post('login-psd','AuthController@loginPsd');
     $r->post('login-code','AuthController@loginCode');
     $r->get('logout','AuthController@logout');
+
+});
+
+
+Route::group(['prefix' => 'public'], function ($r){
+    /**
+     * @var $r Route
+     */
+    $r->post('send-sms','PublicController@sendSms');
+    $r->post('upload','PublicController@upload');
+    $r->post('uploads','PublicController@uploads');
+
 
 });

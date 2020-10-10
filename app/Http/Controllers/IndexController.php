@@ -7,6 +7,8 @@
 namespace App\Http\Controllers;
 
 
+use App\Utils\Sms;
+
 class IndexController extends Controller
 {
 

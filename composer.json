@@ -14,7 +14,8 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.18.35",
         "laravel/tinker": "^2.0",
-        "mews/captcha": "^3.2"
+        "mews/captcha": "^3.2",
+        "mrgoon/aliyun-sms": "dev-master"
     },
     "require-dev": {
         "facade/ignition": "^1.4",
