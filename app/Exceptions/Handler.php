@@ -105,8 +105,7 @@ class Handler extends ExceptionHandler
         if ($exception instanceof AuthenticationException) {
             return redirect(route('login'));
         }
-
-        return redirect('500');
+        return redirect(route('500'));
     }
 
     /**

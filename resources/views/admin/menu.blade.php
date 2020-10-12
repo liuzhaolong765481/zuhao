@@ -22,23 +22,42 @@
                     <dd data-name="content">
                         <a href="javascript:;">内容系统</a>
                         <dl class="layui-nav-child">
-                            <dd data-name="list"><a lay-href="app/content/list.html">文章列表</a></dd>
-                            <dd data-name="tags"><a lay-href="app/content/tags.html">分类管理</a></dd>
-                            <dd data-name="comment"><a lay-href="app/content/comment.html">评论管理</a></dd>
+                            <dd data-name="list"><a lay-href="{{url('admin/article/article-list')}}">文章列表</a></dd>
+                            <dd data-name="tags"><a lay-href="{{url('admin/article/cate')}}">分类管理</a></dd>
                         </dl>
                     </dd>
-                    <dd data-name="forum">
-                        <a href="javascript:;">社区系统</a>
+
+                    <dd data-name="content">
+                        <a href="javascript:;">红包卡券</a>
                         <dl class="layui-nav-child">
-                            <dd data-name="list"><a lay-href="app/forum/list.html">帖子列表</a></dd>
-                            <dd data-name="replys"><a lay-href="app/forum/replys.html">回帖列表</a></dd>
+                            <dd data-name="list"><a lay-href="{{url('admin/card/card-list')}}">卡券列表</a></dd>
                         </dl>
+                    </dd>
+
+
+                </dl>
+            </li>
+
+            <li data-name="app" class="layui-nav-item">
+                <a href="javascript:;" lay-tips="游戏管理" lay-direction="2">
+                    <i class="layui-icon layui-icon-template"></i>
+                    <cite>游戏管理</cite>
+                </a>
+                <dl class="layui-nav-child">
+                    <dd>
+                        <a lay-href="{{url('admin/game/game-list')}}">游戏列表</a>
                     </dd>
                     <dd>
-                        <a lay-href="app/message/index.html">消息中心</a>
+                        <a lay-href="{{url('admin/game/game-cate')}}">游戏分类</a>
                     </dd>
-                    <dd data-name="workorder">
-                        <a lay-href="app/workorder/list.html">工单系统</a>
+                    <dd>
+                        <a lay-href="{{url('admin/game/game-region')}}">游戏大区</a>
+                    </dd>
+                    <dd>
+                        <a lay-href="{{url('admin/game/game-service')}}">游戏服务器</a>
+                    </dd>
+                    <dd>
+                        <a lay-href="{{url('admin/game/game-sku')}}">游戏sku</a>
                     </dd>
                 </dl>
             </li>
@@ -46,7 +65,7 @@
             <li data-name="user" class="layui-nav-item">
                 <a href="javascript:;" lay-tips="用户" lay-direction="2">
                     <i class="layui-icon layui-icon-user"></i>
-                    <cite>用户</cite>
+                    <cite>用户管理</cite>
                 </a>
                 <dl class="layui-nav-child">
                     <dd>

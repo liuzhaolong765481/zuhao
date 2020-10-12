@@ -51,13 +51,13 @@
                 </li>
                 <li class="layui-nav-item" lay-unselect>
                     <a href="javascript:;">
-                        <cite>贤心</cite>
+                        <cite>{{auth('admin')->user()->name}}</cite>
                     </a>
                     <dl class="layui-nav-child">
-                        <dd><a lay-href="set/user/info.html">基本资料</a></dd>
-                        <dd><a lay-href="set/user/password.html">修改密码</a></dd>
-                        <hr>
-                        <dd lay-href="{{url('admin/auth/logout')}}" style="text-align: center;"><a>退出</a></dd>
+{{--                        <dd><a lay-href="set/user/info.html">基本资料</a></dd>--}}
+{{--                        <dd><a lay-href="set/user/password.html">修改密码</a></dd>--}}
+{{--                        <hr>--}}
+                        <dd lay-href="javascript:;" style="text-align: center;"><a href="{{url('admin/auth/logout')}}">退出</a></dd>
                     </dl>
                 </li>
 

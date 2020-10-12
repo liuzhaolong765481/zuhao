@@ -1,23 +1,33 @@
 <?php
+
 /**
- * Created by lzl
- * Date: 2020 2020/10/9
- * Time: 11:06
+ * Created by Reliese Model.
  */
 
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * Class Admin
+ * 
+ * @property int $id
+ * @property string|null $name
+ * @property string|null $password
+ *
+ * @package App\Models
+ */
 class Admin extends Authenticatable
 {
+	protected $table = 'xf_admin';
+	public $timestamps = false;
 
-    protected $table = 'xf_admin';
+	protected $hidden = [
+		'password'
+	];
 
-    protected $fillable = ['name', 'password'];
-
-    protected $hidden = [
-        'password'
-    ];
-
+	protected $fillable = [
+		'name',
+		'password'
+	];
 }
