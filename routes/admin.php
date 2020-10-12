@@ -28,5 +28,14 @@ Route::group(['middleware' => 'admin'], function ($r) {
 
 
 
+    Route::group(['prefix' => 'article'], function ($r){
+        /**
+         * @var $r Route
+         */
+        $r->get('article-list','ArticleController@articleList');
+        $r->get('console','IndexController@console');
+    });
+
+
 
 });

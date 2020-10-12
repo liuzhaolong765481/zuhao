@@ -12,4 +12,3 @@
     <script src="{{asset('plugin/layuiadmin/layui/layui.js')}}"></script>
     <script src="{{asset('js/base.js')}}"></script>
 </head>
-<body>

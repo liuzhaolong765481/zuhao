@@ -86,6 +86,13 @@
                     </li>
                 </ul>
             </div>
+
+            <div class="layui-tab" lay-unauto lay-allowClose="true" lay-filter="layadmin-layout-tabs">
+                <ul class="layui-tab-title" id="LAY_app_tabsheader">
+                    <li lay-id="{{url('admin/index/console')}}" lay-attr="{{url('admin/index/console')}}" class="layui-this"><i class="layui-icon layui-icon-home"></i></li>
+                </ul>
+            </div>
+
         </div>
 
         <!-- 主体内容 -->

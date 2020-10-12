@@ -6,7 +6,7 @@
 
         <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
             <li data-name="home" class="layui-nav-item">
-                <a href="javascript:;" lay-href="{{asset('admin/index/console')}}" lay-tips="主页" lay-direction="2">
+                <a href="javascript:;" lay-href="{{url('admin/index/console')}}" lay-tips="主页" lay-direction="2">
                     <i class="layui-icon layui-icon-home"></i>
                     <cite>控制台</cite>
                 </a>
@@ -40,7 +40,7 @@
 
             <li data-name="app" class="layui-nav-item">
                 <a href="javascript:;" lay-tips="游戏管理" lay-direction="2">
-                    <i class="layui-icon layui-icon-template"></i>
+                    <i class="layui-icon layui-icon-template-1"></i>
                     <cite>游戏管理</cite>
                 </a>
                 <dl class="layui-nav-child">
@@ -61,6 +61,25 @@
                     </dd>
                 </dl>
             </li>
+
+            <li data-name="home" class="layui-nav-item">
+                <a href="javascript:;"  lay-tips="主页" lay-direction="2">
+                    <i class="layui-icon layui-icon-rmb"></i>
+                    <cite>账号 / 订单</cite>
+                </a>
+                <dl class="layui-nav-child">
+                    <dd>
+                        <a lay-href="{{url('admin/account/account-list')}}">账号管理</a>
+                    </dd>
+                    <dd>
+                        <a lay-href="{{url('admin/order/order-list')}}">租号订单</a>
+                    </dd>
+                    <dd>
+                        <a lay-href="{{url('admin/order/recharge-cate')}}">充值订单</a>
+                    </dd>
+                </dl>
+            </li>
+
 
             <li data-name="user" class="layui-nav-item">
                 <a href="javascript:;" lay-tips="用户" lay-direction="2">
