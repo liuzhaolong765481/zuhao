@@ -18,7 +18,7 @@ class UploadServices
     /**
      * 图片上传
      * @param $file \Illuminate\Http\UploadedFile 用户上传文件
-     * @param $dir string string 存储路径
+     * @param $dir string 存储路径
      * @return string
      * @throws RequestException
      */
@@ -33,6 +33,7 @@ class UploadServices
 
         // 上传
         if (\Storage::put($filename, file_get_contents($realPath))) {
+            
             return  $filename;
         }
 
