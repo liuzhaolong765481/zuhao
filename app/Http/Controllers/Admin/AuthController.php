@@ -8,6 +8,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Admin;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -66,6 +67,12 @@ class AuthController extends Controller
 
     public function userList()
     {
+        if(request()->ajax())
+        {
+            $list = User::all()->toArray();
+            return $this->showJson($list);
+        }
+
         return $this->rView('auth.user_list');
     }
 

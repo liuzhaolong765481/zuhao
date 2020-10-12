@@ -50,4 +50,13 @@ class Controller extends BaseController
         return view('admin.'.$url);
     }
 
+    public function showJson($list)
+    {
+        $arr['data'] = $list;
+        $arr['count'] = count($list);
+        $arr['code'] = "0";
+        $arr['msg'] = "success";
+        return $arr;
+    }
+
 }
