@@ -27,6 +27,7 @@ class Controller extends BaseController
     // 未效验用户请求参数
     public $request;
 
+
     /**
      * Controller constructor.
      */
@@ -45,18 +46,31 @@ class Controller extends BaseController
     }
 
 
-    public function rView($url)
+    /**
+     * 跳转后台模板
+     * @param $url
+     * @param array $data
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function rView($url, $data = [])
     {
-        return view('admin.'.$url);
+        return view('admin.'.$url, $data);
     }
 
-    public function showJson($list)
+    /**
+     * layui 格式输出
+     * @param $list
+     * @return mixed
+     */
+    public function showJsonLayui($list)
     {
-        $arr['data'] = $list;
-        $arr['count'] = count($list);
-        $arr['code'] = "0";
-        $arr['msg'] = "success";
-        return $arr;
+        return [
+            'data'  => $list->toArray(),
+            'count' => defined('PAGE_COUNT') ? PAGE_COUNT : 0,
+            'code'  => 0,
+            'msg'   => 'success'
+        ];
     }
+
 
 }

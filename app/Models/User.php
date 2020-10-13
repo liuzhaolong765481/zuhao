@@ -33,6 +33,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable
 {
+
+    use Page;
+
 	protected $table = 'xf_user';
 	public $timestamps = false;
 

@@ -16,6 +16,10 @@ Route::group(['middleware' => 'admin'], function ($r) {
         $r->get('logout','AuthController@logout');
         $r->get('user-list','AuthController@userList');
         $r->get('manager-list','AuthController@managerList');
+        $r->any('user-info','AuthController@userInfo');
+        $r->any('user-recharge','AuthController@userRecharge');
+
+
     });
 
     Route::group(['prefix' => 'index'], function ($r){

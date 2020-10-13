@@ -64,16 +64,78 @@ class AuthController extends Controller
     }
 
 
-
+    /**
+     * 用户列表
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|mixed
+     * @throws \App\Exceptions\RequestException
+     */
     public function userList()
     {
-        if(request()->ajax())
-        {
-            $list = User::all()->toArray();
-            return $this->showJson($list);
+        if($this->request->ajax()) {
+
+            $rules = [
+                'page'       => 'required',
+                'limit'      => 'required',
+                'user_phone' => 'nullable',
+            ];
+
+            $this->validateInput($rules);
+
+            $validated = $this->validated;
+
+//            \DB::connection()->enableQueryLog();
+            $where = [];
+            if(isset($validated['user_phone'])){
+                $where['user_phone'] = $validated['user_phone'];
+            }
+
+            $list = User::where($where)
+                ->page($validated['page'], $validated['limit'])
+                ->get();
+//            dd(\DB::getQueryLog());
+
+            return $this->showJsonLayui($list);
         }
 
         return $this->rView('auth.user_list');
+    }
+
+    /**
+     * 用户信息
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|mixed
+     * @throws \App\Exceptions\RequestException
+     */
+    public function userInfo()
+    {
+        $rules = [
+            'id' => 'required',
+            'field' => 'nullable',
+            'value' => 'nullable',
+        ];
+
+        $this->validateInput($rules);
+
+        $user =  User::whereKey($this->validated['id'])->first();
+        if($this->request->isMethod('post')){
+
+            if(isset($this->validated['field'])){
+                $user->update([$this->validated['field'] => $this->validated['value']]);
+            }
+
+            return $this->success();
+        }
+
+
+        return $this->rView('auth.user_info', compact('user'));
+
+    }
+
+    /**
+     * 用户后台充值
+     */
+    public function userRecharge()
+    {
+
     }
 
     public function managerList()
