@@ -65,12 +65,25 @@
             }
             var index = layer.load(1);
             var url = "{{url('admin/auth/user-info')}}";
-            $.post(url,{id:id,field:"status",value:status},function () {
-                layer.close(index);
-                layer.msg("操作成功",{time:800,shade:0.3},function () {
-                    table.reload('user_table')
-                });
-            },"json")
+
+            $.ajax({
+                url:url,
+                dateType:'json',
+                data:{id:id,field:"status",value:status},
+                beforeSend:function() {
+
+                },
+                type:'post',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success:function (res) {
+                    layer.close(index);
+                    layer.msg("操作成功",{time:800,shade:0.3},function () {
+                        table.reload('user_table')
+                    });
+                }
+            })
         });
 
 

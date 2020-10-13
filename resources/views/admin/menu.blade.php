@@ -48,16 +48,16 @@
                         <a lay-href="{{url('admin/game/game-list')}}">游戏列表</a>
                     </dd>
                     <dd>
-                        <a lay-href="{{url('admin/game/game-cate')}}">游戏分类</a>
+                        <a lay-href="{{url('admin/game/cate-list')}}">游戏分类</a>
                     </dd>
                     <dd>
-                        <a lay-href="{{url('admin/game/game-region')}}">游戏大区</a>
+                        <a lay-href="{{url('admin/game/region-list')}}">游戏大区</a>
                     </dd>
                     <dd>
-                        <a lay-href="{{url('admin/game/game-service')}}">游戏服务器</a>
+                        <a lay-href="{{url('admin/game/service-list')}}">游戏服务器</a>
                     </dd>
                     <dd>
-                        <a lay-href="{{url('admin/game/game-sku')}}">游戏sku</a>
+                        <a lay-href="{{url('admin/game/sku-list')}}">游戏sku</a>
                     </dd>
                 </dl>
             </li>

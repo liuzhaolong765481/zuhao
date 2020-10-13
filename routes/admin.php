@@ -41,5 +41,12 @@ Route::group(['middleware' => 'admin'], function ($r) {
     });
 
 
+    Route::group(['prefix' => 'game'], function ($r){
+        /**
+         * @var $r Route
+         */
+        $r->get('game-list','GameController@gameList');
+        $r->get('cate-list','GameController@cateList');
+    });
 
 });

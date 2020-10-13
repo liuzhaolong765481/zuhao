@@ -116,8 +116,8 @@ class AuthController extends Controller
         $this->validateInput($rules);
 
         $user =  User::whereKey($this->validated['id'])->first();
-        if($this->request->isMethod('post')){
 
+        if($this->request->isMethod('post')){
             if(isset($this->validated['field'])){
                 $user->update([$this->validated['field'] => $this->validated['value']]);
             }
