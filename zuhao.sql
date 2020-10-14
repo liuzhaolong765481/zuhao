@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2020-10-12 09:34:30
+Date: 2020-10-14 18:02:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -204,8 +204,11 @@ CREATE TABLE `xf_game` (
   `name` varchar(255) DEFAULT NULL COMMENT '游戏名称',
   `poster` varchar(255) DEFAULT NULL COMMENT '游戏封面图',
   `tag` text COMMENT '游戏标签，json格式',
-  `descript` text COMMENT '游戏描述',
+  `description` text COMMENT '游戏描述',
+  `status` int(2) DEFAULT '1' COMMENT '1：上架  0：下架',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL,
+  `delete_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='游戏表';
 
@@ -222,15 +225,16 @@ CREATE TABLE `xf_game_cate` (
   `cate_name` varchar(255) DEFAULT NULL COMMENT '分类名称',
   `image` varchar(255) DEFAULT NULL COMMENT '分类图片',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='游戏分类表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='游戏分类表';
 
 -- ----------------------------
 -- Records of xf_game_cate
 -- ----------------------------
-INSERT INTO `xf_game_cate` VALUES ('1', '端游', null);
-INSERT INTO `xf_game_cate` VALUES ('2', '手游', null);
-INSERT INTO `xf_game_cate` VALUES ('3', 'steam', null);
-INSERT INTO `xf_game_cate` VALUES ('4', '其他', null);
+INSERT INTO `xf_game_cate` VALUES ('1', '端游', '/uploads/20201014/4ZyYmXkypEuMTHIjRzKgsgc59iClrVRk.jpg');
+INSERT INTO `xf_game_cate` VALUES ('2', '手游', '/uploads/20201014/lewmcT2nzT2fq5nGyXcAE7DweAgUma1b.png');
+INSERT INTO `xf_game_cate` VALUES ('3', 'steam', '/uploads/20201014/BV7mPeWfz4b5jfL7GlKNaUgBwWJlUMNn.jpg');
+INSERT INTO `xf_game_cate` VALUES ('4', '其他', '/uploads/20201014/VGkrGM9pKZAGGpVixms65YqaWeJqx9u5.jpg');
+INSERT INTO `xf_game_cate` VALUES ('5', '暴雪端游', '/uploads/20201014/5Xq4yGbFz5mcwdSqIauNh3wB3YdLV33h.jpg');
 
 -- ----------------------------
 -- Table structure for xf_game_region
@@ -407,19 +411,20 @@ CREATE TABLE `xf_user` (
   `last_login_time` datetime DEFAULT NULL,
   `is_auth` int(2) DEFAULT '0' COMMENT '是否实名认证 0：未实名 1：已实名',
   `ali_number` varchar(50) DEFAULT NULL COMMENT '支付宝账号',
-  `balance` decimal(10,2) DEFAULT NULL COMMENT '账户总余额',
-  `withable_balance` decimal(10,2) DEFAULT NULL,
-  `deposit` decimal(10,2) DEFAULT NULL COMMENT '押金',
+  `balance` decimal(10,2) DEFAULT '0.00' COMMENT '账户总余额',
+  `withable_balance` decimal(10,2) DEFAULT '0.00' COMMENT '可提现金额',
+  `deposit` decimal(10,2) DEFAULT '0.00' COMMENT '押金',
   `uuid` varchar(20) DEFAULT NULL COMMENT '用作以后扩展分销模块唯一标识（扩展字段）',
   `real_name` varchar(20) DEFAULT NULL COMMENT '真实姓名',
   `idcard` varchar(50) DEFAULT NULL COMMENT '身份证号',
   `status` int(2) DEFAULT '1' COMMENT '1:正常（扩展字段）',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 -- ----------------------------
 -- Records of xf_user
 -- ----------------------------
+INSERT INTO `xf_user` VALUES ('1', '18301395979', 'e10adc3949ba59abbe56e057f20f883e', '小刘', '1552519081@qq.com', null, '2020-10-13 11:10:19', null, '0', null, '0.00', '0.00', '0.00', null, null, null, '0');
 
 -- ----------------------------
 -- Table structure for xf_user_balance_log
