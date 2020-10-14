@@ -19,12 +19,16 @@
 
             <div class="layui-form-item">
                 <label class="layui-form-label">游戏标签</label>
+
+{{--                <div class="layui-input-block">--}}
+{{--                    <button class="layui-btn layui-btn-primary layui-btn-sm" type="button">火火火</button>--}}
+{{--                    <input type="hidden" name="tag[]">--}}
+{{--                    <button class="layui-btn layui-btn-primary layui-btn-sm" type="button"><i class="layui-icon"></i></button>--}}
+{{--                </div>--}}
+
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-primary layui-btn-sm" type="button">火火火</button>
-                    <input type="hidden" name="tag[]">
-                    <button class="layui-btn layui-btn-primary layui-btn-sm" type="button"><i class="layui-icon"></i></button>
+                    <button type="button" id="add_tag" class="layui-btn layui-btn-sm"><i class="layui-icon"></i></button>
                 </div>
-                <button type="button" id="add_tag" class="layui-btn layui-btn-sm"><i class="layui-icon"></i></button>
             </div>
 
             <div class="layui-form-item">
@@ -139,16 +143,20 @@
                 btn: ["确认","取消"],
                 btnAlign: 'c',
                 yes: function () {
-                    that.before(" <div class=\"layui-input-block\">\n" +
+                    that.parent().before(" <div class=\"layui-input-block\">\n" +
                         "                    <button class=\"layui-btn layui-btn-primary layui-btn-sm\" type=\"button\">"+$('.tag_input').val()+"</button>\n" +
                         "                    <input type=\"hidden\" name=\"tag[]\" value='"+$('.tag_input').val()+"'>\n" +
-                        "                    <button class=\"layui-btn layui-btn-primary layui-btn-sm\" type=\"button\"><i class=\"layui-icon\"></i></button>\n" +
+                        "                    <button class=\"layui-btn layui-btn-primary layui-btn-sm del_tag\"  type=\"button\"><i class=\"layui-icon\"></i></button>\n" +
                         "                </div>");
-                    layer.closeAll(_tag)
+                    layer.close(_tag)
                 }
             });
-        })
+        });
 
+
+        $(document).on("click",".del_tag",function(){
+            $(this).parents('.layui-input-block').remove()
+        })
     });
 
 
