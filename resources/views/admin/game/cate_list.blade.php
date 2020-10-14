@@ -7,7 +7,7 @@
         <div class="layui-row layui-col-space15 larryms-data-top">
             <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 layui-col-lg12">
                 <script type="text/html" id="tools">
-                    <button type="button" class="layui-btn" lay-event="show">添加类型</button>
+                    <button type="button" class="layui-btn" lay-event="add">添加类型</button>
                 </script>
                 <table lay-filter="cate_table" class="layui-table" lay-data="{height:'full-155',cellMinWidth:95,url:'{{url('admin/game/cate-list')}}', page:true, id:'cate_table',toolbar:'#tools',defaultToolbar:[]}">
                     <thead>
@@ -42,10 +42,9 @@
             form = layui.form,
             table = layui.table;
 
-
         table.on('toolbar(cate_table)', function(obj){
             var that = this;
-            if (obj.event == 'show') {
+            if (obj.event == 'add') {
                 var index = layer.open({
                     title: "添加类型",
                     type: 2,
@@ -55,12 +54,12 @@
                     end:function () {
                         $(that).removeAttr("data-flag");
                         layui.cache.layerIndex = null;
-                        table.reload('article')
+                        table.reload('cate_table')
                     }
                 });
                 // layer.full(index);
             }
-        })
+        });
 
         table.on('tool(cate_table)', function(obj){
             var data = obj.data;
@@ -88,17 +87,17 @@
             } else if (obj.event == 'info') {
                 var url = $(this).data('url');
                 index = layer.open({
-                    title: data.user_phone+" 个人信息",
+                    title: data.cate_name,
                     type: 2,
                     area: ['760px', '550px'],
                     content: url,
                     end: function() {
                         $(that).removeAttr("data-flag");
                         layui.cache.layerIndex = null;
-                        table.reload('article')
+                        table.reload('cate_table')
                     }
                 });
-            } 
+            }
 
         });
 

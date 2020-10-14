@@ -30,4 +30,13 @@ class GameRegion extends BaseModel
 		'game_id',
 		'region_name'
 	];
+
+    /**
+     * 关联游戏服务器
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+	public function service()
+    {
+        return $this->hasMany(GameService::class,'region_id','id');
+    }
 }
