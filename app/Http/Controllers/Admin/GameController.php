@@ -54,7 +54,7 @@ class GameController extends Controller
             'id'          => 'nullable',
             'cate_id'     => 'nullable',
             'name'        => 'nullable',
-            'post'        => 'nullable',
+            'poster'        => 'nullable',
             'tag'         => 'nullable',
             'description' => 'nullable',
             'status'      => 'nullable'
@@ -65,12 +65,15 @@ class GameController extends Controller
         $game = Game::findOrNew($this->validated['id'] ?? 0);
 
         if($this->request->isMethod('post')){
+//            dd($this->validated);
 
             return $this->successOrFailed(Game::updateOrCreate(['id' => $this->validated['id']], $this->validated));
 
         }
 
-        return $this->rView('game.add_game', compact('game'));
+        $game_cate = GameCate::all();
+
+        return $this->rView('game.add_game', compact('game','game_cate'));
 
     }
 

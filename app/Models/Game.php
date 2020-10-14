@@ -62,7 +62,7 @@ class Game extends BaseModel
         'status'
 	];
 
-
+    protected $appends = ['cate_string'];
     /**
      * 格式化游戏标签
      * @param $v
@@ -70,7 +70,7 @@ class Game extends BaseModel
      */
 	public function setTagAttribute($v)
     {
-        return is_array($v) ? json_encode($v) : [];
+        $this->attributes['tag'] = is_array($v) ? json_encode($v) : [];
     }
 
     /**
@@ -81,6 +81,11 @@ class Game extends BaseModel
 	public function getTagAttribute($v)
     {
         return  json_decode($v, true);
+    }
+
+    public function getCateStringAttribute()
+    {
+        return GameCate::find($this->cate_id)->cate_name;
     }
 
     /**

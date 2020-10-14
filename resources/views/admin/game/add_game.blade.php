@@ -13,19 +13,27 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">游戏分类</label>
                 <div class="layui-input-block">
-                    <input type="text" name="name" lay-verify="required" placeholder="请填写游戏名称"  value="{{$game->name}}" autocomplete="off" class="layui-input larry-input">
+                    <select name="cate_id" lay-verify="required">
+                        <option value="">请选择一个分类</option>
+                        @foreach ($game_cate as $item)
+                        <option value="{{$item->id}}" @if($game->cate_id == $item->id) selected @endif>{{$item->cate_name}}</option>
+                        @endforeach
+                    </select>
+                    {{--<input type="text" name="name" lay-verify="required" placeholder="请填写游戏名称"  value="{{$game->name}}" autocomplete="off" class="layui-input larry-input">--}}
                 </div>
             </div>
 
             <div class="layui-form-item">
                 <label class="layui-form-label">游戏标签</label>
-
-{{--                <div class="layui-input-block">--}}
-{{--                    <button class="layui-btn layui-btn-primary layui-btn-sm" type="button">火火火</button>--}}
-{{--                    <input type="hidden" name="tag[]">--}}
-{{--                    <button class="layui-btn layui-btn-primary layui-btn-sm" type="button"><i class="layui-icon"></i></button>--}}
-{{--                </div>--}}
-
+                @if(is_array($game->tag))
+                @foreach($game->tag as $item)
+                    <div class="layui-input-block">
+                        <button class="layui-btn layui-btn-primary layui-btn-sm" type="button">{{$item}}</button>
+                        <input type="hidden" name="tag[]" value="{{$item}}">
+                        <button class="layui-btn layui-btn-primary layui-btn-sm" type="button"><i class="layui-icon"></i></button>
+                    </div>
+                @endforeach
+                @endif
                 <div class="layui-input-block">
                     <button type="button" id="add_tag" class="layui-btn layui-btn-sm"><i class="layui-icon"></i></button>
                 </div>
@@ -34,7 +42,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">游戏描述</label>
                 <div class="layui-input-block">
-                    <textarea name="description" placeholder="请输入" class="layui-textarea"></textarea>
+                    <textarea name="description" lay-verify="required" placeholder="请输入" class="layui-textarea">{{$game->description}}</textarea>
                 </div>
             </div>
 
@@ -111,7 +119,7 @@
 
 
         form.on('submit(game_add)', function(data) {
-            console.log(data.field);
+            // console.log(data.field);
             var index = layer.load(1);
             $.ajax({
                 url:"{{url('admin/game/add-game')}}",
