@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 本地
+Source Server         : 本机
 Source Server Version : 50726
 Source Host           : localhost:3306
 Source Database       : zuhao
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2020-10-14 18:02:34
+Date: 2020-10-15 22:05:09
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -206,15 +206,19 @@ CREATE TABLE `xf_game` (
   `tag` text COMMENT '游戏标签，json格式',
   `description` text COMMENT '游戏描述',
   `status` int(2) DEFAULT '1' COMMENT '1：上架  0：下架',
+  `sort` int(11) DEFAULT '0' COMMENT '排序',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL,
   `delete_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='游戏表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='游戏表';
 
 -- ----------------------------
 -- Records of xf_game
 -- ----------------------------
+INSERT INTO `xf_game` VALUES ('1', '2', '王者荣耀', '/uploads/20201014/X7vagnDJezVaR3veZNsi8fA9cGiyrvsu.png', '[]', '腾讯的一款5v5策略动作游戏', '1', '2', '2020-10-14 21:04:08', '2020-10-15 22:02:38', null);
+INSERT INTO `xf_game` VALUES ('2', '1', '英雄联盟', '/uploads/20201014/fPR7pATSA0GbKHvNtyOdzPNpc3uW455f.jpg', '[]', '英雄联盟', '1', '0', '2020-10-14 21:22:49', '2020-10-14 21:22:49', null);
+INSERT INTO `xf_game` VALUES ('3', '4', '英雄联盟2', '/uploads/20201014/fPR7pATSA0GbKHvNtyOdzPNpc3uW455f.jpg', '[\"lol\",\"\\u5fb7\\u739b\\u897f\\u4e9a\",\"\\u6bd4\\u5c14\\u5409\\u6c83\\u7279\"]', '英雄联盟', '1', '3', '2020-10-14 21:55:41', '2020-10-15 22:03:51', null);
 
 -- ----------------------------
 -- Table structure for xf_game_cate
@@ -225,7 +229,7 @@ CREATE TABLE `xf_game_cate` (
   `cate_name` varchar(255) DEFAULT NULL COMMENT '分类名称',
   `image` varchar(255) DEFAULT NULL COMMENT '分类图片',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='游戏分类表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='游戏分类表';
 
 -- ----------------------------
 -- Records of xf_game_cate
@@ -235,6 +239,7 @@ INSERT INTO `xf_game_cate` VALUES ('2', '手游', '/uploads/20201014/lewmcT2nzT2
 INSERT INTO `xf_game_cate` VALUES ('3', 'steam', '/uploads/20201014/BV7mPeWfz4b5jfL7GlKNaUgBwWJlUMNn.jpg');
 INSERT INTO `xf_game_cate` VALUES ('4', '其他', '/uploads/20201014/VGkrGM9pKZAGGpVixms65YqaWeJqx9u5.jpg');
 INSERT INTO `xf_game_cate` VALUES ('5', '暴雪端游', '/uploads/20201014/5Xq4yGbFz5mcwdSqIauNh3wB3YdLV33h.jpg');
+INSERT INTO `xf_game_cate` VALUES ('6', '测试分类', '/uploads/20201014/E5ChUgiPCQtL13Y9XehkyHXK1nUFQY4g.jpg');
 
 -- ----------------------------
 -- Table structure for xf_game_region
@@ -245,11 +250,13 @@ CREATE TABLE `xf_game_region` (
   `game_id` int(11) DEFAULT NULL COMMENT '游戏id',
   `region_name` varchar(255) DEFAULT NULL COMMENT '大区名称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='游戏大区表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='游戏大区表';
 
 -- ----------------------------
 -- Records of xf_game_region
 -- ----------------------------
+INSERT INTO `xf_game_region` VALUES ('3', '1', '安卓区');
+INSERT INTO `xf_game_region` VALUES ('4', '1', 'ios区');
 
 -- ----------------------------
 -- Table structure for xf_game_service
@@ -260,11 +267,12 @@ CREATE TABLE `xf_game_service` (
   `region_id` int(11) DEFAULT NULL COMMENT '游戏大区id',
   `service_name` varchar(255) DEFAULT NULL COMMENT '游戏服务器名称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='游戏服务器表';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='游戏服务器表';
 
 -- ----------------------------
 -- Records of xf_game_service
 -- ----------------------------
+INSERT INTO `xf_game_service` VALUES ('9', '3', '烈焰玫瑰');
 
 -- ----------------------------
 -- Table structure for xf_game_sku

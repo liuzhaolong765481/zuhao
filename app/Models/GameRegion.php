@@ -47,7 +47,7 @@ class GameRegion extends BaseModel
      * 游戏名
      * @return string|null
      */
-    public function setGameNameAttribute()
+    public function getGameNameAttribute()
     {
         return Game::find($this->game_id)->name;
     }

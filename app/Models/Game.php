@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $id
  * @property int|null $cate_id
  * @property int|null $status
+ * @property int|null $sort
  * @property string|null $name
  * @property string|null $poster
  * @property string|null $tag
@@ -43,7 +44,8 @@ class Game extends BaseModel
 
 	protected $casts = [
 		'cate_id' => 'int',
-        'status'  => 'int'
+        'status'  => 'int',
+        'sort'    => 'int'
 	];
 
 	protected $dates = [
@@ -59,7 +61,8 @@ class Game extends BaseModel
 		'create_time',
         'update_time',
         'delete_time',
-        'status'
+        'status',
+        'sort'
 	];
 
     protected $appends = ['cate_string'];

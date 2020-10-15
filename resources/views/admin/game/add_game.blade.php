@@ -30,7 +30,7 @@
                     <div class="layui-input-block">
                         <button class="layui-btn layui-btn-primary layui-btn-sm" type="button">{{$item}}</button>
                         <input type="hidden" name="tag[]" value="{{$item}}">
-                        <button class="layui-btn layui-btn-primary layui-btn-sm" type="button"><i class="layui-icon"></i></button>
+                        <button class="layui-btn layui-btn-primary layui-btn-sm del_tag" type="button"><i class="layui-icon"></i></button>
                     </div>
                 @endforeach
                 @endif
@@ -40,9 +40,16 @@
             </div>
 
             <div class="layui-form-item">
+                <label class="layui-form-label">排序</label>
+                <div class="layui-input-block">
+                    <input type="text" name="sort" lay-verify="required" placeholder="请填写游戏排序"  value="{{$game->sort}}"  class="layui-input larry-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
                 <label class="layui-form-label">游戏描述</label>
                 <div class="layui-input-block">
-                    <textarea name="description" lay-verify="required" placeholder="请输入" class="layui-textarea">{{$game->description}}</textarea>
+                    <textarea name="description" lay-verify="required" placeholder="请输入游戏描述" class="layui-textarea">{{$game->description}}</textarea>
                 </div>
             </div>
 

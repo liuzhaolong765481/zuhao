@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Game;
 use App\Models\GameCate;
 use App\Models\GameRegion;
+use App\Models\GameService;
 
 class GameController extends Controller
 {
@@ -33,7 +34,7 @@ class GameController extends Controller
 
             $validated = $this->validated;
 
-            $list = Game::where([])
+            $list = Game::OrderBy('sort', 'desc')
                 ->page($validated['page'], $validated['limit'])
                 ->get();
 
@@ -58,7 +59,8 @@ class GameController extends Controller
             'poster'      => 'nullable',
             'tag'         => 'nullable',
             'description' => 'nullable',
-            'status'      => 'nullable'
+            'status'      => 'nullable',
+            'sort'        => 'nullable',
         ];
 
         $this->validateInput($rules);
@@ -66,9 +68,7 @@ class GameController extends Controller
         $game = Game::findOrNew($this->validated['id'] ?? 0);
 
         if($this->request->isMethod('post')){
-
             return $this->successOrFailed(Game::updateOrCreate(['id' => $this->validated['id']], $this->validated));
-
         }
 
         $game_cate = GameCate::all();
@@ -140,6 +140,8 @@ class GameController extends Controller
      */
     public function regionList()
     {
+        $game_id = request()->input('game_id');
+
         if($this->request->ajax()) {
 
             $rules = [
@@ -151,14 +153,14 @@ class GameController extends Controller
 
             $validated = $this->validated;
 
-            $list = GameRegion::where([])
+            $list = GameRegion::where('game_id', $game_id)
                 ->page($validated['page'], $validated['limit'])
                 ->get();
 
             return $this->showJsonLayui($list);
         }
 
-        return $this->rView('game.region_list');
+        return $this->rView('game.region_list', compact('game_id'));
     }
 
 
@@ -172,12 +174,10 @@ class GameController extends Controller
         $rules = [
             'id'          => 'nullable',
             'game_id'     => 'required',
-            'region_name' => 'nullable'
+            'region_name' => 'nullable',
         ];
 
         $this->validateInput($rules);
-
-        $region = GameRegion::findOrNew($this->validated['id'] ?? 0);
 
         if($this->request->isMethod('post')){
 
@@ -185,15 +185,40 @@ class GameController extends Controller
 
         }
 
-        return $this->rView('game.add_region', compact('region'));
+        $region = GameRegion::findOrNew($this->validated['id'] ?? 0);
+        $game_id = $this->validated['game_id'];
+
+        return $this->rView('game.add_region', compact('region','game_id'));
     }
 
     /**
      * 游戏服务器列表
+     * @return mixed
+     * @throws \App\Exceptions\RequestException
      */
-    public function serviceList()
+    public function addService()
     {
+        $rules = [
+            'region_id'     => 'required',
+            'service_name'  => 'nullable',
+            'id'            => 'nullable',
+        ];
 
+        $this->validateInput($rules);
+
+        $region_id = $this->validated['region_id'];
+
+        if($this->request->isMethod('post')){
+            if(isset($this->validated['id']) && $this->validated['id']){
+                return $this->successOrFailed(GameService::whereKey($this->validated['id'])->delete());
+            }else{
+                return $this->successOrFailed(GameService::create($this->validated));
+            }
+        }
+
+        $service = GameService::where('region_id', $region_id)->get();
+
+        return $this->rView('game.add_service',compact('service','region_id'));
     }
 
 

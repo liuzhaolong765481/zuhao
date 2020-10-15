@@ -1,6 +1,11 @@
 @include('admin._include.header')
 <body>
-
+<style>
+    .layui-table-cell {
+        height: auto;
+        line-height: 20px;
+    }
+</style>
 <div class="layui-fluid">
     <div class="larry-container">
         <div class="layui-row layui-col-space15 larryms-data-top">
@@ -11,12 +16,13 @@
                 <table lay-filter="game_table" class="layui-table" lay-data="{height:'full-155',cellMinWidth:95,url:'{{url('admin/game/game-list')}}', page:true, id:'game_table',toolbar:'#tools',defaultToolbar:[]}">
                     <thead>
                     <tr>
-                        <th lay-data="{field:'id', align:'center'}">ID</th>
+                        <th lay-data="{field:'id', align:'center',sort: true}">ID</th>
                         <th lay-data="{field:'name',align:'center'}">游戏名称</th>
                         <th lay-data="{field:'cate_string',align:'center'}">游戏分类</th>
                         <th lay-data="{field:'tag',align:'center'}">游戏标签</th>
                         <th lay-data="{field:'description',align:'center'}">游戏描述</th>
                         <th lay-data="{align:'center',templet:'#game_status'}">是否上架</th>
+                        <th lay-data="{field:'sort',align:'center',sort: true}">排序</th>
                         <th lay-data="{toolbar:'#toolbarDemo',width:200,align:'center'}">封面图片</th>
                         <th lay-data="{title:'操作',templet:'#listBar',align:'center'}">操作</th>
                     </tr>
@@ -40,6 +46,7 @@
 <script type="text/html" id="toolbarDemo">
     <button type="button" class="layui-btn layui-btn-normal layui-btn-xs" lay-event="show">查看</button>
 </script>
+
 
 <script type="text/html" id="listBar">
     <a class="layui-btn layui-btn-xs layui-btn-warm" data-url="{{url('admin/game/region-list')}}?game_id=@{{ d.id }}" lay-event="service">游戏区服</a>
@@ -65,12 +72,12 @@
                 var status = 0;
             }
             var index = layer.load(1);
-            var url = "{{url('admin/auth/user-info')}}";
+            var url = "{{url('admin/game/add-game')}}";
 
             $.ajax({
                 url:url,
                 dateType:'json',
-                data:{id:id,field:"status",value:status},
+                data:{id:id,status:status},
                 beforeSend:function() {
 
                 },
@@ -146,15 +153,16 @@
             }else if(obj.event == 'service'){
 
                 var url = $(this).data('url');
+
                 var index = layer.open({
                     type: 2,
-                    title: "游戏区服",
+                    title: data.name + "-游戏区服",
                     scrollbar:true,
                     content: url,
                     end:function () {
                         $(that).removeAttr("data-flag");
                         layui.cache.layerIndex = null;
-                        table.reload('article')
+                        table.reload('game_table')
                     }
                 });
                 layer.full(index);
