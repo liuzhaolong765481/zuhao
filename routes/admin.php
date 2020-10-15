@@ -50,7 +50,9 @@ Route::group(['middleware' => 'admin'], function ($r) {
         $r->get('cate-list','GameController@cateList');
         $r->any('add-cate','GameController@addCate');
         $r->get('region-list','GameController@regionList');
-
+        $r->any('add-region','GameController@addRegion');
+        $r->get('service-list','GameController@serviceList');
+        $r->any('add-service','GameController@addService');
 
     });
 

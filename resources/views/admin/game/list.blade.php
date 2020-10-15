@@ -42,7 +42,7 @@
 </script>
 
 <script type="text/html" id="listBar">
-    <a class="layui-btn layui-btn-xs layui-btn-warm" data-url="{{url('admin/game/region-list')}}?id=@{{ d.id }}">游戏区服</a>
+    <a class="layui-btn layui-btn-xs layui-btn-warm" data-url="{{url('admin/game/region-list')}}?game_id=@{{ d.id }}" lay-event="service">游戏区服</a>
     <a class="layui-btn layui-btn-xs"  data-url="{{url('admin/game/add-game')}}?id=@{{ d.id }}" lay-event="info">修改</a>
 </script>
 
@@ -143,6 +143,21 @@
                         table.reload('game_table')
                     }
                 });
+            }else if(obj.event == 'service'){
+
+                var url = $(this).data('url');
+                var index = layer.open({
+                    type: 2,
+                    title: "游戏区服",
+                    scrollbar:true,
+                    content: url,
+                    end:function () {
+                        $(that).removeAttr("data-flag");
+                        layui.cache.layerIndex = null;
+                        table.reload('article')
+                    }
+                });
+                layer.full(index);
             }
 
         });

@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Game;
 use App\Models\GameCate;
+use App\Models\GameRegion;
 
 class GameController extends Controller
 {
@@ -54,7 +55,7 @@ class GameController extends Controller
             'id'          => 'nullable',
             'cate_id'     => 'nullable',
             'name'        => 'nullable',
-            'poster'        => 'nullable',
+            'poster'      => 'nullable',
             'tag'         => 'nullable',
             'description' => 'nullable',
             'status'      => 'nullable'
@@ -65,7 +66,6 @@ class GameController extends Controller
         $game = Game::findOrNew($this->validated['id'] ?? 0);
 
         if($this->request->isMethod('post')){
-//            dd($this->validated);
 
             return $this->successOrFailed(Game::updateOrCreate(['id' => $this->validated['id']], $this->validated));
 
@@ -135,12 +135,58 @@ class GameController extends Controller
 
     /**
      * 游戏大区列表
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|mixed
+     * @throws \App\Exceptions\RequestException
      */
     public function regionList()
     {
+        if($this->request->ajax()) {
 
+            $rules = [
+                'page'       => 'required',
+                'limit'      => 'required',
+            ];
+
+            $this->validateInput($rules);
+
+            $validated = $this->validated;
+
+            $list = GameRegion::where([])
+                ->page($validated['page'], $validated['limit'])
+                ->get();
+
+            return $this->showJsonLayui($list);
+        }
+
+        return $this->rView('game.region_list');
     }
 
+
+    /**
+     * 添加大区
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|mixed
+     * @throws \App\Exceptions\RequestException
+     */
+    public function addRegion()
+    {
+        $rules = [
+            'id'          => 'nullable',
+            'game_id'     => 'required',
+            'region_name' => 'nullable'
+        ];
+
+        $this->validateInput($rules);
+
+        $region = GameRegion::findOrNew($this->validated['id'] ?? 0);
+
+        if($this->request->isMethod('post')){
+
+            return $this->successOrFailed(GameRegion::updateOrCreate(['id' => $this->validated['id']], $this->validated));
+
+        }
+
+        return $this->rView('game.add_region', compact('region'));
+    }
 
     /**
      * 游戏服务器列表

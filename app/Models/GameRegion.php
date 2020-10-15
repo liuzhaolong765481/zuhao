@@ -31,6 +31,8 @@ class GameRegion extends BaseModel
 		'region_name'
 	];
 
+	protected $appends = ['game_name'];
+
     /**
      * 关联游戏服务器
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -38,5 +40,15 @@ class GameRegion extends BaseModel
 	public function service()
     {
         return $this->hasMany(GameService::class,'region_id','id');
+    }
+
+
+    /**
+     * 游戏名
+     * @return string|null
+     */
+    public function setGameNameAttribute()
+    {
+        return Game::find($this->game_id)->name;
     }
 }
