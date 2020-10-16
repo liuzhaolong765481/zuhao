@@ -13,10 +13,10 @@
                     <thead>
                     <tr>
                         <th lay-data="{field:'id', align:'center'}">ID</th>
-                        <th lay-data="{field:'cate_name',align:'center'}">广告分类</th>
+                        <th lay-data="{field:'type_name',align:'center'}">广告分类</th>
                         <th lay-data="{toolbar:'#toolbarDemo',width:200,align:'center'}">图片</th>
                         <th lay-data="{field:'create_time',align:'center'}">创建时间</th>
-                        <th lay-data="{align:'center',templet:'#is_show'}">是否禁用</th>
+                        <th lay-data="{align:'center',templet:'#is_show'}">是否启用</th>
                         <th lay-data="{title:'操作',templet:'#listBar',align:'center'}">操作</th>
                     </tr>
                     </thead>
@@ -52,13 +52,13 @@
             form = layui.form,
             table = layui.table;
 
-        form.on('switch(status)', function(data){
+        form.on('switch(is_show)', function(data){
             var bool = data.elem.checked;
             var id = data.value;
             if (bool) {
-                var status = 0;
-            } else {
                 var status = 1;
+            } else {
+                var status = 0;
             }
             var index = layer.load(1);
             var url = "{{url('admin/application/add-ad')}}";
@@ -77,7 +77,7 @@
                 success:function (res) {
                     layer.close(index);
                     layer.msg("操作成功",{time:800,shade:0.3},function () {
-                        table.reload('user_table')
+                        table.reload('ad_table')
                     });
                 }
             })
@@ -106,24 +106,24 @@
             var data = obj.data;
             var that = this;
             if (obj.event == "show") {
-                var jsondata = data;
-                var arr = [];
-                var obj = {
-                    'alt':jsondata.cate_name,
-                    'pic':jsondata.id+"_id",
-                    'src':jsondata.image,
-                    'thumb':jsondata.image
-                };
-                arr.push(obj);
-                var json = {
-                    'title':jsondata.cate_name,
-                    'id':jsondata.id,
-                    'start':0,
-                    'data':arr
-                };
+                console.log(data);return false;
+                // var arr = [];
+                // var obj = {
+                //     'alt':jsondata.cate_name,
+                //     'pic':jsondata.id+"_id",
+                //     'src':jsondata.image,
+                //     'thumb':jsondata.image
+                // };
+                // arr.push(obj);
+                // var json = {
+                //     'title':jsondata.cate_name,
+                //     'id':jsondata.id,
+                //     'start':0,
+                //     'data':arr
+                // };
                 layer.photos({
-                    photos: json
-                    ,anim:2
+                    photos: json,
+                    anim:2
                 });
             } else if (obj.event == 'info') {
                 var url = $(this).data('url');

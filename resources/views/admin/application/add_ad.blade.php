@@ -6,7 +6,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">广告分类</label>
                 <div class="layui-input-block">
-                    <select name="cate_id" lay-verify="required">
+                    <select name="type" lay-verify="required">
                         <option value="">请选择一个分类</option>
                         <option value="1" @if($ad->type == 1) selected @endif>首页banner</option>
                         <option value="1" @if($ad->type == 3) selected @endif>耳机页面banner</option>
@@ -14,26 +14,31 @@
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">分类图片</label>
+                <label class="layui-form-label">图片</label>
 
                 <div class="layui-card-body">
                     <div class="layui-upload">
                         <button type="button" class="layui-btn" id="test-upload-normal">上传图片</button>
                         <div class="layui-upload-list">
-                            <img class="layui-upload-img" src="{{$cate->image}}" style="width: 100px;margin-left: 95px" id="test-upload-normal-img">
+                            <img class="layui-upload-img" src="{{$ad->image}}" style="width: 100px;margin-left: 95px" id="test-upload-normal-img">
                             <p id="test-upload-demoText"></p>
                         </div>
                     </div>
-                    <blockquote class="layui-elem-quote">
-                        为提高网站性能，请尽可能上传小于 500kb 矢量图片
-                    </blockquote>
                 </div>
 
             </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">链接</label>
+                <div class="layui-input-block">
+                    <input type="text" name="href" lay-verify="required" placeholder="请填写游戏链接"  value="{{$ad->href}}"  class="layui-input larry-input">
+                </div>
+            </div>
+
             <div class="layui-form-item" style="text-align: center">
-                <input type="hidden" name="image" lay-verify="required" value="{{$cate->image}}">
-                <input type="hidden" name="id" value="{{$cate->id}}">
-                <button class="layui-btn" lay-submit lay-filter="cate_add">确定</button>
+                <input type="hidden" name="image" lay-verify="required" value="{{$ad->image}}">
+                <input type="hidden" name="id" value="{{$ad->id}}">
+                <button class="layui-btn" lay-submit lay-filter="ad_add">确定</button>
             </div>
 
         </form>
@@ -86,11 +91,11 @@
         });
 
 
-        form.on('submit(cate_add)', function(data) {
+        form.on('submit(ad_add)', function(data) {
             console.log(data.field);
             var index = layer.load(1);
             $.ajax({
-                url:"{{url('admin/game/add-cate')}}",
+                url:"{{url('admin/application/add-ad')}}",
                 dateType:'json',
                 data:data.field,
                 type:'post',

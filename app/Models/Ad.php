@@ -25,7 +25,10 @@ class Ad extends BaseModel
     const NAV_BANNER = 3;  //导航banner
 
 	protected $table = 'xf_ad';
-	public $timestamps = false;
+
+    const CREATED_AT = 'create_time';
+
+    const UPDATED_AT = null;
 
 	protected $casts = [
 		'type' => 'int'
@@ -34,10 +37,11 @@ class Ad extends BaseModel
 	protected $fillable = [
 		'image',
 		'href',
-		'type'
+		'type',
+        'is_show'
 	];
 
-	protected $appends = 'type_name';
+	protected $appends = ['type_name'];
 
     /**
      * 幻灯片类型

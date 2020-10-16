@@ -62,6 +62,6 @@ Route::group(['middleware' => 'admin'], function ($r) {
          * @var $r Route
          */
         $r->get('ad-list', 'ApplicationController@adList');
-        $r->post('add-ad','ApplicationController@addAd');
+        $r->any('add-ad','ApplicationController@addAd');
     });
 });

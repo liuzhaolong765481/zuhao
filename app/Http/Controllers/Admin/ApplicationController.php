@@ -29,6 +29,7 @@ class ApplicationController extends Controller
             $this->validateInput($rules);
 
             $validated = $this->validated;
+
             $where = [];
             if(isset($validated['type'])){
                 $where['type'] = $validated['type'];
@@ -52,10 +53,11 @@ class ApplicationController extends Controller
     public function addAd()
     {
         $rules = [
-            'id'    => 'nullable',
-            'image' => 'required',
-            'href'  => 'present',
-            'type'  => 'required|integer',
+            'id'      => 'nullable',
+            'image'   => 'nullable',
+            'href'    => 'nullable',
+            'type'    => 'nullable',
+            'is_show' => 'nullable'
         ];
 
         $this->validateInput($rules);
