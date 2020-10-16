@@ -6,6 +6,9 @@
  */
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Ad;
+use App\Models\GameRegion;
+
 class IndexController extends Controller
 {
 
@@ -18,4 +21,6 @@ class IndexController extends Controller
     {
         return $this->rView('console');
     }
+
+
 }

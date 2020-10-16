@@ -34,6 +34,7 @@
                         </dl>
                     </dd>
 
+                    <dd data-name="list"><a lay-href="{{url('admin/index/ad-list')}}">广告管理</a></dd>
 
                 </dl>
             </li>

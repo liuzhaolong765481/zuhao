@@ -20,6 +20,10 @@ namespace App\Models;
  */
 class Ad extends BaseModel
 {
+    const INDEX_BANNER = 1;  //首页banner
+
+    const NAV_BANNER = 3;  //导航banner
+
 	protected $table = 'xf_ad';
 	public $timestamps = false;
 
@@ -32,4 +36,23 @@ class Ad extends BaseModel
 		'href',
 		'type'
 	];
+
+	protected $appends = 'type_name';
+
+    /**
+     * 幻灯片类型
+     * @return string
+     */
+	public function getTypeNameAttribute()
+    {
+        switch ($this->type)
+        {
+            case self::INDEX_BANNER:
+                return '首页banner';
+            case self::NAV_BANNER:
+                return '导航页banner';
+            default:
+                return '默认广告';
+        }
+    }
 }

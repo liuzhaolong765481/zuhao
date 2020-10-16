@@ -28,6 +28,7 @@ Route::group(['middleware' => 'admin'], function ($r) {
          */
         $r->get('home','IndexController@home')->name('admin.home');
         $r->get('console','IndexController@console');
+
     });
 
 
@@ -56,4 +57,11 @@ Route::group(['middleware' => 'admin'], function ($r) {
 
     });
 
+    Route::group(['prefix' => 'application'], function ($r) {
+        /**
+         * @var $r Route
+         */
+        $r->get('ad-list', 'ApplicationController@adList');
+        $r->post('add-ad','ApplicationController@addAd');
+    });
 });
