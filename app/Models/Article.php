@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Article
@@ -20,6 +21,7 @@ use Carbon\Carbon;
  * @property string|null $seo_content
  * @property string|null $image
  * @property string|null $content
+ * @property string|null $description
  * @property Carbon|null $create_time
  * @property Carbon|null $update_time
  * @property Carbon|null $delete_time
@@ -29,10 +31,18 @@ use Carbon\Carbon;
 class Article extends BaseModel
 {
 	protected $table = 'xf_article';
-	public $timestamps = false;
+
+	use SoftDeletes;
+
+    const CREATED_AT = 'create_time';
+
+    const UPDATED_AT = 'update_time';
+
+    const DELETED_AT = 'delete_time';
 
 	protected $casts = [
-		'cate_id' => 'int'
+		'cate_id' => 'int',
+        'sort'    => 'int'
 	];
 
 	protected $dates = [
@@ -52,6 +62,21 @@ class Article extends BaseModel
 		'content',
 		'create_time',
 		'update_time',
-		'delete_time'
+		'delete_time',
+        'sort',
+        'description',
 	];
+
+	protected $appends = ['cate_name'];
+
+    /**
+     * 返回分类名称
+     * @return mixed
+     */
+	public function getCateNameAttribute()
+    {
+        return ArticleCate::whereKey($this->cate_id)->value('cate_name');
+    }
+
+
 }

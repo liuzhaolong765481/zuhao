@@ -34,4 +34,16 @@ class ArticleCate extends BaseModel
 		'cate_descript',
 		'image'
 	];
+
+	protected $appends = ['pid_name'];
+
+    /**
+     * 返回父级菜单名称
+     * @return string
+     */
+	public function getPidNameAttribute()
+    {
+        return self::whereKey($this->pid)->value('cate_name') ?: '一级分类';
+    }
+
 }

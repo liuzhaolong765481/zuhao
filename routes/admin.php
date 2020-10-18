@@ -32,16 +32,6 @@ Route::group(['middleware' => 'admin'], function ($r) {
     });
 
 
-
-    Route::group(['prefix' => 'article'], function ($r){
-        /**
-         * @var $r Route
-         */
-        $r->get('article-list','ArticleController@articleList');
-        $r->get('console','IndexController@console');
-    });
-
-
     Route::group(['prefix' => 'game'], function ($r){
         /**
          * @var $r Route
@@ -63,5 +53,14 @@ Route::group(['middleware' => 'admin'], function ($r) {
          */
         $r->get('ad-list', 'ApplicationController@adList');
         $r->any('add-ad','ApplicationController@addAd');
+
+        $r->get('article-list','ApplicationController@articleList');
+        $r->any('article-ad','ApplicationController@addArticle');
+        $r->get('article-delete','ApplicationController@deleteArticle');
+
+        $r->get('article-cate','ApplicationController@articleCateList');
+        $r->any('article-cate-add','ApplicationController@addArticleCate');
+
+
     });
 });

@@ -26,8 +26,8 @@
     </div>
 </div>
 
-<script type="text/html" id="toolbarDemo">
-    <img src="@{{ d.image }}" alt="" lay-filter="show">
+<script type="text/html" id="toolbarDemo" class="layer-photos-demo">
+    <img src="@{{ d.image }}" width="100px" height="50px" layer-src="@{{ d.image }}" alt="" lay-event="show">
 </script>
 
 <script type="text/html" id="is_show">
@@ -106,24 +106,24 @@
             var data = obj.data;
             var that = this;
             if (obj.event == "show") {
-                console.log(data);return false;
-                // var arr = [];
-                // var obj = {
-                //     'alt':jsondata.cate_name,
-                //     'pic':jsondata.id+"_id",
-                //     'src':jsondata.image,
-                //     'thumb':jsondata.image
-                // };
-                // arr.push(obj);
-                // var json = {
-                //     'title':jsondata.cate_name,
-                //     'id':jsondata.id,
-                //     'start':0,
-                //     'data':arr
-                // };
+                // console.log(data);return false;
+                var arr = [];
+                var obj = {
+                    'alt':data.image,
+                    'pic':data.id+"_id",
+                    'src':data.image,
+                    'thumb':data.image
+                };
+                arr.push(obj);
+                var json = {
+                    'title':data.image,
+                    'id':data.id,
+                    'start':0,
+                    'data':arr
+                };
                 layer.photos({
-                    photos: json,
-                    anim:2
+                    photos: json
+                    ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
                 });
             } else if (obj.event == 'info') {
                 var url = $(this).data('url');
@@ -142,11 +142,7 @@
 
         });
 
-
     });
-
-
-
 
 </script>
 </body>

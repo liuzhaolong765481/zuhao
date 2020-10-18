@@ -22,8 +22,8 @@
                     <dd data-name="content">
                         <a href="javascript:;">内容系统</a>
                         <dl class="layui-nav-child">
-                            <dd data-name="list"><a lay-href="{{url('admin/article/article-list')}}">文章列表</a></dd>
-                            <dd data-name="tags"><a lay-href="{{url('admin/article/cate')}}">分类管理</a></dd>
+                            <dd data-name="list"><a lay-href="{{url('admin/application/article-list')}}">文章列表</a></dd>
+                            <dd data-name="tags"><a lay-href="{{url('admin/application/article-cate')}}">分类管理</a></dd>
                         </dl>
                     </dd>
 
