@@ -13,7 +13,7 @@
                     <thead>
                     <tr>
                         <th lay-data="{field:'id', align:'center'}">ID</th>
-                        <th lay-data="{field:'pid_name',align:'center'}">文章标题</th>
+                        <th lay-data="{field:'title',align:'center'}">文章标题</th>
                         <th lay-data="{field:'cate_name',align:'center'}">文章分类</th>
                         <th lay-data="{field:'description',align:'center'}">文章描述</th>
                         <th lay-data="{toolbar:'#toolbarDemo',width:200,align:'center'}">封面图片</th>
@@ -60,7 +60,7 @@
                         table.reload('article_table')
                     }
                 });
-                // layer.full(index);
+                layer.full(index);
             }
         });
 
@@ -90,7 +90,7 @@
             } else if (obj.event == 'info') {
                 var url = $(this).data('url');
                 index = layer.open({
-                    title: data.cate_name,
+                    title: data.title,
                     type: 2,
                     area: ['760px', '800px'],
                     content: url,
@@ -100,6 +100,7 @@
                         table.reload('article_table')
                     }
                 });
+                layer.full(index);
             }
 
         });

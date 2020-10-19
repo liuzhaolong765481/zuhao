@@ -6,34 +6,66 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">文章标题</label>
                 <div class="layui-input-block">
-                    <input type="text" name="cate_name" lay-verify="required" placeholder="请填写文章标题"  value="{{$article->cate_name}}" autocomplete="off" class="layui-input larry-input">
+                    <input type="text" name="title" lay-verify="required" placeholder="请填写文章标题"  value="{{$article->title}}" autocomplete="off" class="layui-input larry-input">
                 </div>
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label">上级分类</label>
+                <label class="layui-form-label">文章来源</label>
                 <div class="layui-input-block">
-                    <select name="pid" lay-verify="required">
+                    <input type="text" name="auth" lay-verify="required" placeholder="请填写文章来源"  value="{{$article->auth}}" autocomplete="off" class="layui-input larry-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">文章描述</label>
+                <div class="layui-input-block">
+                    <textarea name="description" lay-verify="required" placeholder="请输入文章关键字" class="layui-textarea">{{$article->description}}</textarea>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">排序</label>
+                <div class="layui-input-block">
+                    <input type="number" name="sort"  placeholder="请填写排序"  value="{{$article->sort}}" autocomplete="off" class="layui-input larry-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">文章分类</label>
+                <div class="layui-input-block">
+                    <select name="cate_id" lay-verify="required">
                         <option value="">请选择一个分类</option>
-                        <option value="0" @if($article->pid === 0) selected @endif>一级分类</option>
                         @foreach($cate_list as $item)
-                            <option value="{{$item->id}}" @if($article->pid == $item->id) selected @endif >{{$item->cate_name}}</option>
+                            <option value="{{$item->id}}" @if($article->cate_id == $item->id) selected @endif >{{$item->cate_name}}</option>
                         @endforeach
                     </select>
                 </div>
             </div>
 
-
-
             <div class="layui-form-item">
-                <label class="layui-form-label">分类描述</label>
+                <label class="layui-form-label">文章SEO标题</label>
                 <div class="layui-input-block">
-                    <textarea name="cate_descript" lay-verify="required" placeholder="请输入分类描述" class="layui-textarea">{{$article->cate_descript}}</textarea>
+                    <input type="text" name="seo_title"  placeholder="请填写文章SEO标题"  value="{{$article->seo_title}}" autocomplete="off" class="layui-input larry-input">
                 </div>
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label">分类图片</label>
+                <label class="layui-form-label">文章SEO关键字</label>
+                <div class="layui-input-block">
+                    <input type="text" name="seo_keywords"  placeholder="请填写文章SEO关键字"  value="{{$article->seo_keywords}}" autocomplete="off" class="layui-input larry-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">文章SEO描述</label>
+                <div class="layui-input-block">
+                    <textarea name="seo_content"  placeholder="请输入文章SEO关键字" class="layui-textarea">{{$article->seo_content}}</textarea>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">封面图片</label>
 
                 <div class="layui-card-body">
                     <div class="layui-upload">
@@ -44,8 +76,16 @@
                         </div>
                     </div>
                 </div>
-
             </div>
+
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">文章内容</label>
+                <div class="layui-input-block">
+                    <textarea id="demo" name="content" style="display: none;">{{$article->content}}</textarea>
+                </div>
+            </div>
+
 
             <div class="layui-form-item" style="text-align: center">
                 <input type="hidden" name="image" lay-verify="required" value="{{$article->image}}">
@@ -63,10 +103,16 @@
         base: "/plugin/layuiadmin/" //静态资源所在路径
     }).extend({
         index: 'lib/index' //主入口模块
-    }).use(['index', 'upload','form'], function(){
+    }).use(['index', 'upload','form', 'layedit'], function(){
         var $ = layui.jquery,
             upload = layui.upload;
-        form = layui.form;
+            form = layui.form;
+            layedit = layui.layedit;
+
+        layedit.build('demo',{
+            'height':'500',
+
+        }); //建立编辑器
 
         var uploadInst = upload.render({
             elem: '#test-upload-normal',
@@ -108,7 +154,7 @@
             // console.log(data.field);
             var index = layer.load(1);
             $.ajax({
-                url:"{{url('admin/application/article-cate-add')}}",
+                url:"{{url('admin/application/article-add')}}",
                 dateType:'json',
                 data:data.field,
                 type:'post',

@@ -126,17 +126,21 @@ class ApplicationController extends Controller
             'image'        => 'nullable',
             'content'      => 'nullable',
             'sort'         => 'nullable',
+            'description'  => 'nullable',
         ];
 
         $this->validateInput($rules);
 
         if($this->request->isMethod('post')) {
-            return $this->successOrFailed(Article::updateOrCreate(['id' => $this->validated['id'], $this->validated]));
+
+            return $this->successOrFailed(Article::updateOrCreate(['id' => $this->validated['id']], $this->validated));
         }
 
         $article = Article::findOrNew($this->validated['id'] ?? 0);
 
-        return $this->rView('application.add_article', compact('article'));
+        $cate_list = ArticleCate::all();
+
+        return $this->rView('application.add_article', compact('article','cate_list'));
     }
 
 

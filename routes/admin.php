@@ -55,7 +55,7 @@ Route::group(['middleware' => 'admin'], function ($r) {
         $r->any('add-ad','ApplicationController@addAd');
 
         $r->get('article-list','ApplicationController@articleList');
-        $r->any('article-ad','ApplicationController@addArticle');
+        $r->any('article-add','ApplicationController@addArticle');
         $r->get('article-delete','ApplicationController@deleteArticle');
 
         $r->get('article-cate','ApplicationController@articleCateList');
