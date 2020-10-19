@@ -38,7 +38,10 @@ use Carbon\Carbon;
 class Account extends BaseModel
 {
 	protected $table = 'xf_account';
-	public $timestamps = false;
+
+	const CREATED_AT = 'create_time';
+
+	const UPDATED_AT = 'update_time';
 
 	protected $casts = [
 		'uid' => 'int',
@@ -81,4 +84,29 @@ class Account extends BaseModel
 		'create_time',
 		'update_time'
 	];
+
+
+	protected $appends = ['game_name', 'game_cate', 'user_phone', 'spu'];
+
+
+	public function getGameNameAttribute()
+    {
+        return Game::whereKey($this->game_id)->value('name');
+    }
+
+    public function getGameCateAttribute()
+    {
+
+    }
+
+    public function getUserPhoneAttribute()
+    {
+
+    }
+
+    public function getSpuAttribute()
+    {
+
+    }
+
 }

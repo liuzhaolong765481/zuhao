@@ -9,15 +9,18 @@
                 <script type="text/html" id="tools">
                     <button type="button" class="layui-btn" lay-event="add">添加账号</button>
                 </script>
-                <table lay-filter="article_table" class="layui-table" lay-data="{height:'full-155',cellMinWidth:95,url:'{{url('admin/account/account-list')}}', page:true, id:'article_table',toolbar:'#tools',defaultToolbar:[]}">
+                <table lay-filter="account_table" class="layui-table" lay-data="{height:'full-155',cellMinWidth:95,url:'{{url('admin/account/account-list')}}', page:true, id:'account_table',toolbar:'#tools',defaultToolbar:[]}">
                     <thead>
                     <tr>
                         <th lay-data="{field:'id', align:'center'}">ID</th>
-                        <th lay-data="{field:'title',align:'center'}">文章标题</th>
-                        <th lay-data="{field:'cate_name',align:'center'}">文章分类</th>
-                        <th lay-data="{field:'description',align:'center'}">文章描述</th>
-                        <th lay-data="{toolbar:'#toolbarDemo',width:200,align:'center'}">封面图片</th>
-                        <th lay-data="{field:'sort',align:'center'}">排序</th>
+                        <th lay-data="{field:'game_name',align:'center'}">所属游戏</th>
+                        <th lay-data="{field:'user_phone',align:'center'}">发布用户</th>
+                        <th lay-data="{field:'spu',align:'center'}">游戏区服</th>
+                        <th lay-data="{field:'title',align:'center'}">发布标题</th>
+                        <th lay-data="{align:'center',templet:'#account_status'}">是否上架</th>
+                        <th lay-data="{field:'lease_times',align:'center'}">浏览次数</th>
+                        <th lay-data="{field:'lease_hour',align:'center'}">出租次数</th>
+                        <th lay-data="{field:'lease_hour',align:'center'}">累计出租时长/小时</th>
                         <th lay-data="{title:'操作',templet:'#listBar',align:'center'}">操作</th>
                     </tr>
                     </thead>
@@ -26,6 +29,14 @@
         </div>
     </div>
 </div>
+
+<script type="text/html" id="account_status">
+    @{{# if (d.is_upper == 0) { }}
+    <input type="checkbox" checked="true" lay-filter="status" value="@{{d.id}}" lay-skin="switch" lay-text="是|否">
+    @{{# } else {}}
+    <input type="checkbox"  value="@{{d.id}}" lay-filter="status" lay-skin="switch" lay-text="是|否">
+    @{{# }}}
+</script>
 
 <script type="text/html" id="toolbarDemo">
     <img src="@{{ d.image }}" width="100px" height="50px" layer-src="@{{ d.image }}" alt="" lay-event="show">
@@ -45,7 +56,7 @@
             form = layui.form,
             table = layui.table;
 
-        table.on('toolbar(article_table)', function(obj){
+        table.on('toolbar(account_table)', function(obj){
             var that = this;
             if (obj.event == 'add') {
                 var index = layer.open({
@@ -57,14 +68,14 @@
                     end:function () {
                         $(that).removeAttr("data-flag");
                         layui.cache.layerIndex = null;
-                        table.reload('article_table')
+                        table.reload('account_table')
                     }
                 });
                 layer.full(index);
             }
         });
 
-        table.on('tool(article_table)', function(obj){
+        table.on('tool(account_table)', function(obj){
             var data = obj.data;
             var that = this;
             if (obj.event == "show") {
@@ -97,7 +108,7 @@
                     end: function() {
                         $(that).removeAttr("data-flag");
                         layui.cache.layerIndex = null;
-                        table.reload('article_table')
+                        table.reload('account_table')
                     }
                 });
                 layer.full(index);
