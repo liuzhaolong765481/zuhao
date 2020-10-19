@@ -69,7 +69,6 @@ class Game extends BaseModel
     /**
      * 格式化游戏标签
      * @param $v
-     * @return array|false|string
      */
 	public function setTagAttribute($v)
     {

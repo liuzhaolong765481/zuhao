@@ -8,6 +8,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Account;
+use App\Models\AccountSpec;
+use App\Models\Game;
+use App\Services\AccountService;
 
 class AccountController extends Controller
 {
@@ -45,10 +48,44 @@ class AccountController extends Controller
         return $this->rView('account.account_list');
     }
 
-
+    /**
+     * 添加账号
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|mixed
+     * @throws \App\Exceptions\RequestException
+     */
     public function addAccount()
     {
+        $rules = [
+            'id'           => 'nullable',
+            'title'        => 'nullable',
+            'descript'     => 'nullable',
+            'explain'      => 'nullable',
+            'uid'          => 'nullable',
+            'game_id'      => 'nullable',
+            'region_id'    => 'nullable',
+            'service_id'   => 'nullable',
+            'images'       => 'nullable',
+            'browse_times' => 'nullable',
+            'lease_times'  => 'nullable',
+            'lease_hour'   => 'nullable',
+            'follow_times' => 'nullable',
+            'deposit'      => 'nullable',
+            'tags'         => 'nullable',
+        ];
 
+        $this->validateInput($rules);
+
+        if($this->request->isMethod('post')) {
+            return $this->successOrFailed(AccountService::createAccount($this->validated));
+        }
+
+        $article = Account::findOrNew($this->validated['id'] ?? 0);
+
+        $game = Game::where('status', Game::IN_USE_STATUS)->get(['id', 'name']);
+
+        $specs = AccountSpec::all();
+
+        return $this->rView('account.add_account', compact('article','game', 'specs'));
     }
 
 }

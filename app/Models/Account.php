@@ -86,27 +86,81 @@ class Account extends BaseModel
 	];
 
 
-	protected $appends = ['game_name', 'game_cate', 'user_phone', 'spu'];
+	protected $appends = ['game_name', 'user_phone', 'region', 'service'];
 
-
+    /**
+     * 游戏名称
+     * @return mixed
+     */
 	public function getGameNameAttribute()
     {
         return Game::whereKey($this->game_id)->value('name');
     }
 
-    public function getGameCateAttribute()
-    {
-
-    }
-
+    /**
+     * 账号所有者
+     * @return mixed
+     */
     public function getUserPhoneAttribute()
     {
-
+        return User::whereKey($this->uid)->value('user_phone') ?: '系统发布';
     }
 
-    public function getSpuAttribute()
+    /**
+     * 大区名称
+     * @return mixed|null|string
+     */
+    public function getRegionAttribute()
     {
+        return GameRegion::whereKey($this->region_id)->region_name;
+    }
 
+    /**
+     * 游戏服务器
+     * @return mixed|null|string
+     */
+    public function getServiceAttribute()
+    {
+        return GameService::whereKey($this->service_id)->service_name;
+    }
+
+    /**
+     * 格式化账号标签
+     * @param $v
+     */
+    public function setTagsAttribute($v)
+    {
+        $this->attributes['tags'] = is_array($v) ? json_encode($v) : [];
+    }
+
+    /**
+     * 格式化账号标签
+     * @param $v
+     * @return mixed
+     */
+    public function getTagsAttribute($v)
+    {
+        return  json_decode($v, true);
+    }
+
+    /**
+     * 格式化账号图片
+     * @param $v
+     */
+    public function setImagesAttribute($v)
+    {
+        $this->attributes['images'] = is_array($v) ? json_encode($v) : [];
+    }
+
+
+    /**
+     * 格式化账号标签
+     * @param $v
+     * @return mixed
+     */
+    public function getImagesAttribute($v)
+    {
+        return  json_decode($v, true);
     }
 
 }

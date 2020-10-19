@@ -15,8 +15,9 @@
                         <th lay-data="{field:'id', align:'center'}">ID</th>
                         <th lay-data="{field:'game_name',align:'center'}">所属游戏</th>
                         <th lay-data="{field:'user_phone',align:'center'}">发布用户</th>
-                        <th lay-data="{field:'spu',align:'center'}">游戏区服</th>
+                        <th lay-data="{toolbar:'#spu',width:200,align:'center'}">游戏区服</th>
                         <th lay-data="{field:'title',align:'center'}">发布标题</th>
+                        <th lay-data="{toolbar:'#toolbarDemo',width:200,align:'center'}">游戏图片</th>
                         <th lay-data="{align:'center',templet:'#account_status'}">是否上架</th>
                         <th lay-data="{field:'lease_times',align:'center'}">浏览次数</th>
                         <th lay-data="{field:'lease_hour',align:'center'}">出租次数</th>
@@ -39,11 +40,16 @@
 </script>
 
 <script type="text/html" id="toolbarDemo">
-    <img src="@{{ d.image }}" width="100px" height="50px" layer-src="@{{ d.image }}" alt="" lay-event="show">
+    <button type="button" class="layui-btn layui-btn-normal layui-btn-xs" lay-event="show">查看</button>
+</script>
+
+<script type="text/html" id="spu">
+    <button type="button" class="layui-btn-warm">@{{ d.region }}</button>
+    <button type="button" class="layui-btn">@{{ d.service }}</button>
 </script>
 
 <script type="text/html" id="listBar">
-    <a class="layui-btn layui-btn-xs"  data-url="{{url('admin/application/article-add')}}?id=@{{ d.id }}" lay-event="info">修改</a>
+    <a class="layui-btn layui-btn-xs"  data-url="{{url('admin/account/add-account')}}?id=@{{ d.id }}" lay-event="info">修改</a>
 </script>
 
 <script>
@@ -60,18 +66,18 @@
             var that = this;
             if (obj.event == 'add') {
                 var index = layer.open({
-                    title: "添加文章",
+                    title: "添加账号",
                     type: 2,
                     area: ['760px', '800px'],
                     scrollbar:true,
-                    content: "{{url('admin/application/article-add')}}",
+                    content: "{{url('admin/account/add-account')}}",
                     end:function () {
                         $(that).removeAttr("data-flag");
                         layui.cache.layerIndex = null;
                         table.reload('account_table')
                     }
                 });
-                layer.full(index);
+                // layer.full(index);
             }
         });
 
@@ -82,14 +88,14 @@
                 var jsondata = data;
                 var arr = [];
                 var obj = {
-                    'alt':jsondata.cate_name,
+                    'alt':jsondata.title,
                     'pic':jsondata.id+"_id",
                     'src':jsondata.image,
                     'thumb':jsondata.image
                 };
                 arr.push(obj);
                 var json = {
-                    'title':jsondata.cate_name,
+                    'title':jsondata.title,
                     'id':jsondata.id,
                     'start':0,
                     'data':arr
@@ -111,7 +117,7 @@
                         table.reload('account_table')
                     }
                 });
-                layer.full(index);
+                // layer.full(index);
             }
 
         });
