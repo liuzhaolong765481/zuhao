@@ -63,4 +63,14 @@ Route::group(['middleware' => 'admin'], function ($r) {
 
 
     });
+
+    Route::group(['prefix' => 'account'], function ($r) {
+        /**
+         * @var $r Route
+         */
+        $r->get('account-list', 'AccountController@accountList');
+        $r->any('add-account','AccountController@addAccount');
+
+    });
+
 });
