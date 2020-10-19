@@ -94,16 +94,16 @@ class Handler extends ExceptionHandler
         // 404 页面跳转
         if ($exception instanceof NotFoundHttpException) {
 
-            return starts_with(\Request::path(), 'admin')
-
-                ? redirect(route('admin.login'))
-
-                :redirect('404');
+            return redirect('404');
         }
 
         // 登录 跳转
         if ($exception instanceof AuthenticationException) {
-            return redirect(route('login'));
+            return starts_with(\Request::path(), 'admin')
+
+                ? redirect(route('admin.login'))
+
+                :redirect('login');
         }
         return redirect(route('500'));
     }
