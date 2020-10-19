@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 本机
+Source Server         : 本地
 Source Server Version : 50726
 Source Host           : localhost:3306
 Source Database       : zuhao
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2020-10-15 22:05:09
+Date: 2020-10-19 10:51:00
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -106,12 +106,15 @@ CREATE TABLE `xf_ad` (
   `image` varchar(255) DEFAULT NULL COMMENT '图片地址',
   `href` varchar(255) DEFAULT NULL COMMENT '跳转链接',
   `type` int(2) DEFAULT '1' COMMENT '分类  1：首页banner  2:首页推荐合作伙伴  3：导航页面广告 。。。',
+  `is_show` int(2) DEFAULT '1' COMMENT '是否展示 1：展示  0：不展示',
+  `create_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='广告表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='广告表';
 
 -- ----------------------------
 -- Records of xf_ad
 -- ----------------------------
+INSERT INTO `xf_ad` VALUES ('1', '/uploads/20201016/10xr52dXoNTPmS7yu3UVWZif89MhyW55.jpg', 'http://www.baidu.coms', '1', '1', '2020-10-16 17:55:12');
 
 -- ----------------------------
 -- Table structure for xf_admin
@@ -216,7 +219,7 @@ CREATE TABLE `xf_game` (
 -- ----------------------------
 -- Records of xf_game
 -- ----------------------------
-INSERT INTO `xf_game` VALUES ('1', '2', '王者荣耀', '/uploads/20201014/X7vagnDJezVaR3veZNsi8fA9cGiyrvsu.png', '[]', '腾讯的一款5v5策略动作游戏', '1', '2', '2020-10-14 21:04:08', '2020-10-15 22:02:38', null);
+INSERT INTO `xf_game` VALUES ('1', '2', '王者荣耀', '/uploads/20201014/X7vagnDJezVaR3veZNsi8fA9cGiyrvsu.png', '[\"123\"]', '腾讯的一款5v5策略动作游戏', '1', '2', '2020-10-14 21:04:08', '2020-10-16 09:27:49', null);
 INSERT INTO `xf_game` VALUES ('2', '1', '英雄联盟', '/uploads/20201014/fPR7pATSA0GbKHvNtyOdzPNpc3uW455f.jpg', '[]', '英雄联盟', '1', '0', '2020-10-14 21:22:49', '2020-10-14 21:22:49', null);
 INSERT INTO `xf_game` VALUES ('3', '4', '英雄联盟2', '/uploads/20201014/fPR7pATSA0GbKHvNtyOdzPNpc3uW455f.jpg', '[\"lol\",\"\\u5fb7\\u739b\\u897f\\u4e9a\",\"\\u6bd4\\u5c14\\u5409\\u6c83\\u7279\"]', '英雄联盟', '1', '3', '2020-10-14 21:55:41', '2020-10-15 22:03:51', null);
 
