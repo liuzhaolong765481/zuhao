@@ -93,8 +93,7 @@ class Handler extends ExceptionHandler
 
         // 404 页面跳转
         if ($exception instanceof NotFoundHttpException) {
-
-            return redirect('404');
+            return redirect(route('404'));
         }
 
         // 登录 跳转
