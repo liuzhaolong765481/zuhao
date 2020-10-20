@@ -45,6 +45,7 @@ Route::group(['prefix' => 'public'], function ($r){
     $r->post('send-sms','PublicController@sendSms');
     $r->post('upload','PublicController@upload');
     $r->post('uploads','PublicController@uploads');
+    $r->post('get-game-spu','PublicController@getGameSpu');
 
 
 });

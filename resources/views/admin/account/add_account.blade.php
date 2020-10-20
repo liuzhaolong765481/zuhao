@@ -13,7 +13,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">游戏</label>
                 <div class="layui-input-block">
-                    <select name="game_id" lay-verify="required">
+                    <select name="game_id" lay-verify="required" lay-filter="game_select">
                         <option value="">请选择一个游戏</option>
                         @foreach ($game as $item)
                             <option value="{{$item->id}}" @if($account->game_id == $item->id) selected @endif>{{$item->name}}</option>
@@ -25,11 +25,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">游戏大区</label>
                 <div class="layui-input-block">
-                    <select name="region_id" lay-verify="required">
+                    <select name="region_id" id="region_select" lay-filter="region_select">
                         <option value="">请选择游戏大区</option>
-                        @foreach ($game as $item)
-                            <option value="{{$item->id}}" @if($account->game_id == $item->id) selected @endif>{{$item->name}}</option>
-                        @endforeach
                     </select>
                 </div>
             </div>
@@ -38,11 +35,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">游戏服务器</label>
                 <div class="layui-input-block">
-                    <select name="service_id" lay-verify="required">
+                    <select name="service_id" id="service_select" lay-filter="service_select">
                         <option value="">请选择游戏服务器</option>
-                        @foreach ($game as $item)
-                            <option value="{{$item->id}}" @if($account->game_id == $item->id) selected @endif>{{$item->name}}</option>
-                        @endforeach
                     </select>
                 </div>
             </div>
@@ -70,8 +64,6 @@
                     <div class="layui-upload">
                         <button type="button" class="layui-btn" id="test-upload-normal">上传图片</button>
                         <div class="layui-upload-list">
-                            <img class="layui-upload-img" src="" style="width: 100px;margin-left: 95px" id="test-upload-normal-img">
-                            <em class='layui-img-del'></em>
                             <p id="test-upload-demoText"></p>
                         </div>
                     </div>
@@ -83,7 +75,7 @@
                 <div class="layui-input-block">
                     @foreach($specs as $k => $item)
                         <input type="checkbox" name="specs[{{$item->id}}][key]" title="{{$item->specs_name}}">
-                        <input type="number"   name="specs[{{$item->id}}][value]" style="margin-top: 5px" class="layui-input" placeholder="请输入响应规格对应价格"><br/>
+                        <input type="number"   name="specs[{{$item->id}}][value]" style="margin-top: 5px" class="layui-input" placeholder="请输入响应规格对应价格（单位：元）"><br/>
                     @endforeach
                 </div>
             </div>
@@ -107,7 +99,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">账号押金</label>
                 <div class="layui-input-block">
-                    <input type="number" name="deposit" lay-verify="required" placeholder="请填写账号押金"  value="{{$account->deposit}}" autocomplete="off" class="layui-input larry-input">
+                    <input type="number" name="deposit" lay-verify="required" placeholder="请填写账号押金（单位：元）"  value="{{$account->deposit}}" autocomplete="off" class="layui-input larry-input">
                 </div>
             </div>
 
@@ -138,7 +130,8 @@
 
         var uploadInst = upload.render({
             elem: '#test-upload-normal',
-            url: '{{url('public/uploads')}}',
+            url: '{{url('public/upload')}}',
+            multiple: true,  //是否允许多图上传
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
@@ -148,7 +141,11 @@
             before: function(obj){
                 //预读本地文件示例，不支持ie8
                 obj.preview(function(index, file, result){
-                    $('#test-upload-normal-img').attr('src', result); //图片链接（base64）
+
+                    $('.layui-upload-list').append("" +
+                        " <img class='layui-upload-img enlarge' src='"+result+"'  style='width:100px;margin-left:95px'>" +
+                        " <em class='layui-img-del'></em>"
+                    );
                 });
             },
             done: function(res){
@@ -156,7 +153,9 @@
                 if(res.status != SUCCESS){
                     return layer.msg(res.message);
                 }else{
-                    $("input[name='poster']").val(res.data);
+                    $('.layui-upload-list').append("" +
+                        "<input type='hidden' name='images[]' value='"+res.data+"'>"
+                    );
                 }
                 //上传成功
             },
@@ -189,6 +188,65 @@
             });
 
             return false;
+        });
+
+
+        form.on('select(game_select)' ,function(data){
+            $.ajax({
+                url: "{{url('public/get-game-spu')}}",
+                data: {'game_id': data.value},
+                dataType: "json",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: "post",
+                success: function (resultData) {
+                    $("#region_select").empty();
+                    if (resultData.status === SUCCESS) {
+                        $('#region_select').attr('lay-verify','required');
+
+                        $("#region_select").append(new Option("请选择游戏大区", ""));
+                        $.each(resultData.data, function (index, item) {
+                            $('#region_select').append(new Option(item.region_name, item.id));
+                        });
+                    } else {
+
+                        $('#region_select').removeAttr('lay-verify','required');
+                        $("#region_select").append(new Option("请选择游戏大区", ""));
+                    }
+
+                    form.render("select");
+                }
+            });
+        });
+
+
+        form.on('select(region_select)' ,function(data){
+            $.ajax({
+                url: "{{url('public/get-game-spu')}}",
+                data: {'region_id': data.value},
+                dataType: "json",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: "post",
+                success: function (resultData) {
+                    $("#service_select").empty();
+                    if (resultData.status === SUCCESS) {
+                        $('#service_select').attr('lay-verify','required');
+
+                        $("#service_select").append(new Option("请选择游戏服务器", ""));
+                        $.each(resultData.data, function (index, item) {
+                            $('#service_select').append(new Option(item.service_name, item.id));
+                        });
+                    } else {
+                        $('#service_select').removeAttr('lay-verify','required');
+                        $("#service_select").append(new Option("请选择游戏服务器", ""));
+                    }
+
+                    form.render("select");
+                }
+            });
         });
 
 

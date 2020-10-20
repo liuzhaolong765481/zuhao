@@ -7,17 +7,7 @@ function reload() {
 }
 
 $(document).on('ready', function () {
-    /**
-     * 图片放大
-     */
-    $(".enlarge").each(function () {
-        $(this).magnificPopup({
-            items: {
-                src: $(this).attr('src')
-            },
-            type: 'image' // this is default type
-        });
-    });
+    erLarge();
 });
 
 /**
@@ -53,4 +43,16 @@ function refreshCode() {
     }
 }
 
-
+function erLarge() {
+    /**
+     * 图片放大
+     */
+    $(".enlarge").each(function () {
+        $(this).magnificPopup({
+            items: {
+                src: $(this).attr('src')
+            },
+            type: 'image' // this is default type
+        });
+    });
+}

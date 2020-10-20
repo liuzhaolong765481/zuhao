@@ -7,6 +7,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GameRegion;
+use App\Models\GameService;
 use App\Models\User;
 use App\Services\UploadServices as Upload;
 use App\Utils\Sms;
@@ -73,15 +75,28 @@ class PublicController extends Controller
     }
 
 
+    /**
+     * 请求获取区服
+     * @return mixed
+     * @throws \App\Exceptions\RequestException
+     */
     public function getGameSpu()
     {
         $rules = [
-            'game_id' => 'nullable',
-            'region_id'  => 'nullable',
+            'game_id'   => 'nullable',
+            'region_id' => 'nullable',
         ];
 
         $this->validateInput($rules);
 
+        if(isset($this->validated['game_id'])){
+            return $this->successOrNodata(GameRegion::where('game_id', $this->validated['game_id'])->get()->toArray());
+        }
 
+        if(isset($this->validated['region_id'])){
+            return $this->successOrNodata(GameService::where('region_id', $this->validated['region_id'])->get()->toArray());
+        }
+
+        return $this->badRequestError();
     }
 }
