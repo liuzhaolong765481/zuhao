@@ -102,7 +102,7 @@ class Handler extends ExceptionHandler
 
                 ? redirect(route('admin.login'))
 
-                :redirect('login');
+                :redirect(route('login'));
         }
         return redirect(route('500'));
     }

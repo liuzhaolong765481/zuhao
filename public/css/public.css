@@ -56,3 +56,14 @@
     color: #d82b24;
     text-decoration: underline;
 }
+
+.layui-img-del{
+    display: block;
+    background: url("../images/close.png") no-repeat;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    cursor: pointer;
+}

@@ -87,6 +87,7 @@
                     if(e.status == SUCCESS){
                         reload()
                     }else{
+                        refreshCode();
                         layer.msg(e.message)
                     }
 

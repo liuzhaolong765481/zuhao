@@ -72,4 +72,16 @@ class PublicController extends Controller
         return $this->success(Upload::uploads($this->validated['files']));
     }
 
+
+    public function getGameSpu()
+    {
+        $rules = [
+            'game_id' => 'nullable',
+            'region_id'  => 'nullable',
+        ];
+
+        $this->validateInput($rules);
+
+
+    }
 }

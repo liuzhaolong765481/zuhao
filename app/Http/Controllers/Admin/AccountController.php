@@ -71,6 +71,7 @@ class AccountController extends Controller
             'follow_times' => 'nullable',
             'deposit'      => 'nullable',
             'tags'         => 'nullable',
+            'specs'        => 'nullable',
         ];
 
         $this->validateInput($rules);
@@ -79,13 +80,13 @@ class AccountController extends Controller
             return $this->successOrFailed(AccountService::createAccount($this->validated));
         }
 
-        $article = Account::findOrNew($this->validated['id'] ?? 0);
+        $account = Account::findOrNew($this->validated['id'] ?? 0);
 
         $game = Game::where('status', Game::IN_USE_STATUS)->get(['id', 'name']);
 
         $specs = AccountSpec::all();
 
-        return $this->rView('account.add_account', compact('article','game', 'specs'));
+        return $this->rView('account.add_account', compact('account','game', 'specs'));
     }
 
 }

@@ -6,6 +6,20 @@ function reload() {
     location.reload();
 }
 
+$(document).on('ready', function () {
+    /**
+     * 图片放大
+     */
+    $(".enlarge").each(function () {
+        $(this).magnificPopup({
+            items: {
+                src: $(this).attr('src')
+            },
+            type: 'image' // this is default type
+        });
+    });
+});
+
 /**
  * 封装加载层
  */
@@ -38,3 +52,5 @@ function refreshCode() {
         $('.verify-code').attr('src', str + '&r=' + Math.ceil(Math.random() * 100));
     }
 }
+
+
