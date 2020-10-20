@@ -43,10 +43,11 @@ function refreshCode() {
     }
 }
 
+/**
+ * 图片放大
+ */
 function erLarge() {
-    /**
-     * 图片放大
-     */
+   
     $(".enlarge").each(function () {
         $(this).magnificPopup({
             items: {
