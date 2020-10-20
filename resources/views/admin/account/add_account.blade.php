@@ -156,6 +156,7 @@
                     $('.layui-upload-list').append("" +
                         "<input type='hidden' name='images[]' value='"+res.data+"'>"
                     );
+                    erLarge();
                 }
                 //上传成功
             },
