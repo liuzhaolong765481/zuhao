@@ -65,6 +65,12 @@
                         <button type="button" class="layui-btn" id="test-upload-normal">上传图片</button>
                         <div class="layui-upload-list">
                             <p id="test-upload-demoText"></p>
+                            @foreach($account->images as $item)
+                                <div class='image_div' > <em class='layui-img-del'></em>
+                                    <img class='layui-upload-img enlarge' src='{{$item}}' >
+                                    <input type='hidden' name='images[]' value='{{$item}}'>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
