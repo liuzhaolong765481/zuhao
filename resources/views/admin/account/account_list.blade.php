@@ -44,8 +44,8 @@
 </script>
 
 <script type="text/html" id="spu">
-    <button type="button" class="layui-btn-warm">@{{ d.region }}</button>
-    <button type="button" class="layui-btn">@{{ d.service }}</button>
+    <button type="button" class="layui-btn layui-btn-warm layui-btn-xs">@{{ d.region }}</button>
+    <button type="button" class="layui-btn layui-btn-xs">@{{ d.service }}</button>
 </script>
 
 <script type="text/html" id="listBar">
@@ -90,8 +90,8 @@
                 var obj = {
                     'alt':jsondata.title,
                     'pic':jsondata.id+"_id",
-                    'src':jsondata.image,
-                    'thumb':jsondata.image
+                    'src':jsondata.images,
+                    'thumb':jsondata.images
                 };
                 arr.push(obj);
                 var json = {
