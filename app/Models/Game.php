@@ -72,7 +72,7 @@ class Game extends BaseModel
      */
 	public function setTagAttribute($v)
     {
-        $this->attributes['tag'] = is_array($v) ? json_encode($v) : [];
+        $this->attributes['tag'] = is_array($v) ? json_encode($v ,JSON_UNESCAPED_UNICODE) : [];
     }
 
     /**

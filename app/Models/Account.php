@@ -112,7 +112,7 @@ class Account extends BaseModel
      */
     public function getRegionAttribute()
     {
-        return GameRegion::whereKey($this->region_id)->region_name;
+        return GameRegion::whereKey($this->region_id)->value('region_name');
     }
 
     /**
@@ -121,7 +121,7 @@ class Account extends BaseModel
      */
     public function getServiceAttribute()
     {
-        return GameService::whereKey($this->service_id)->service_name;
+        return GameService::whereKey($this->service_id)->value('service_name');
     }
 
     /**
@@ -130,7 +130,7 @@ class Account extends BaseModel
      */
     public function setTagsAttribute($v)
     {
-        $this->attributes['tags'] = is_array($v) ? json_encode($v) : [];
+        $this->attributes['tags'] = is_array($v) ? json_encode($v,JSON_UNESCAPED_UNICODE) : [];
     }
 
     /**

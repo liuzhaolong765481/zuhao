@@ -52,7 +52,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">账号描述</label>
                 <div class="layui-input-block">
-                    <textarea id="demo" name="descript" style="display: none;">{{$account->descript}}</textarea>
+                    <textarea id="demo2" name="descript">{{$account->descript}}</textarea>
                 </div>
             </div>
 
@@ -74,8 +74,8 @@
                 <label class="layui-form-label">出租规格</label>
                 <div class="layui-input-block">
                     @foreach($specs as $k => $item)
-                        <input type="checkbox" name="specs[{{$item->id}}][key]" title="{{$item->specs_name}}">
-                        <input type="number"   name="specs[{{$item->id}}][value]" style="margin-top: 5px" class="layui-input" placeholder="请输入响应规格对应价格（单位：元）"><br/>
+                        <input type="checkbox" title="{{$item->specs_name}}">
+                        <input type="number"   name="specs[{{$item->id}}]" style="margin-top: 5px" class="layui-input" placeholder="请输入响应规格对应价格（单位：元）"><br/>
                     @endforeach
                 </div>
             </div>
@@ -99,7 +99,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">账号押金</label>
                 <div class="layui-input-block">
-                    <input type="number" name="deposit" lay-verify="required" placeholder="请填写账号押金（单位：元）"  value="{{$account->deposit}}" autocomplete="off" class="layui-input larry-input">
+                    <input type="number" name="deposit" lay-verify="required" placeholder="请填写账号押金 0 为无需押金（单位：元）"  value="{{$account->deposit}}" autocomplete="off" class="layui-input larry-input">
                 </div>
             </div>
 
@@ -126,7 +126,10 @@
             form = layui.form;
             layedit = layui.layedit;
 
-        layedit.build('demo'); //建立编辑器
+        layedit.build('demo2',{
+            'height':'300',
+
+        }); //建立编辑器
 
         var uploadInst = upload.render({
             elem: '#test-upload-normal',
@@ -142,10 +145,7 @@
                 //预读本地文件示例，不支持ie8
                 obj.preview(function(index, file, result){
 
-                    $('.layui-upload-list').append("" +
-                        " <img class='layui-upload-img enlarge' src='"+result+"'  style='width:100px;margin-left:95px'>" +
-                        " <em class='layui-img-del'></em>"
-                    );
+
                 });
             },
             done: function(res){
@@ -154,7 +154,9 @@
                     return layer.msg(res.message);
                 }else{
                     $('.layui-upload-list').append("" +
-                        "<input type='hidden' name='images[]' value='"+res.data+"'>"
+                        " <div class='image_div' > <em class='layui-img-del'></em><img class='layui-upload-img enlarge' src='"+res.data+"' >" +
+                        "<input type='hidden' name='images[]' value='"+res.data+"'>"+
+                        "</div>"
                     );
                     erLarge();
                 }
@@ -276,7 +278,12 @@
 
         $(document).on("click",".del_tag",function(){
             $(this).parents('.layui-input-block').remove()
-        })
+        });
+
+        $(document).on("click",".layui-img-del",function(){
+            $(this).parents('.image_div').remove()
+        });
+
     });
 
 
