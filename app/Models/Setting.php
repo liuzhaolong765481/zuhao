@@ -24,6 +24,8 @@ class Setting extends BaseModel
 	protected $table = 'xf_setting';
 	public $timestamps = false;
 
+	const FARTHER = 0;
+
 	protected $casts = [
 		'pid' => 'int'
 	];

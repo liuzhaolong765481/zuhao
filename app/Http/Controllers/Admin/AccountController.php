@@ -8,6 +8,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Account;
+use App\Models\AccountSpcesRelation;
 use App\Models\AccountSpec;
 use App\Models\Game;
 use App\Models\GameRegion;

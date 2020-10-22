@@ -34,4 +34,15 @@ class AccountSpcesRelation extends BaseModel
 		'specs_id',
 		'price'
 	];
+
+
+	public function specs()
+    {
+        return $this->hasOne(AccountSpec::class,'id','specs_id');
+    }
+
+    public function account()
+    {
+        return $this->hasOne(Account::class,'id','account_id');
+    }
 }

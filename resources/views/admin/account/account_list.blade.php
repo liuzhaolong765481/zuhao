@@ -44,8 +44,8 @@
 </script>
 
 <script type="text/html" id="spu">
-    <button type="button" class="layui-btn layui-btn-warm layui-btn-xs">@{{ d.region }}</button>
-    <button type="button" class="layui-btn layui-btn-xs">@{{ d.service }}</button>
+    <button type="button" class="layui-btn layui-btn-warm layui-btn-xs">@{{ d.region ? d.region : '暂无'}}</button>
+    <button type="button" class="layui-btn layui-btn-xs">@{{ d.service ? d.service : '暂无'}}</button>
 </script>
 
 <script type="text/html" id="listBar">

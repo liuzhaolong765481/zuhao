@@ -100,8 +100,9 @@
                     <dd class="layui-nav-itemed">
                         <a href="javascript:;">系统设置</a>
                         <dl class="layui-nav-child">
-                            <dd><a lay-href="set/system/website.html">网站设置</a></dd>
-                            <dd><a lay-href="set/system/email.html">邮件服务</a></dd>
+                            <dd>
+                                <a lay-href="{{url('admin/setting/index')}}">网站设置</a>
+                            </dd>
                         </dl>
                     </dd>
                     <dd class="layui-nav-itemed">

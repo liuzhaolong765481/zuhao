@@ -73,4 +73,11 @@ Route::group(['middleware' => 'admin'], function ($r) {
 
     });
 
+    Route::group(['prefix' => 'setting'], function ($r) {
+       /**
+        * @var $r Route
+        */
+       $r->any('index','SettingController@index');
+    });
+
 });

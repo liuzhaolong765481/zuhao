@@ -24,4 +24,6 @@ class AccountSpec extends BaseModel
 	protected $fillable = [
 		'specs_name'
 	];
+
+
 }

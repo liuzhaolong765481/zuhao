@@ -88,8 +88,20 @@
                 <label class="layui-form-label">出租规格</label>
                 <div class="layui-input-block">
                     @foreach($specs as $k => $item)
-                        <input type="checkbox" title="{{$item->specs_name}}">
-                        <input type="number"   name="specs[{{$item->id}}]" style="margin-top: 5px" class="layui-input" placeholder="请输入响应规格对应价格（单位：元）"><br/>
+                        <input type="checkbox"
+                               @foreach($account->account_specs as $item2)
+                               @if($item->id == $item2->specs_id)
+                               checked
+                               @endif
+                               @endforeach
+                               title="{{$item->specs_name}}">
+                        <input type="number" name="specs[{{$item->id}}]" style="margin-top: 5px"
+                               @foreach($account->account_specs as $item2)
+                               @if($item->id == $item2->specs_id)
+                               value="{{$item2->price}}"
+                               @endif
+                               @endforeach
+                               class="layui-input" placeholder="请输入响应规格对应价格（单位：元）"><br/>
                     @endforeach
                 </div>
             </div>

@@ -163,4 +163,13 @@ class Account extends BaseModel
         return  json_decode($v, true);
     }
 
+    /**
+     * 关联关系表
+     */
+    public function account_specs()
+    {
+        return $this->hasMany(AccountSpcesRelation::class,'account_id','id');
+    }
+
+//collect($account->account_specs->toArray())->pluck('specs_id')
 }
