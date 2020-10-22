@@ -27,6 +27,9 @@
                 <div class="layui-input-block">
                     <select name="region_id" id="region_select" lay-filter="region_select">
                         <option value="">请选择游戏大区</option>
+                        @foreach($region as $item)
+                            <option value="{{$item->id}}" @if($account->region_id == $item->id) selected @endif>{{$item->region_name}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -37,6 +40,9 @@
                 <div class="layui-input-block">
                     <select name="service_id" id="service_select" lay-filter="service_select">
                         <option value="">请选择游戏服务器</option>
+                        @foreach($service as $item)
+                            <option value="{{$item->id}}" @if($account->service_id == $item->id) selected @endif>{{$item->service_name}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -65,12 +71,14 @@
                         <button type="button" class="layui-btn" id="test-upload-normal">上传图片</button>
                         <div class="layui-upload-list">
                             <p id="test-upload-demoText"></p>
-                            @foreach($account->images as $item)
-                                <div class='image_div' > <em class='layui-img-del'></em>
-                                    <img class='layui-upload-img enlarge' src='{{$item}}' >
-                                    <input type='hidden' name='images[]' value='{{$item}}'>
-                                </div>
-                            @endforeach
+                            @if(is_array($account->images))
+                                @foreach($account->images as $item)
+                                    <div class='image_div'><em class='layui-img-del'></em>
+                                        <img class='layui-upload-img enlarge' src='{{$item}}'>
+                                        <input type='hidden' name='images[]' value='{{$item}}'>
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>

@@ -32,7 +32,7 @@
 </div>
 
 <script type="text/html" id="account_status">
-    @{{# if (d.is_upper == 0) { }}
+    @{{# if (d.is_upper == 1) { }}
     <input type="checkbox" checked="true" lay-filter="status" value="@{{d.id}}" lay-skin="switch" lay-text="是|否">
     @{{# } else {}}
     <input type="checkbox"  value="@{{d.id}}" lay-filter="status" lay-skin="switch" lay-text="是|否">
@@ -62,6 +62,38 @@
             form = layui.form,
             table = layui.table;
 
+        form.on('switch(status)', function(data){
+            var bool = data.elem.checked;
+            var id = data.value;
+            if (bool) {
+                var status = 1;
+            } else {
+                var status = 0;
+            }
+            var index = layer.load(1);
+            var url = "{{url('admin/account/add-account')}}";
+
+            $.ajax({
+                url:url,
+                dateType:'json',
+                data:{id:id,is_upper:status},
+                beforeSend:function() {
+
+                },
+                type:'post',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success:function (res) {
+                    layer.close(index);
+                    layer.msg("操作成功",{time:800,shade:0.3},function () {
+                        table.reload('user_table')
+                    });
+                }
+            })
+        });
+
+
         table.on('toolbar(account_table)', function(obj){
             var that = this;
             if (obj.event == 'add') {
@@ -85,18 +117,19 @@
             var data = obj.data;
             var that = this;
             if (obj.event == "show") {
-                var jsondata = data;
                 var arr = [];
-                var obj = {
-                    'alt':jsondata.title,
-                    'pic':jsondata.id+"_id",
-                    'src':jsondata.images,
-                    'thumb':jsondata.images
-                };
-                arr.push(obj);
+                $.each(data.images, function (k,v) {
+                    var obj = {
+                        'alt':data.title,
+                        'pic':data.id+"_id",
+                        'src':v,
+                        'thumb':v
+                    };
+                    arr.push(obj);
+                });
                 var json = {
-                    'title':jsondata.title,
-                    'id':jsondata.id,
+                    'title':data.title,
+                    'id':data.id,
                     'start':0,
                     'data':arr
                 };

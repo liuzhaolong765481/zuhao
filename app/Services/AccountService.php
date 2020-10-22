@@ -25,17 +25,19 @@ class AccountService extends BaseServices
      */
     public static function createAccount($validate)
     {
-//        \DB::beginTransaction();
-//        try {
+        \DB::beginTransaction();
+
+        try {
             if (isset($validate['region_id'])) {
                 $validate['region_name'] = GameRegion::whereKey($validate['region_id'])->value('region_name');
             }
             if (isset($validate['service_id'])) {
                 $validate['service_name'] = GameService::whereKey($validate['service_id'])->value('service_name');
             }
-            $account = Account::create($validate);
+            $account = Account::updateOrCreate(['id' => $validate['id'] ], $validate);
             //处理租号规格
             if (isset($validate['specs']) && is_array($validate['specs'])) {
+
                 AccountSpcesRelation::where('account_id', $account->id)->delete();
                 foreach ($validate['specs'] as $k => $v) {
                     if ($v) {
@@ -46,17 +48,16 @@ class AccountService extends BaseServices
                         ]);
                     }
                 }
+
             }
 
+            \DB::commit();
             return true;
 
-//            \DB::commit();
-//            return true;
-//
-//        }catch (\Exception $e){
-//            \DB::commit();
-//            throw new RequestException($e->getMessage());
-//        }
+        }catch (\Exception $e){
+            \DB::commit();
+            throw new RequestException($e->getMessage());
+        }
 
 
     }

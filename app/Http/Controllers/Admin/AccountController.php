@@ -10,6 +10,8 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Account;
 use App\Models\AccountSpec;
 use App\Models\Game;
+use App\Models\GameRegion;
+use App\Models\GameService;
 use App\Services\AccountService;
 
 class AccountController extends Controller
@@ -24,9 +26,9 @@ class AccountController extends Controller
     {
         if($this->request->ajax()) {
             $rules = [
-                'page'       => 'required',
-                'limit'      => 'required',
-                'game_id'       => 'nullable'
+                'page'    => 'required',
+                'limit'   => 'required',
+                'game_id' => 'nullable'
             ];
 
             $this->validateInput($rules);
@@ -72,6 +74,7 @@ class AccountController extends Controller
             'deposit'      => 'nullable',
             'tags'         => 'nullable',
             'specs'        => 'nullable',
+            'is_upper'     => 'nullable'
         ];
 
         $this->validateInput($rules);
@@ -84,9 +87,22 @@ class AccountController extends Controller
 
         $game = Game::where('status', Game::IN_USE_STATUS)->get(['id', 'name']);
 
+        //TODO 渲染数据，写的不好 后期优化
         $specs = AccountSpec::all();
 
-        return $this->rView('account.add_account', compact('account','game', 'specs'));
+        if(isset($this->validated['id']) && $this->validated['id'] && $account->region_id){
+            $region = GameRegion::where('game_id',$account->game_id)->get();
+        }else{
+            $region = [];
+        }
+
+        if(isset($this->validated['id']) && $this->validated['id'] && $account->service_id){
+            $service = GameService::where('region_id',$account->region_id)->get();
+        }else{
+            $service = [];
+        }
+
+        return $this->rView('account.add_account', compact('account','game', 'specs', 'region', 'service'));
     }
 
 }
