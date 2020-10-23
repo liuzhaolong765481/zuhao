@@ -1,4 +1,5 @@
 @include('admin/_include/header')
+<body class="login-body">
 <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
 
     <div class="layadmin-user-login-main">
@@ -66,6 +67,8 @@
 
 
 </div>
+</body>
+
 <script>
     layui.use(['form'], function () {
         var form = layui.form;
