@@ -20,11 +20,15 @@ trait Page
      * @param int $limit 取出条数
      * @return mixed
      */
-    public function scopePage($query, $page = 1, $limit = 10)
+    public function scopePage($query)
     {
+        $limit = (int)(\Request::input('limit') ?? 10);
+
+        $page = (int)(\Request::input('page') ?? 1);
+
         define('PAGE_COUNT', $query->count());
 
-        return \Request::input('page') ? $query->offset((int)$page - 1 * (int)$limit)->limit((int)$limit) : $query;
+        return \Request::input('page') ? $query->offset(($page - 1) * $limit)->limit($limit) : $query;
     }
 
 

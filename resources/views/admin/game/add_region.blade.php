@@ -4,7 +4,7 @@
     <div class="layui-row larryms-panel auth-user-add">
         <form class="layui-form" method="post">
             <div class="layui-form-item">
-                <label class="layui-form-label">分类名称</label>
+                <label class="layui-form-label">大区名称</label>
                 <div class="layui-input-block">
                     <input type="text" name="region_name" lay-verify="required" placeholder="请填写大区名称"  value="{{$region->region_name}}" autocomplete="off" class="layui-input larry-input">
                     <input type="hidden" name="game_id" value="{{$game_id}}">

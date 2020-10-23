@@ -5,7 +5,7 @@
         <form class="layui-form" method="post">
 
             <div class="layui-form-item">
-                <label class="layui-form-label">游戏大区</label>
+                <label class="layui-form-label">游戏服务器</label>
 {{--                @if(is_array($service))--}}
                     @foreach($service as $item)
                         <div class="layui-input-block">
