@@ -5,7 +5,8 @@
 
 .login-body
 {
-    background:url('../../../images/bg.jpg') no-repeat 100%;
+    background:url('../../../images/bg.gif') no-repeat ;
+    background-size: 100% 100%;
 }
 .layui-layout-body {
     overflow: auto
