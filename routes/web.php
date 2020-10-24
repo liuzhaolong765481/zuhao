@@ -34,7 +34,8 @@ Route::group(['prefix' => 'auth'], function ($r){
     $r->post('login-psd','AuthController@loginPsd');
     $r->post('login-code','AuthController@loginCode');
     $r->get('logout','AuthController@logout');
-
+    $r->post('register','AuthController@register');
+    $r->post('reset-psd','AuthController@resetPsd');
 });
 
 

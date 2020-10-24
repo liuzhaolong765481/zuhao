@@ -8,8 +8,9 @@
     <title>飞讯租号</title>
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
-    <link type="text/css" rel="stylesheet" href="{{asset('css/zuhao/activitiesregister.css')}}"/>
-    <link type="text/css" rel="stylesheet" href="{{asset('css/zuhao/animate.min.css')}}"/>
+    <link type="text/css" rel="stylesheet" href="{{asset('css/activitiesregister.css')}}"/>
+    <link type="text/css" rel="stylesheet" href="{{asset('css/animate.min.css')}}"/>
+    <link type="text/css" rel="stylesheet" href="{{asset('plugin/layui/css/layui.css')}}"/>
     <script>
         //低于IE10前往浏览器升级
         if (/msie/i.test(navigator.userAgent) && navigator.userAgent.match(/msie (\d+\.\d+)/i)[1] < 10)
@@ -71,16 +72,128 @@
     <script src="{{asset('js/zuhao/font.js')}}"></script>
     <!--加载JS-->
     <script type="text/javascript" src="{{asset('js/jquery-1.12.4.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/zuhao/layer.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/zuhao/menuaim_swiper.js')}}"></script>
+    <script type="text/javascript" src="{{asset('plugin/layui/layui.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/base.js')}}"></script>
+{{--    <script type="text/javascript" src="{{asset('js/zuhao/menuaim_swiper.js')}}"></script>--}}
 </head>
+<style>
+    .layui-layer{
+        border: none!important;
+    }
+    .layui-layer-page{
+        border: none!important;
+    }
+</style>
 <body>
+
+
+<!--登录模板-->
+<div class="login-box template" data-width="400px">
+    <ul class="tab-head">
+        <li class="on">登录</li>
+        <li class="to-register">注册</li>
+    </ul>
+    <div class="content">
+        <form id="login-form" class="comm-form">
+            <div class="form-item">
+                <label class="pos-before" style="opacity: 0.4" for="login-username"><i class="icon icon-account"></i></label>
+                <a class="pos-after" style="font-size: 0;" onclick="$(this).next('input').val('');"><i class="icon icon-clear-input"></i></a>
+                <input id="login-username" class="username" type="text" name="user_phone" placeholder="请输入手机号">
+            </div>
+            <div class="form-item">
+                <label class="pos-before" style="opacity: 0.4" for="login-password"><i class="icon icon-password"></i></label>
+                <input id="login-password" class="password" type="password" name="password" placeholder="请输入你的密码" autocomplete="off">
+            </div>
+            <input type="button"  id="login-sub"  value="登录">
+            <div class="tools cf">
+                <a data-triggerClass="to-login" class="forget-password fr">忘记密码?</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--注册模板-->
+<div class="register-box template" data-width="400px">
+    <ul class="tab-head">
+        <li class="to-login">登录</li>
+        <li class="on">注册</li>
+    </ul>
+    <div class="content">
+        <form id="register-form" class="comm-form">
+            <div class="form-item">
+                <div class="pos-before dropmenu">
+                    <div class="drop-title">
+                        <input type="text" placeholder="" value="+86" readonly="readonly">
+                        <i class="edge"></i>
+                    </div>
+                    <dl class="drop-menu" style="display: none;">
+                        <dd class="selected">+86</dd>
+                    </dl>
+                </div>
+                <a class="pos-after" style="font-size: 0;" onclick="$(this).next('input').val('');"><i class="icon icon-clear-input"></i></a>
+                <input id="register-mobile" class="mobile" type="text" name="user_phone" placeholder="请输入手机号码" autocomplete="off">
+            </div>
+            <div id="register-captcha" class="form-item dragImgCaptcha"></div>
+            <div class="form-item w-eight-two cf">
+                <input class="pull-left captcha" name="validate_code" type="text" placeholder="请输入手机验证码" autocomplete="off">
+                <button data-name="registerCaptchaTimer" type="button" data-type="register" class="get-captcha pull-right" tabindex="-1">获取验证码</button>
+            </div>
+            <div class="form-item" style="margin-bottom: 60px;">
+                <input id="register-password" class="password" name="password" type="password" placeholder="6-20位数字或字母密码" autocomplete="off">
+                <a class="pos-after see-password"><i class="icon icon-see-pwd"></i></a>
+            </div>
+            <p class="user-agree">
+                <label class="checkbox">
+                    <input id="register-agree" name="agree" type="checkbox" checked>
+                    <i></i>
+                </label>
+                <label for="register-agree">我已阅读并接受</label><a target="_blank" href="">《飞讯租号用户协议》</a>
+            </p>
+            <input type="button" id="register-sub" value="注册">
+        </form>
+    </div>
+</div>
+
+<!--忘记密码-->
+<div class="findPassword-box template" data-width="400px">
+    <ul class="tab-head">
+        <li>忘记密码</li>
+    </ul>
+    <div class="content">
+        <form id="findPassword-form" class="comm-form">
+            <div class="form-item">
+                <div class="pos-before dropmenu">
+                    <div class="drop-title">
+                        <input type="text" placeholder="" value="+86" readonly="readonly">
+                        <i class="edge"></i>
+                    </div>
+                    <dl class="drop-menu" style="display: none;">
+                        <dd class="selected">+86</dd>
+                    </dl>
+                </div>
+                <a class="pos-after" onclick="$(this).next('input').val('');"><i class="icon icon-clear-input"></i></a>
+                <input id="findPassword-mobile" class="mobile" type="text" name="user_phone" placeholder="请输入手机号码" autocomplete="off">
+            </div>
+            <div id="findPwd-captcha" class="form-item dragImgCaptcha"></div>
+            <div class="form-item w-eight-two cf">
+                <input class="pull-left captcha" name="validate_code" type="text" placeholder="请输入手机验证码" autocomplete="off">
+                <button type="button" data-name="findPasswordCaptchaTimer" data-type="code" class="get-captcha pull-right" tabindex="-1">获取验证码</button>
+            </div>
+            <div class="form-item" style="margin-bottom: 60px;">
+                <input id="findPassword-password" class="password" name="password" type="password"
+                       placeholder="请输入你的新密码" autocomplete="off">
+                <a class="pos-after see-password"><i class="icon icon-see-pwd"></i></a>
+            </div>
+            <input type="button" id="find-password-sub" value="确认修改">
+        </form>
+    </div>
+</div>
 
 <header class="comm-header space-between hasOpacity">
     <div class="ver-center">
         <a href="/" class="logo ver-center">
-            <img src="{{asset('images/logo.png')}}" alt="租号网logo">
-            <h1>租号网</h1>
+            <img src="{{asset('images/logo.png')}}" alt="飞讯租号logo">
+            <h1>飞讯租号</h1>
         </a>
         <div class="game-categories">
             <div class="btn center-center-column">
@@ -99,69 +212,19 @@
                             端游
                         </div>
                         <ul class="game-list">
+                            @foreach($nav_game['pc'] as $k => $item)
                             <li>
                                 <a href="">
-                                    <img src="picture/5ee19a2803be6.png" alt="英雄LOL">
-                                    <span>英雄LOL</span>
+                                    <img src="{{$item->poster}}" alt="{{$item->name}}">
+                                    <span>{{$item->name}}</span>
+                                    @if($item->is_hot)
                                     <svg class="symbolIcon" aria-hidden="true">
                                         <use xlink:href="#icon-hot"></use>
                                     </svg>
+                                    @endif
                                 </a>
                             </li>
-                            <li>
-                                <a href="">
-                                    <img src="picture/5ee19a5ab1969.png" alt="绝地求生">
-                                    <span>绝地求生</span>
-                                    <svg class="symbolIcon" aria-hidden="true">
-                                        <use xlink:href="#icon-hot"></use>
-                                    </svg>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <img src="picture/5ee19ac421f04.png" alt="CF端游">
-                                    <span>CF端游</span>
-                                    <svg class="symbolIcon" aria-hidden="true">
-                                        <use xlink:href="#icon-hot"></use>
-                                    </svg>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <img src="picture/5f326046c6b2d.png" alt="糖豆人">
-                                    <span>糖豆人</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <img src="picture/5ee19b57ca05e.png" alt="逆战">
-                                    <span>逆战</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <img src="picture/5ee19cf23f8b2.png" alt="人类：一败涂地">
-                                    <span>人类：一败涂地</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <img src="picture/5ee19baf90303.png" alt="GTA5online">
-                                    <span>GTA5online</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <img src="picture/5ee19d06841e2.png" alt="CSOL">
-                                    <span>CSOL</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <img src="picture/5ee19bc21fc56.png" alt="黎明杀机">
-                                    <span>黎明杀机</span>
-                                </a>
-                            </li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="split-line"></div>
@@ -173,51 +236,21 @@
                             手游
                         </div>
                         <ul class="game-list">
-                            <li>
-                                <a href="/glory/">
-                                    <img src="picture/5ee19af848f5b.png" alt="王者手游">
-                                    <span>王者手游</span>
-                                    <svg class="symbolIcon" aria-hidden="true">
-                                        <use xlink:href="#icon-hot"></use>
-                                    </svg>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/gp/">
-                                    <img src="picture/5ee19be12675b.png" alt="吃鸡手游">
-                                    <span>吃鸡手游</span>
-                                    <svg class="symbolIcon" aria-hidden="true">
-                                        <use xlink:href="#icon-hot"></use>
-                                    </svg>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/naruto/">
-                                    <img src="picture/5ee19cc8e9dc3.png" alt="火影忍者">
-                                    <span>火影忍者</span>
-                                    <svg class="symbolIcon" aria-hidden="true">
-                                        <use xlink:href="#icon-hot"></use>
-                                    </svg>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/cfm/">
-                                    <img src="picture/5ee19c2bb2d6b.png" alt="CF手游">
-                                    <span>CF手游</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/speedmobile/">
-                                    <img src="picture/5ee1eef8a9cb2.png" alt="飞车(手游)">
-                                    <span>飞车(手游)</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/bob/">
-                                    <img src="picture/5ee19ce0e8fcd.png" alt="球球大作战">
-                                    <span>球球大作战</span>
-                                </a>
-                            </li>
+
+                            @foreach($nav_game['mobile'] as $k => $item)
+                                <li>
+                                    <a href="">
+                                        <img src="{{$item->poster}}" alt="{{$item->name}}">
+                                        <span>{{$item->name}}</span>
+                                        @if($item->is_hot)
+                                            <svg class="symbolIcon" aria-hidden="true">
+                                                <use xlink:href="#icon-hot"></use>
+                                            </svg>
+                                        @endif
+                                    </a>
+                                </li>
+                            @endforeach
+
                         </ul>
                     </div>
                 </div>
@@ -226,13 +259,13 @@
     </div>
     <nav class="ver-center nav">
         <a class="on" href="/">首页</a>
-        <a class="" href="/">租号大厅</a>
+        <a class="" href="">租号大厅</a>
         <a class="" href="">店铺</a>
-        <a class="secondary" href="https://www.yuema.cn/" target="_blank">游戏陪玩</a>
+        <a class="" href="" target="_blank">游戏陪玩</a>
         <a class="" href="">游戏百科</a>
     </nav>
     <div class="ver-center">
-        <form class="search" action="/all/" method="get" target="_blank">
+        <form class="search" action="{{url('search')}}" method="get" target="_blank">
             <div class="keywords related-words dropmenu">
                 <div class="drop-title">
                     <input type="text" name="keywords" placeholder="搜索" maxlength="38" required="required" autocomplete="off">
@@ -240,11 +273,10 @@
                         <use xlink:href="#icon-search"></use>
                     </svg>
                 </div>
-
             </div>
-
         </form>
-
+        <!--未登录-->
+        @if(!auth()->check())
         <div class="un-login ver-center" >
             <svg class="symbolIcon" aria-hidden="true">
                 <use xlink:href="#icon-user-unlogin"></use>
@@ -253,45 +285,193 @@
             <div class="split-line"></div>
             <button class="to-register">注册</button>
         </div>
-
-        <div class="login-ed ver-center" style="display:none">
-            <script type="text/html" id="tpl-header-login-ed">
-                <a class="msg picture/bfaeffa6eb344778af8a3d1dc85bb1c8.gifunread_msg ? 'has-new': ''}}" href="/my/msg">
-                    <svg class="symbolIcon js-hoverAnimate" data-animate="rubberBand" aria-hidden="true">
-                        <use xlink:href="#icon-message"></use>
-                    </svg>
-                    <span class="amount">picture/bfaeffa6eb344778af8a3d1dc85bb1c8.gifunread_msg}}</span>
+        @else
+        <!--已登录-->
+        <div class="login-ed ver-center" >
+            <a class="msg" href="">
+                <svg class="symbolIcon js-hoverAnimate" data-animate="rubberBand" aria-hidden="true">
+                    <use xlink:href="#icon-message"></use>
+                </svg>
+                {{--<span class="amount">999</span>--}}
+            </a>
+            <div class="user ver-center">
+                <a class="center-center" href="">
+                    <img src="{{auth()->user()->avatar ?: asset('images/default_icon.png')}}" alt="用户头像">
+                    <span>{{auth()->user()->nick_name}}</span>
                 </a>
-                <div class="user ver-center">
-                    <a class="center-center" href="/my">
-                        <img src="picture/bfaeffa6eb344778af8a3d1dc85bb1c8.gif'static/' + avatar|generateApiAddr}}"
-                             alt="用户头像">
-                        <span>picture/bfaeffa6eb344778af8a3d1dc85bb1c8.gif@ nickname}}</span>
-                    </a>
-                    <div class="sub-menu">
-                        <div class="balance">
-                            <div>余额：<span>￥picture/bfaeffa6eb344778af8a3d1dc85bb1c8.gifcny/100}}</span></div>
-                            <div class="buttons">
-                                <a href="/my/recharge">充值</a>
-                                <button class="cash ghost">提现</button>
-                            </div>
+                <div class="sub-menu">
+                    <div class="balance">
+                        <div>余额：<span>￥{{format_amount(auth()->user()->balance)}}</span></div>
+                        <div class="buttons">
+                            <a href="">充值</a>
+                            <button class="cash ghost">提现</button>
                         </div>
-                        <ul class="menu">
-                            <li><a href="/my/order">我的订单</a></li>
-                            <li><a href="/my/rentorder">我的出租订单</a></li>
-                        </ul>
-                        <ul class="menu">
-                            <li><a class="to-logout" href="">退出登录</a></li>
-                        </ul>
                     </div>
+                    <ul class="menu">
+                        <li><a href="">我的订单</a></li>
+                        <li><a href="">我的出租订单</a></li>
+                    </ul>
+                    <ul class="menu">
+                        <li><a class="to-logout" href="{{'auth/logout'}}">退出登录</a></li>
+                    </ul>
                 </div>
-            </script>
+            </div>
         </div>
-
-        <button class="aside-main-menu-btn">
-            <svg class="symbolIcon" aria-hidden="true">
-                <use xlink:href="#icon-aside-menu"></use>
-            </svg>
-        </button>
+        @endif
     </div>
+
 </header>
+
+<ul class="aside-tools">
+    <li>
+        <a href="javascript: Zuhao.checkLogin(function(){window.open('/my/release')});void(0);">
+            <svg class="symbolIcon" aria-hidden="true">
+                <use xlink:href="#icon-aside-publish"></use>
+            </svg>
+            发布账号
+        </a>
+    </li>
+    <li>
+        <a href="https://url.cn/C4dZXPsx?_type=wpa&qidian=true"
+           target="_blank">
+            <svg class="symbolIcon" aria-hidden="true">
+                <use xlink:href="#icon-aside-connect"></use>
+            </svg>
+            在线客服
+        </a>
+    </li>
+    <li>
+        <a href="/help" target="_blank">
+            <svg class="symbolIcon" aria-hidden="true">
+                <use xlink:href="#icon-aside-helpcenter"></use>
+            </svg>
+            帮助中心
+        </a>
+    </li>
+    <li>
+        <a href="/notice/">
+            <svg class="symbolIcon" aria-hidden="true">
+                <use xlink:href="#icon-aside-notice"></use>
+            </svg>
+            平台公告
+        </a>
+    </li>
+</ul>
+
+
+<script>
+
+    layui.use('layer', function () {
+
+        $('.to-login').on('click', function () {
+            layer.closeAll();
+            mask($('.login-box'))
+        });
+
+        $('.to-register').on('click', function () {
+            layer.closeAll();
+            mask($('.register-box'))
+        });
+
+        $('.forget-password').on('click',function () {
+            layer.closeAll();
+            mask($('.findPassword-box'));
+        })
+
+    });
+
+    $('#register-sub').on('click', function () {
+
+        if(!$("#register-agree").is(':checked')){
+            layer.msg('请勾选用户协议');
+            return false;
+        }
+        var user_phone = $(this).parents('form').find("input[name='user_phone']").val();
+        var validate_code = $(this).parents('form').find("input[name='validate_code']").val();
+        var password = $(this).parents('form').find("input[name='password']").val();
+        if(!isPhone(user_phone)){
+            layer.msg('请输入正确手机号码');
+            return false;
+        }
+        if(!validate_code){
+            layer.msg('请输入短信验证码');
+            return false;
+        }
+        if(!password){
+            layer.msg('请输入密码');
+            return false;
+        }
+
+        ajaxRequest("{{url('auth/register')}}", showSuccess, $("#register-form").serializeArray())
+    });
+
+
+    $('#find-password-sub').on('click', function () {
+
+        var user_phone = $(this).parents('form').find("input[name='user_phone']").val();
+        var validate_code = $(this).parents('form').find("input[name='validate_code']").val();
+        var password = $(this).parents('form').find("input[name='password']").val();
+        if(!isPhone(user_phone)){
+            layer.msg('请输入正确手机号码');
+            return false;
+        }
+        if(!validate_code){
+            layer.msg('请输入短信验证码');
+            return false;
+        }
+        if(!password){
+            layer.msg('请输入密码');
+            return false;
+        }
+
+        ajaxRequest("{{url('auth/reset-psd')}}", showSuccess, $("#findPassword-form").serializeArray())
+
+    });
+
+    $('#login-sub').on('click', function () {
+        var user_phone = $(this).parents('form').find("input[name='user_phone']").val();
+        var password = $(this).parents('form').find("input[name='password']").val();
+        if(!isPhone(user_phone)){
+            layer.msg('请输入正确手机号码');
+            return false;
+        }
+        if(!password){
+            layer.msg('请输入密码');
+            return false;
+        }
+        ajaxRequest("{{url('auth/login-psd')}}", reload, $("#login-form").serializeArray())
+    });
+
+
+    $('.get-captcha').on('click', function () {
+        var user_phone = $(this).parents('form').find("input[name='user_phone']").val();
+        var that = this;
+
+        if(!isPhone(user_phone)){
+            layer.msg('请输入正确手机号码');
+            return false;
+        }
+
+        $.ajax({
+            type:"post",
+            url:"{{url('public/send-sms')}}",
+            data:{
+                user_phone:user_phone,
+                type:$(that).data('type')
+            },
+            headers:{
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success:function (res) {
+                if(res.status === SUCCESS){
+                    setTime($(that))
+                }
+                layer.msg(res.message)
+            },
+        })
+
+
+    })
+</script>
+
+

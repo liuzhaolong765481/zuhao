@@ -26,4 +26,8 @@ class GameCate extends BaseModel
 		'cate_name',
 		'image'
 	];
+
+	public function game(){
+	    return $this->hasMany(Game::class,'cate_id','id')->where('status',Game::IN_USE_STATUS);
+    }
 }

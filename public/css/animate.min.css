@@ -1400,7 +1400,11 @@ template {
       left: 0;
       z-index: 1;
       background: rgba(4, 4, 4, 0.7);
-      box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.15); }
+      box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.15);
+        position: fixed;
+        left: 0;
+        top: 0;
+    }
       .comm-header.hasOpacity .login-ed .user .sub-menu {
         background: rgba(4, 4, 4, 0.7); } }
   @media only screen and (min-width: 990px) {
@@ -1762,7 +1766,7 @@ template {
   display: none;
   position: fixed;
   right: 0;
-  top: 250px;
+  top: 300px;
   width: 80px;
   padding: 1px 0 0 0;
   margin: 0;
@@ -1868,7 +1872,24 @@ template {
     color: #040404;
     border-radius: 4px;
     background: #F7CD46;
-    cursor: pointer; }
+    cursor: pointer; 
+  }
+
+.comm-form input[type="button"] {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  height: 40px;
+  margin: 20px auto;
+  font-size: 17px;
+  border: none;
+  color: #040404;
+  border-radius: 4px;
+  background: #F7CD46;
+  cursor: pointer;
+  color: #fff;
+}
+
     .comm-form input[type="submit"].small {
       max-width: 135px;
       font-size: 14px; }
@@ -2025,7 +2046,10 @@ template {
           cursor: pointer;
           color: #333333;
           background: #F7CD46;
-          border: solid 1px #F7CD46; }
+          border: solid 1px #F7CD46;
+          font-size: 12px;
+          color: #fff;
+        }
           .comm-form .form-item.w-eight-two .pull-right.get-captcha.disabled, .comm-form .form-item.w-eight-two .pull-right.copy-textarea.disabled {
             pointer-events: none;
             color: #bbbbbb;

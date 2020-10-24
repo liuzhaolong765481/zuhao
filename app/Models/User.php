@@ -37,7 +37,10 @@ class User extends Authenticatable
     use Page;
 
 	protected $table = 'xf_user';
-	public $timestamps = false;
+
+	const CREATED_AT = 'register_time';
+
+	const UPDATED_AT = null;
 
 	protected $casts = [
 		'is_auth' => 'int',
