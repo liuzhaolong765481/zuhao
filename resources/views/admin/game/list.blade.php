@@ -22,6 +22,7 @@
                         <th lay-data="{field:'tag',align:'center'}">游戏标签</th>
                         <th lay-data="{field:'description',align:'center'}">游戏描述</th>
                         <th lay-data="{align:'center',templet:'#game_status'}">是否上架</th>
+                        <th lay-data="{align:'center',templet:'#is_hot'}">是否热门</th>
                         <th lay-data="{field:'sort',align:'center',sort: true}">排序</th>
                         <th lay-data="{toolbar:'#toolbarDemo',width:200,align:'center'}">封面图片</th>
                         <th lay-data="{title:'操作',templet:'#listBar',align:'center'}">操作</th>
@@ -42,6 +43,14 @@
     @{{# }}}
 </script>
 
+
+<script type="text/html" id="is_hot">
+    @{{# if (d.is_hot == 1) { }}
+    <input type="checkbox" checked="true" lay-filter="is_hot" value="@{{d.id}}" lay-skin="switch" lay-text="是|否">
+    @{{# } else {}}
+    <input type="checkbox"  value="@{{d.id}}" lay-filter="is_hot" lay-skin="switch" lay-text="是|否">
+    @{{# }}}
+</script>
 
 <script type="text/html" id="toolbarDemo">
     <button type="button" class="layui-btn layui-btn-normal layui-btn-xs" lay-event="show">查看</button>
@@ -88,7 +97,39 @@
                 success:function (res) {
                     layer.close(index);
                     layer.msg("操作成功",{time:800,shade:0.3},function () {
-                        table.reload('user_table')
+                        table.reload('game_table')
+                    });
+                }
+            })
+        });
+
+
+        form.on('switch(is_hot)', function(data){
+            var bool = data.elem.checked;
+            var id = data.value;
+            if (bool) {
+                var status = 1;
+            } else {
+                var status = 0;
+            }
+            var index = layer.load(1);
+            var url = "{{url('admin/game/add-game')}}";
+
+            $.ajax({
+                url:url,
+                dateType:'json',
+                data:{id:id,is_hot:status},
+                beforeSend:function() {
+
+                },
+                type:'post',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success:function (res) {
+                    layer.close(index);
+                    layer.msg("操作成功",{time:800,shade:0.3},function () {
+                        table.reload('game_table')
                     });
                 }
             })

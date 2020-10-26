@@ -61,6 +61,7 @@ class GameController extends Controller
             'description' => 'nullable',
             'status'      => 'nullable',
             'sort'        => 'nullable',
+            'is_hot'      => 'nullable'
         ];
 
         $this->validateInput($rules);
