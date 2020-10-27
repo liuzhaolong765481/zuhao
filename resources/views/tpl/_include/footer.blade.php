@@ -1,3 +1,38 @@
+<ul class="aside-tools">
+    <li>
+        <a href="javascript: Zuhao.checkLogin(function(){window.open('/my/release')});void(0);">
+            <svg class="symbolIcon" aria-hidden="true">
+                <use xlink:href="#icon-aside-publish"></use>
+            </svg>
+            发布账号
+        </a>
+    </li>
+    <li>
+        <a href="https://url.cn/C4dZXPsx?_type=wpa&qidian=true"
+           target="_blank">
+            <svg class="symbolIcon" aria-hidden="true">
+                <use xlink:href="#icon-aside-connect"></use>
+            </svg>
+            在线客服
+        </a>
+    </li>
+    <li>
+        <a href="/help" target="_blank">
+            <svg class="symbolIcon" aria-hidden="true">
+                <use xlink:href="#icon-aside-helpcenter"></use>
+            </svg>
+            帮助中心
+        </a>
+    </li>
+    <li>
+        <a href="/notice/">
+            <svg class="symbolIcon" aria-hidden="true">
+                <use xlink:href="#icon-aside-notice"></use>
+            </svg>
+            平台公告
+        </a>
+    </li>
+</ul>
 <footer class="comm-footer">
     <div class="w-response">
         <ul class="guarantee space-between">

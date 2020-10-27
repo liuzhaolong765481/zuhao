@@ -6,7 +6,7 @@
  */
 namespace App\Http\Controllers;
 
-
+use App\Models\Ad;
 use App\Utils\Sms;
 
 class IndexController extends Controller
@@ -14,6 +14,8 @@ class IndexController extends Controller
 
     public function index()
     {
+        $banner = Ad::where('type', Ad::INDEX_BANNER)->get();
+
         return $this->rView('index');
     }
 

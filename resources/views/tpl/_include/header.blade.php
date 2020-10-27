@@ -74,7 +74,8 @@
     <script type="text/javascript" src="{{asset('js/jquery-1.12.4.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('plugin/layui/layui.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/base.js')}}"></script>
-{{--    <script type="text/javascript" src="{{asset('js/zuhao/menuaim_swiper.js')}}"></script>--}}
+    <script type="text/javascript" src="{{asset('js/zuhao/lodash_swiper.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/zuhao/menuaim_swiper.js')}}"></script>
 </head>
 <style>
     .layui-layer{
@@ -322,41 +323,7 @@
 
 </header>
 
-<ul class="aside-tools">
-    <li>
-        <a href="javascript: Zuhao.checkLogin(function(){window.open('/my/release')});void(0);">
-            <svg class="symbolIcon" aria-hidden="true">
-                <use xlink:href="#icon-aside-publish"></use>
-            </svg>
-            发布账号
-        </a>
-    </li>
-    <li>
-        <a href="https://url.cn/C4dZXPsx?_type=wpa&qidian=true"
-           target="_blank">
-            <svg class="symbolIcon" aria-hidden="true">
-                <use xlink:href="#icon-aside-connect"></use>
-            </svg>
-            在线客服
-        </a>
-    </li>
-    <li>
-        <a href="/help" target="_blank">
-            <svg class="symbolIcon" aria-hidden="true">
-                <use xlink:href="#icon-aside-helpcenter"></use>
-            </svg>
-            帮助中心
-        </a>
-    </li>
-    <li>
-        <a href="/notice/">
-            <svg class="symbolIcon" aria-hidden="true">
-                <use xlink:href="#icon-aside-notice"></use>
-            </svg>
-            平台公告
-        </a>
-    </li>
-</ul>
+
 
 
 <script>

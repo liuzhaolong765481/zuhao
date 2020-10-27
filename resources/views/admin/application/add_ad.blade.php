@@ -9,7 +9,7 @@
                     <select name="type" lay-verify="required">
                         <option value="">请选择一个分类</option>
                         <option value="1" @if($ad->type == 1) selected @endif>首页banner</option>
-                        <option value="1" @if($ad->type == 3) selected @endif>耳机页面banner</option>
+                        <option value="1" @if($ad->type == 3) selected @endif>二级页面banner</option>
                     </select>
                 </div>
             </div>
