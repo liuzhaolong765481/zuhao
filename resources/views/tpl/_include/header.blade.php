@@ -261,7 +261,6 @@
     <nav class="ver-center nav">
         <a class="on" href="/">首页</a>
         <a class="" href="">租号大厅</a>
-        <a class="" href="">店铺</a>
         <a class="" href="" target="_blank">游戏陪玩</a>
         <a class="" href="">游戏百科</a>
     </nav>

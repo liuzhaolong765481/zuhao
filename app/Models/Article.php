@@ -34,6 +34,8 @@ class Article extends BaseModel
 
 	use SoftDeletes;
 
+	const INDEX_CATE = 1;
+
     const CREATED_AT = 'create_time';
 
     const UPDATED_AT = 'update_time';

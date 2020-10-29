@@ -44,7 +44,8 @@ Route::group(['middleware' => 'admin'], function ($r) {
         $r->any('add-region','GameController@addRegion');
         $r->get('service-list','GameController@serviceList');
         $r->any('add-service','GameController@addService');
-
+        $r->get('sku-list','GameController@skuList');
+        $r->any('add-sku','GameController@addSku');
     });
 
     Route::group(['prefix' => 'application'], function ($r) {

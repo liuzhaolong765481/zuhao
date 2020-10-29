@@ -19,7 +19,6 @@
                         <option value="{{$item->id}}" @if($game->cate_id == $item->id) selected @endif>{{$item->cate_name}}</option>
                         @endforeach
                     </select>
-                    {{--<input type="text" name="name" lay-verify="required" placeholder="请填写游戏名称"  value="{{$game->name}}" autocomplete="off" class="layui-input larry-input">--}}
                 </div>
             </div>
 
@@ -54,13 +53,47 @@
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label">封面图片</label>
+                <label class="layui-form-label">菜单icon</label>
 
                 <div class="layui-card-body">
                     <div class="layui-upload">
-                        <button type="button" class="layui-btn" id="test-upload-normal">上传图片</button>
+                        <button type="button" class="layui-btn test-upload-normal" >上传图片</button>
+                        <input type="hidden" name="poster" lay-verify="required" value="{{$game->poster}}">
                         <div class="layui-upload-list">
                             <img class="layui-upload-img" src="{{$game->poster}}" style="width: 100px;margin-left: 95px" id="test-upload-normal-img">
+
+                            <p id="test-upload-demoText"></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">首页封面图片</label>
+
+                <div class="layui-card-body">
+                    <div class="layui-upload">
+                        <button type="button" class="layui-btn test-upload-normal">上传图片</button>
+                        <input type="hidden" name="index_poster" lay-verify="required" value="{{$game->index_poster}}">
+                        <div class="layui-upload-list">
+                            <img class="layui-upload-img" src="{{$game->index_poster}}" style="width: 100px;margin-left: 95px" id="test-upload-normal-img">
+                            <p id="test-upload-demoText"></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">游戏icon</label>
+
+                <div class="layui-card-body">
+                    <div class="layui-upload">
+                        <button type="button" class="layui-btn test-upload-normal" >上传图片</button>
+                        <input type="hidden" name="icon" lay-verify="required" value="{{$game->icon}}">
+                        <div class="layui-upload-list">
+                            <img class="layui-upload-img" src="{{$game->icon}}" style="width: 100px;margin-left: 95px" id="test-upload-normal-img">
                             <p id="test-upload-demoText"></p>
                         </div>
                     </div>
@@ -69,7 +102,7 @@
             </div>
 
             <div class="layui-form-item" style="text-align: center">
-                <input type="hidden" name="poster" lay-verify="required" value="{{$game->poster}}">
+
                 <input type="hidden" name="id" value="{{$game->id}}">
                 <button class="layui-btn" lay-submit lay-filter="game_add">确定</button>
             </div>
@@ -84,13 +117,13 @@
         base: "/plugin/layuiadmin/" //静态资源所在路径
     }).extend({
         index: 'lib/index' //主入口模块
-    }).use(['index', 'upload','form'], function(){
+    }).use(['index', 'upload', 'form'], function(){
         var $ = layui.jquery,
             upload = layui.upload;
         form = layui.form;
 
         var uploadInst = upload.render({
-            elem: '#test-upload-normal',
+            elem: '.test-upload-normal',
             url: '{{url('public/upload')}}',
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -101,27 +134,21 @@
             field: 'file',  //上传文件参数名
             before: function(obj){
                 //预读本地文件示例，不支持ie8
-                obj.preview(function(index, file, result){
-                    $('#test-upload-normal-img').attr('src', result); //图片链接（base64）
-                });
+                // obj.preview(function(index, file, result){
+                //     $('#test-upload-normal-img').attr('src', result); //图片链接（base64）
+                // });
             },
             done: function(res){
                 //如果上传失败
                 if(res.status != SUCCESS){
                     return layer.msg(res.message);
                 }else{
-                    $("input[name='poster']").val(res.data);
+                    $(this.item).next().next().val(res.data);
+                    $(this.item).next().next().next().find('img').attr('src', res.data)
                 }
                 //上传成功
             },
-            error: function(){
-                //演示失败状态，并实现重传
-                var demoText = $('#test-upload-demoText');
-                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
-                demoText.find('.demo-reload').on('click', function(){
-                    uploadInst.upload();
-                });
-            }
+
         });
 
 

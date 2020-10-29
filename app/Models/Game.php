@@ -16,9 +16,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int|null $cate_id
  * @property int|null $status
  * @property int|null $is_hot
+ * @property int|null $is_index
  * @property int|null $sort
  * @property string|null $name
  * @property string|null $poster
+ * @property string|null $index_poster
+ * @property string|null $icon
  * @property string|null $tag
  * @property string|null $description
  * @property Carbon|null $create_time
@@ -43,11 +46,16 @@ class Game extends BaseModel
 
     const UN_USE_STATUS = 0; //游戏状态，下架
 
+    const IS_HOT = 1;  //热门
+
+    const IS_INDEX = 1;  //首页展示
+
 	protected $casts = [
-		'cate_id' => 'int',
-        'status'  => 'int',
-        'sort'    => 'int',
-        'is_hot'  => 'int',
+        'cate_id'  => 'int',
+        'status'   => 'int',
+        'sort'     => 'int',
+        'is_hot'   => 'int',
+        'is_index' => 'int'
 	];
 
 	protected $dates = [
@@ -66,6 +74,9 @@ class Game extends BaseModel
         'status',
         'sort',
         'is_hot',
+        'is_index',
+        'index_poster',
+        'icon'
 	];
 
     protected $appends = ['cate_string'];
@@ -109,5 +120,14 @@ class Game extends BaseModel
     public function region()
     {
         return $this->hasMany(GameRegion::class,'game_id','id');
+    }
+
+    /**
+     * 游戏sku
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function sku()
+    {
+        return $this->hasMany(GameSku::class,'game_id','id');
     }
 }

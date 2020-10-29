@@ -53,15 +53,18 @@ class GameController extends Controller
     public function addGame()
     {
         $rules = [
-            'id'          => 'nullable',
-            'cate_id'     => 'nullable',
-            'name'        => 'nullable',
-            'poster'      => 'nullable',
-            'tag'         => 'nullable',
-            'description' => 'nullable',
-            'status'      => 'nullable',
-            'sort'        => 'nullable',
-            'is_hot'      => 'nullable'
+            'id'           => 'nullable',
+            'cate_id'      => 'nullable',
+            'name'         => 'nullable',
+            'poster'       => 'nullable',
+            'tag'          => 'nullable',
+            'description'  => 'nullable',
+            'status'       => 'nullable',
+            'sort'         => 'nullable',
+            'is_hot'       => 'nullable',
+            'is_index'     => 'nullable',
+            'index_poster' => 'nullable',
+            'icon'         => 'nullable',
         ];
 
         $this->validateInput($rules);
@@ -227,6 +230,12 @@ class GameController extends Controller
      * 游戏规格列表
      */
     public function skuList()
+    {
+
+    }
+
+
+    public function addSku()
     {
 
     }
