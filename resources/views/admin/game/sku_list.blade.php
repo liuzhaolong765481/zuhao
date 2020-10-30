@@ -94,6 +94,19 @@
                     photos: json
                     ,anim:2
                 });
+            }else if (obj.event == 'info') {
+                var url = $(this).data('url');
+                index = layer.open({
+                    title: data.sku_name,
+                    type: 2,
+                    area: ['760px', '550px'],
+                    content: url,
+                    end: function() {
+                        $(that).removeAttr("data-flag");
+                        layui.cache.layerIndex = null;
+                        table.reload('game_table')
+                    }
+                });
             }
 
         });

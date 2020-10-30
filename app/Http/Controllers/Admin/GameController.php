@@ -279,7 +279,7 @@ class GameController extends Controller
         $this->validateInput($rules);
 
         if($this->request->isMethod('post')){
-            return $this->successOrFailed(GameSku::create($this->validated));
+            return $this->successOrFailed(GameSku::updateOrCreate(['id' => $this->validated['id'] ?? 0], $this->validated));
         }
 
         $game = Game::get();

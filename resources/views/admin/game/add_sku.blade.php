@@ -7,7 +7,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">游戏</label>
                 <div class="layui-input-block">
-                    <select name="cate_id" lay-verify="required">
+                    <select name="game_id" lay-verify="required">
                         <option value="">请选择一个游戏</option>
                         @foreach ($game as $item)
                             <option value="{{$item->id}}" @if($sku->game_id == $item->id) selected @endif>{{$item->name}}</option>
@@ -33,9 +33,7 @@
                         <button type="button" class="layui-btn test-upload-normal" >上传图片</button>
                         <input type="hidden" name="sku_icon" value="{{$sku->sku_icon}}">
                         <div class="layui-upload-list">
-                            @if($sku->sku_icon)
                             <img class="layui-upload-img" src="{{$sku->sku_icon}}" style="width: 100px;margin-left: 95px" id="test-upload-normal-img">
-                            @endif
                             <p id="test-upload-demoText"></p>
                         </div>
                     </div>
