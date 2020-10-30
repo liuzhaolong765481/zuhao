@@ -27,9 +27,16 @@ class GameSku extends BaseModel
 		'game_id' => 'int'
 	];
 
+	protected $appends = ['game_name'];
+
 	protected $fillable = [
 		'game_id',
 		'sku_name',
 		'sku_icon'
 	];
+
+	public function getGameNameAttribute()
+    {
+        return Game::find($this->game_id)->value('name');
+    }
 }

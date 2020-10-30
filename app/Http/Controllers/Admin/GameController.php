@@ -12,6 +12,7 @@ use App\Models\Game;
 use App\Models\GameCate;
 use App\Models\GameRegion;
 use App\Models\GameService;
+use App\Models\GameSku;
 
 class GameController extends Controller
 {
@@ -227,16 +228,64 @@ class GameController extends Controller
 
 
     /**
-     * 游戏规格列表
+     * sku列表
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|mixed
+     * @throws \App\Exceptions\RequestException
      */
     public function skuList()
     {
+        if($this->request->ajax()) {
 
+            $rules = [
+                'page'       => 'required',
+                'limit'      => 'required',
+                'game_id'    => 'nullable'
+            ];
+
+            $this->validateInput($rules);
+
+            $validated = $this->validated;
+
+            $where = [];
+            if(isset($validated['game_id'])){
+                $where['game_id'] = $validated['game_id'];
+            }
+
+            $list = GameSku::where($where)
+                ->page($validated['page'], $validated['limit'])
+                ->get();
+
+            return $this->showJsonLayui($list);
+        }
+
+        return $this->rView('game.sku_list');
     }
 
 
+    /**
+     * 添加sku
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|mixed
+     * @throws \App\Exceptions\RequestException
+     */
     public function addSku()
     {
+        $rules = [
+            'id'       => 'nullable',
+            'game_id'  => 'nullable',
+            'sku_name' => 'nullable',
+            'sku_icon' => 'nullable',
+        ];
 
+        $this->validateInput($rules);
+
+        if($this->request->isMethod('post')){
+            return $this->successOrFailed(GameSku::create($this->validated));
+        }
+
+        $game = Game::get();
+
+        $sku = GameSku::findOrNew($this->validated['id'] ?? 0);
+
+        return $this->rView('game.add_sku', compact('game','sku'));
     }
 }
