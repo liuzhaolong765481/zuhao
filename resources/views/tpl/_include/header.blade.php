@@ -326,6 +326,7 @@
 
 
 <script>
+    $()
 
     layui.use('layer', function () {
 
