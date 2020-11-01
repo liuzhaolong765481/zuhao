@@ -260,7 +260,7 @@
     </div>
     <nav class="ver-center nav">
         <a class="on" href="/">首页</a>
-        <a class="" href="">租号大厅</a>
+        <a class="" href="{{url('hall')}}">租号大厅</a>
         <a class="" href="" target="_blank">游戏陪玩</a>
         <a class="" href="">游戏百科</a>
     </nav>
@@ -295,7 +295,7 @@
                 {{--<span class="amount">999</span>--}}
             </a>
             <div class="user ver-center">
-                <a class="center-center" href="">
+                <a class="center-center" href="{{url('member')}}">
                     <img src="{{auth()->user()->avatar ?: asset('images/default_icon.png')}}" alt="用户头像">
                     <span>{{auth()->user()->nick_name}}</span>
                 </a>
@@ -308,8 +308,8 @@
                         </div>
                     </div>
                     <ul class="menu">
-                        <li><a href="">我的订单</a></li>
-                        <li><a href="">我的出租订单</a></li>
+                        <li><a href="{{url('member/order')}}">我的订单</a></li>
+                        <li><a href="{{url('member/rentorder')}}">我的出租订单</a></li>
                     </ul>
                     <ul class="menu">
                         <li><a class="to-logout" href="{{'auth/logout'}}">退出登录</a></li>

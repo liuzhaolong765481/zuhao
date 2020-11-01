@@ -32,15 +32,15 @@
     <section class="second-banner">
         <ul class="swiper-wrapper">
             <li class="swiper-slide">
-                <a href="https://www.zuhao.com/free/">点击区域</a>
+                <a href="">点击区域</a>
                 <img src="{{asset('images/index_free.png')}}" alt="banner">
             </li>
             <li class="swiper-slide">
-                <a href="https://www.zuhao.com/help/2erdv4iu1goz">点击区域</a>
+                <a href="">点击区域</a>
                 <img src="{{asset('images/index_help.png')}}" alt="banner">
             </li>
             <li class="swiper-slide">
-                <a href="https://www.zuhao.com/activity/rebate/">点击区域</a>
+                <a href="">点击区域</a>
                 <img src="{{asset('images/index_share.png')}}" alt="banner">
             </li>
         </ul>
