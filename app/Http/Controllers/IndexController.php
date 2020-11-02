@@ -48,15 +48,6 @@ class IndexController extends Controller
     }
 
 
-    /**
-     * 租号大厅
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function hall()
-    {
-        $game_cate = Game::where('status',Game::IN_USE_STATUS)->orderBy('sort','desc')->get();
 
-        return $this->rView('hall',compact('game_cate'));
-    }
 
 }

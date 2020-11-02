@@ -123,6 +123,13 @@
             </div>
 
             <div class="layui-form-item">
+                <label class="layui-form-label">账号单价</label>
+                <div class="layui-input-block">
+                    <input type="number" name="amount" lay-verify="required" placeholder="请填写账号单价（单位：元）"  value="{{$account->amount}}" autocomplete="off" class="layui-input larry-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
                 <label class="layui-form-label">账号押金</label>
                 <div class="layui-input-block">
                     <input type="number" name="deposit" lay-verify="required" placeholder="请填写账号押金 0 为无需押金（单位：元）"  value="{{$account->deposit}}" autocomplete="off" class="layui-input larry-input">

@@ -72,6 +72,7 @@ class AccountController extends Controller
             'lease_times'  => 'nullable',
             'lease_hour'   => 'nullable',
             'follow_times' => 'nullable',
+            'amount'       => 'nullable',
             'deposit'      => 'nullable',
             'tags'         => 'nullable',
             'specs'        => 'nullable',

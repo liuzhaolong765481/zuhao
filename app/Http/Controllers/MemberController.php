@@ -15,4 +15,11 @@ class MemberController extends Controller
 
         return $this->rView('member.index');
     }
+
+
+    public function publish()
+    {
+
+    }
+
 }

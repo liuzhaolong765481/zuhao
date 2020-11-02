@@ -21,7 +21,7 @@ Route::group([],function($r){
      * @var $r Route
      */
     $r->get('/', 'IndexController@index')->name('index');
-    $r->get('hall', 'IndexController@hall');
+    $r->get('hall', 'AccountController@hall');
 
 
     $r->group(['prefix' => 'index'], function ($r){

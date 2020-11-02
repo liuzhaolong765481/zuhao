@@ -28,6 +28,7 @@ use Carbon\Carbon;
  * @property int|null $lease_hour
  * @property int|null $follow_times
  * @property float|null $deposit
+ * @property float|null $amount
  * @property string|null $tags
  * @property int|null $is_upper
  * @property Carbon|null $create_time
@@ -54,6 +55,7 @@ class Account extends BaseModel
 		'lease_hour' => 'int',
 		'follow_times' => 'int',
 		'deposit' => 'float',
+        'amount' => 'float',
 		'is_upper' => 'int'
 	];
 
@@ -78,6 +80,7 @@ class Account extends BaseModel
 		'lease_times',
 		'lease_hour',
 		'follow_times',
+        'amount',
 		'deposit',
 		'tags',
 		'is_upper',
@@ -171,5 +174,4 @@ class Account extends BaseModel
         return $this->hasMany(AccountSpcesRelation::class,'account_id','id');
     }
 
-//collect($account->account_specs->toArray())->pluck('specs_id')
 }
