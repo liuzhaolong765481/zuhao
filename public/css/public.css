@@ -1,3 +1,46 @@
+.activities-register {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 15vw;
+    z-index: 999;
+    max-height: 200px; }
+.activities-register img {
+    position: absolute;
+    z-index: 0;
+    left: 50%;
+    bottom: 0;
+    display: block;
+    transform: translateX(-50%);
+    max-width: 175%; }
+.activities-register button {
+    padding: 0;
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+    display: block;
+    top: 1vw;
+    right: 14vw;
+    width: 1.7vw;
+    height: 1.7vw;
+    min-width: 20px;
+    min-height: 20px;
+    max-width: 32px;
+    max-height: 32px;
+    background: url("../images/register-close.png") no-repeat center/100%; }
+@media only screen and (min-width: 768px) {
+    .activities-register {
+        height: 12vw; }
+    .activities-register img {
+        max-width: 120%; } }
+@media only screen and (min-width: 1460px) {
+    .activities-register {
+        height: 10vw; }
+    .activities-register img {
+        max-width: 100%; } }
 /*报错*/
 .error404{
     display: block;

@@ -8,7 +8,7 @@
     <title>飞讯租号</title>
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
-    <link type="text/css" rel="stylesheet" href="{{asset('css/activitiesregister.css')}}"/>
+    <link type="text/css" rel="stylesheet" href="{{asset('css/public.css')}}"/>
     <link type="text/css" rel="stylesheet" href="{{asset('css/animate.min.css')}}"/>
     <link type="text/css" rel="stylesheet" href="{{asset('plugin/layui/css/layui.css')}}"/>
     <script>
@@ -326,7 +326,6 @@
 
 
 <script>
-    $()
 
     layui.use('layer', function () {
 
