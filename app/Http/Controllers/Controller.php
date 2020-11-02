@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Base\Format;
 use App\Http\Controllers\Base\Input;
 use App\Http\Controllers\Base\Output;
-use App\Models\Game;
+use App\Services\CacheService;
 use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
@@ -48,10 +48,7 @@ class Controller extends BaseController
 
     public function rView($url, $data = [])
     {
-        $data['nav_game']['pc'] = Game::where(['cate_id' => 1 , 'status' => Game::IN_USE_STATUS])
-            ->orderBy('sort','desc')->get();
-        $data['nav_game']['mobile'] = Game::where(['cate_id' => 2 , 'status' => Game::IN_USE_STATUS])
-            ->orderBy('sort','desc')->get();
+        $data['nav_game'] = CacheService::get('header');
 
         return view('tpl.'.$url, $data);
     }
