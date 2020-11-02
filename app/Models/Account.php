@@ -174,4 +174,5 @@ class Account extends BaseModel
         return $this->hasMany(AccountSpcesRelation::class,'account_id','id');
     }
 
+
 }

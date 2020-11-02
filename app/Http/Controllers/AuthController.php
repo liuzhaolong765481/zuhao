@@ -129,6 +129,8 @@ class AuthController extends Controller
      */
     public function logout()
     {
+        //记录用户行为
+        AuthService::addBehavior(2);
         \Auth::guard('web')->logout();
         return redirect('/');
     }
