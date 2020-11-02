@@ -48,12 +48,11 @@ class AccountController extends Controller
             $order['sort'] = 'desc';
         }
 
-
         $game_cate = Game::where($where)
-            ->orderBy( array_key_first($order), $order[array_key_first($order)])
+            ->orderBy(array_key_first($order), $order[array_key_first($order)])
             ->get();
 
-        return $this->rView('hall',compact('game_cate'));
+        return $this->rView('hall', compact('game_cate'));
     }
 
     /**
