@@ -14,9 +14,10 @@ class CacheService extends BaseServices
 
     const PREFIX = 'index.';
 
-    const TTL = 5 * 60;
+    const TTL = 60 * 60 * 24;  //默认存储时间为24小时
 
     /**
+     * 头部菜单缓存文件
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
@@ -35,6 +36,7 @@ class CacheService extends BaseServices
 
 
     /**
+     * 获取缓存
      * @param $param
      * @return mixed
      */
@@ -47,5 +49,15 @@ class CacheService extends BaseServices
         }
 
         return self::$param();
+    }
+
+
+    /**
+     * 刷新指定键名缓存
+     * @param $param
+     */
+    public static function refresh($param)
+    {
+        \Cache::forget($param);
     }
 }
