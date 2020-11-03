@@ -74,6 +74,16 @@ Route::group(['middleware' => 'admin'], function ($r) {
 
     });
 
+    Route::group(['prefix' => 'card'], function ($r) {
+        /**
+         * @var $r Route
+         */
+        $r->get('card-list', 'CardController@cardList');
+        $r->any('add-card','CardController@addCard');
+
+    });
+
+
     Route::group(['prefix' => 'setting'], function ($r) {
        /**
         * @var $r Route

@@ -29,7 +29,9 @@ use Carbon\Carbon;
 class Card extends BaseModel
 {
 	protected $table = 'xf_card';
-	public $timestamps = false;
+
+	const CREATED_AT = 'create_time';
+
 
 	protected $casts = [
 		'type' => 'int',
