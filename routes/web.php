@@ -44,7 +44,9 @@ Route::group([],function($r){
         $r->post('reset-psd','AuthController@resetPsd');
     });
 
-
+    /**
+     * 公共部分
+     */
     $r->group(['prefix' => 'public'], function ($r){
         /**
          * @var $r Route
@@ -56,15 +58,38 @@ Route::group([],function($r){
 
     });
 
-    $r->group(['prefix' => 'member', 'middleware' => 'auth'], function ($r){
+    /**
+     * 登录后操作
+     */
+    $r->group(['middleware' => 'auth'], function ($r){
         /**
+         * 用户
          * @var $r Route
          */
-        $r->get('/','MemberController@index');
-        $r->get('publish','MemberController@publish');
+        $r->group(['prefix' => 'member'], function ($r) {
+            /**
+             * @var $r Route
+             */
+            $r->get('/', 'MemberController@index');
+            $r->get('publish', 'MemberController@publish');
+            $r->get('carbon','MemberController@carbon');
+            $r->post('up-user','MemberController@upUser');
 
+        });
+
+        /**
+         * 账号相关
+         */
+        $r->group(['prefix' => 'account'], function ($r) {
+            /**
+             * @var $r Route
+             */
+            $r->post('publish','AccountController@publish');
+
+        });
 
     });
+
 
 });
 

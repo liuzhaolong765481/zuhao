@@ -3,6 +3,7 @@
 namespace App\Services;
 
 
+use App\Models\User;
 use App\Models\UserBehavior;
 
 class AuthService extends BaseServices
@@ -50,5 +51,22 @@ class AuthService extends BaseServices
                 'description' => $context ? $context: self::BEHAVIOR[$case]
             ]
         );
+    }
+
+
+    /**
+     * 修改用户信息
+     * @param $validated
+     * @return bool|int
+     */
+    public static function updateUser($validated)
+    {
+        $validated = array_filter($validated);
+
+        if(isset($validated['trade_password'])){
+            $validated['trade_password'] = encrypt($validated['trade_password']);
+        }
+
+        return User::whereKey(auth()->id())->update($validated);
     }
 }
