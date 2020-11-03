@@ -138,10 +138,34 @@ class AuthController extends Controller
 
     }
 
+    /**
+     * 管理员列表
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|mixed
+     * @throws \App\Exceptions\RequestException
+     */
     public function managerList()
     {
+        if($this->request->ajax()) {
+
+            $rules = [
+                'page'       => 'required',
+                'limit'      => 'required',
+            ];
+
+            $this->validateInput($rules);
+
+            $validated = $this->validated;
+
+            $list = Admin::where([])
+                ->page($validated['page'], $validated['limit'])
+                ->get();
+
+            return $this->showJsonLayui($list);
+        }
+
         return $this->rView('auth.manager_list');
     }
+
 
 
 

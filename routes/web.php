@@ -86,6 +86,7 @@ Route::group([],function($r){
              */
             $r->post('publish','AccountController@publish');
 
+
         });
 
     });

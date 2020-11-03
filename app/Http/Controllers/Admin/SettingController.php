@@ -21,6 +21,14 @@ class SettingController extends Controller
 
         if($this->request->isMethod('post')) {
 
+            $param = request()->input();
+            if(is_array($param) && count($param)){
+                foreach ($param as $k => $item){
+                    Setting::whereKey($k)->update([ 'value' => $item]);
+                }
+            }
+
+            return $this->success();
         }
 
         return $this->rView('setting.index', compact('farther'));
