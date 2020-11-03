@@ -259,7 +259,7 @@
         </div>
     </div>
     <nav class="ver-center nav">
-        <a class="on" href="/">首页</a>
+        <a class="" href="{{url('')}}">首页</a>
         <a class="" href="{{url('hall')}}">租号大厅</a>
         <a class="" href="" target="_blank">游戏陪玩</a>
         <a class="" href="">游戏百科</a>
@@ -319,14 +319,19 @@
         </div>
         @endif
     </div>
-
 </header>
 
 
 
-
 <script>
-
+    $(function () {
+        var url = "{{Request::url()}}";
+        $(".nav a").each(function (index, element) {
+            if($(this).attr('href') === url){
+                $(this).attr('class','on')
+            }
+        })
+    });
     layui.use('layer', function () {
 
         $('.to-login').on('click', function () {

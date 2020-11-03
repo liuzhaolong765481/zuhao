@@ -1,8 +1,18 @@
 <link rel="stylesheet" href="{{asset('css/member.css')}}">
 
+<script>
+    $(function () {
+        var url = "{{Request::url()}}";
+        $(".aside-minor-menu a").each(function (index, element) {
+            if($(this).attr('href') === url){
+                $(this).attr('class','on')
+            }
+        })
+    });
+</script>
 <ul class="aside-minor-menu">
     <li class="has-sub show-sub">
-        <a class="on" href="/my">个人中心</a>
+        <a  href="/my">个人中心</a>
     </li>
     <li class="has-sub show-sub">
         <a>我的租号</a>
@@ -17,7 +27,7 @@
         <div>
             <a class="" href="/my/rentOrder">我的出租订单</a>
             <a class="" href="/my/inventory">我的出租帐号</a>
-            <a class="" href="/my/release">发布帐号</a>
+            <a class="" href="{{url('member/publish')}}">发布帐号</a>
         </div>
     </li>
     <li class="has-sub show-sub">
