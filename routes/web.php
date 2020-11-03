@@ -61,6 +61,8 @@ Route::group([],function($r){
          * @var $r Route
          */
         $r->get('/','MemberController@index');
+        $r->get('publish','MemberController@publish');
+
 
     });
 

@@ -8,6 +8,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Game;
+use App\Services\AccountService;
 
 class AccountController extends Controller
 {
@@ -60,17 +61,42 @@ class AccountController extends Controller
      */
     public function detail($id)
     {
+        $game = Game::whereKey($id)->first();
 
+        return $this->rView('game.detail', compact('game'));
     }
 
     /**
      * 发布账号
+     * @throws \App\Exceptions\RequestException
      */
     public function publish()
     {
+        $rules = [
+            'id'           => 'present',
+            'title'        => 'required',
+            'descript'     => 'present',
+            'explain'      => 'required',
+            'game_id'      => 'required|integer',
+            'region_id'    => 'required|integer',
+            'service_id'   => 'required|integer',
+            'images'       => 'required',
+            'amount'       => 'required',
+            'deposit'      => 'present',
+            'tags'         => 'nullable',
+            'specs'        => 'nullable',
+            'is_upper'     => 'present'
+        ];
+
+        $this->validateInput($rules);
+
+        $this->validated['uid'] = auth()->id();
+
+        return $this->successOrFailed(AccountService::createAccount($this->validated));
 
     }
 
+    
 
 
 }
