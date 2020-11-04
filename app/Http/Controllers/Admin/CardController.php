@@ -70,6 +70,7 @@ class CardController extends Controller
         $this->validateInput($rules);
 
         if($this->request->isMethod('post')) {
+
             return $this->successOrFailed(
                 Card::updateOrCreate(['id' => $this->validated['id'] ?? 0], $this->validated)
             );

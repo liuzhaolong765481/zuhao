@@ -32,6 +32,7 @@ class Card extends BaseModel
 
 	const CREATED_AT = 'create_time';
 
+	const UPDATED_AT = null;
 
 	protected $casts = [
 		'type' => 'int',
@@ -61,4 +62,28 @@ class Card extends BaseModel
 		'status',
 		'create_time'
 	];
+
+	protected $appends = ['type_string'];
+
+	public function getTypeStringAttribute()
+    {
+        return $this->typeArray()[$this->type];
+    }
+
+	public function typeArray()
+    {
+        return [
+            1 => '指定金额卡券',
+            2 => '指定小时卡券',
+        ];
+    }
+
+    public function channelArray()
+    {
+        return [
+            1 => '注册领取',
+            2 => '充值任意金额领取',
+            3 => '后台管理员发放',
+        ];
+    }
 }

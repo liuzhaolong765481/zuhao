@@ -107,6 +107,24 @@
             }
         });
 
+        table.on('tool(card_table)', function(obj){
+            var data = obj.data;
+            var that = this;
+            if (obj.event == 'info') {
+                var url = $(this).data('url');
+                index = layer.open({
+                    title: data.card_name,
+                    type: 2,
+                    area: ['760px', '550px'],
+                    content: url,
+                    end: function() {
+                        $(that).removeAttr("data-flag");
+                        layui.cache.layerIndex = null;
+                        table.reload('ad_table')
+                    }
+                });
+            }
+        });
 
     });
 
