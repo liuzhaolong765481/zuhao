@@ -243,10 +243,9 @@
                 <div class="form-item">
                     <p class="user-agree">
                         <label class="checkbox">
-                            <input id="publish-agree" name="agree" type="checkbox" checked="" value="1">
-                            <i></i>
+                            <input id="publish-agree" lay-skin="primary" name="agree" type="checkbox" checked value="1">
                         </label>
-                        <label for="publish-agree">我已阅读并接受<a href="javascript: Zuhao.showPop($('.rules-box'));">《租号网用户协议》</a></label>
+                        <label for="publish-agree">我已阅读并接受<a href="">《租号网用户协议》</a></label>
                     </p>
                     <button class="main-btn submit">立即发布</button>
                 </div>
