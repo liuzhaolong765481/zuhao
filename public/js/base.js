@@ -163,3 +163,12 @@ function setTime(obj) {
             setTime(obj) }
         ,1000)
 }
+
+/**
+ * 拼接图片地址
+ * @param str
+ * @returns {*}
+ */
+function is_ssl(str) {
+    return str;
+}

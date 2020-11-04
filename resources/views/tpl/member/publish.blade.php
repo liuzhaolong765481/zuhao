@@ -28,54 +28,16 @@
                 <label>选择游戏：</label>
                 <div class="form-item">
                     <div class="dropmenu">
-                        <div class="drop-title">
-                            <input class="extraInfo-need" autocomplete="off" name="game_name" type="text"
-                                   placeholder="选择游戏" readonly="readonly" value="">
-                            <i class="edge"></i>
-                        </div>
-                        <dl class="drop-menu" style="">
-                            <dd data-value="25n000002"><a href="/my/release?game=英雄联盟">英雄联盟</a></dd>
-                            <dd data-value="25n000003"><a href="/my/release?game=绝地求生">绝地求生</a></dd>
-                            <dd data-value="261000004"><a href="/my/release?game=王者荣耀">王者荣耀</a></dd>
-                            <dd data-value="261000003"><a href="/my/release?game=穿越火线">穿越火线</a></dd>
-                            <dd data-value="c2ch000001"><a href="/my/release?game=和平精英">和平精英</a></dd>
-                            <dd data-value="c2cy000002"><a href="/my/release?game=火影忍者">火影忍者</a></dd>
-                            <dd data-value="c2cy000001"><a href="/my/release?game=穿越火线-枪战王者">穿越火线-枪战王者</a></dd>
-                            <dd data-value="c2h3000001"><a href="/my/release?game=糖豆人">糖豆人</a></dd>
-                            <dd data-value="261000008"><a href="/my/release?game=逆战">逆战</a></dd>
-                            <dd data-value="26100000a"><a href="/my/release?game=QQ飞车(手游)">QQ飞车(手游)</a></dd>
-                            <dd data-value="c2eh000001"><a href="/my/release?game=人类：一败涂地">人类：一败涂地</a></dd>
-                            <dd data-value="26100000g"><a href="/my/release?game=GTA5online">GTA5online</a></dd>
-                            <dd data-value="c2dy000001"><a href="/my/release?game=球球大作战">球球大作战</a></dd>
-                            <dd data-value="c2f3000001"><a href="/my/release?game=CSOL">CSOL</a></dd>
-                            <dd data-value="c2i2000001"><a href="/my/release?game=雨中冒险2">雨中冒险2</a></dd>
-                            <dd data-value="26100000h"><a href="/my/release?game=黎明杀机">黎明杀机</a></dd>
-                            <dd data-value="c2gh000001"><a href="/my/release?game=生死狙击">生死狙击</a></dd>
-                            <dd data-value="c2i2000002"><a href="/my/release?game=方舟：生存进化">方舟：生存进化</a></dd>
-                            <dd data-value="c2i4000001"><a href="/my/release?game=盗贼之海">盗贼之海</a></dd>
-                            <dd data-value="c2i4000002"><a href="/my/release?game=彩虹6号：围攻">彩虹6号：围攻</a></dd>
-                        </dl>
-                        <input id="game-id" type="hidden" name="game_id" value="">
+                        <select name="" id="">
+                            <option value="">测试三生三世</option>
+                            <option value="">测试三生三世</option>
+                            <option value="">测试三生三世</option>
+                            <option value="">测试三生三世</option>
+                            <option value="">测试三生三世</option>
+                        </select>
                     </div>
                 </div>
             </div>
-            <script>
-                $(document).bind("click",function(e){
-                    var target = $(e.target);
-                    if(target.closest(".extraInfo-need").length == 0){
-                                                               //do something...
-                    }
-                })
-
-                $('.extraInfo-need').on('click', function () {
-                    var item = $(this).parents('.dropmenu').find('.drop-menu');
-                    if(item.css('display') === 'none'){
-                        item.css('display','block')
-                    }else{
-                        item.css('display','none')
-                    }
-                })
-            </script>
             <!--选择区服-->
             <div class="form-item-kv inline small">
                 <label>选择游戏：</label>
@@ -152,6 +114,7 @@
 
                 </div>
             </div>
+
             <h2>
                 <span>2</span>
                 <span>账号信息</span>
