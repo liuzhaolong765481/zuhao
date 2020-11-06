@@ -250,6 +250,7 @@
                     <button class="main-btn submit">立即发布</button>
                 </div>
             </div>
+            
         </form>
     </div>
 </div>
