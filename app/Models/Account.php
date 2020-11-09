@@ -23,6 +23,8 @@ use Carbon\Carbon;
  * @property int|null $service_id
  * @property string|null $service_name
  * @property string|null $images
+ * @property string|null $account
+ * @property string|null $password
  * @property int|null $browse_times
  * @property int|null $lease_times
  * @property int|null $lease_hour
@@ -85,7 +87,9 @@ class Account extends BaseModel
 		'tags',
 		'is_upper',
 		'create_time',
-		'update_time'
+		'update_time',
+        'account',
+        'password'
 	];
 
 
