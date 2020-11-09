@@ -7,6 +7,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Game;
 use App\Services\AuthService;
 
 class MemberController extends Controller
@@ -27,7 +28,10 @@ class MemberController extends Controller
      */
     public function publish()
     {
-        return $this->rView('member.publish');
+        $game = Game::where('status',Game::IN_USE_STATUS)->orderBy('sort','desc')->get();
+
+
+        return $this->rView('member.publish', compact('game'));
     }
 
     /**

@@ -2,6 +2,8 @@ const SUCCESS = 10001;
 
 const AUTH_ERROR = 10002;
 
+const NO_DATA = 10003;
+
 const ERROR = 0;
 
 function reload() {
@@ -128,6 +130,34 @@ function ajaxRequest(url,  callback, param = {}, ) {
     })
 }
 
+
+
+/**
+ * 封装ajax 需要先声明layer
+ * @param url
+ * @param callback
+ * @param param
+ */
+function ajaxNoLoading(url,  callback, param = {}, ) {
+    $.ajax({
+        type:"post",
+        url:url,
+        data:param,
+        headers:{
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success:function (res) {
+            if(res.status == SUCCESS || res.status == NO_DATA){
+                callback(res);
+            }else if(res.status === AUTH_ERROR){
+                layer.msg('请先登录',function () {
+                    $('.to-login').click();
+                })
+            }
+
+        },
+    })
+}
 
 function showSuccess(res) {
     layer.msg(res.message);

@@ -1897,7 +1897,7 @@ template {
       background: #EFF0EF;
       color: #bbbbbb; }
   .comm-form .inline {
-    display: inline-block !important;
+    display: inline-block ;
     vertical-align: middle; }
     .comm-form .inline + .inline {
       margin-left: 30px; }

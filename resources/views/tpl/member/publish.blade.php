@@ -28,90 +28,33 @@
                 <label>选择游戏：</label>
                 <div class="form-item">
                     <div class="dropmenu">
-                        <select name="" id="">
-                            <option value="">测试三生三世</option>
-                            <option value="">测试三生三世</option>
-                            <option value="">测试三生三世</option>
-                            <option value="">测试三生三世</option>
-                            <option value="">测试三生三世</option>
+                        <select name="game_id" lay-filter="game_select" id="" lay-verify="required" lay-verType="tips">
+                            <option value="">请选择游戏</option>
+                            @foreach($game as $item)
+                            <option value="{{$item->id}}">{{$item->name}}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
             </div>
-            <!--选择区服-->
-            <div class="form-item-kv inline small">
-                <label>选择游戏：</label>
+            <!--选择大区-->
+            <div class="form-item-kv inline small region_id" style="display: none">
+                <label>选择大区：</label>
                 <div class="form-item">
                     <div class="dropmenu">
-                        <div class="drop-title">
-                            <input class="extraInfo-need" autocomplete="off" name="game_name" type="text"
-                                   placeholder="选择游戏" readonly="readonly" value="">
-                            <i class="edge"></i>
-                        </div>
-                        <dl class="drop-menu" style="">
-                            <dd data-value="25n000002"><a href="/my/release?game=英雄联盟">英雄联盟</a></dd>
-                            <dd data-value="25n000003"><a href="/my/release?game=绝地求生">绝地求生</a></dd>
-                            <dd data-value="261000004"><a href="/my/release?game=王者荣耀">王者荣耀</a></dd>
-                            <dd data-value="261000003"><a href="/my/release?game=穿越火线">穿越火线</a></dd>
-                            <dd data-value="c2ch000001"><a href="/my/release?game=和平精英">和平精英</a></dd>
-                            <dd data-value="c2cy000002"><a href="/my/release?game=火影忍者">火影忍者</a></dd>
-                            <dd data-value="c2cy000001"><a href="/my/release?game=穿越火线-枪战王者">穿越火线-枪战王者</a></dd>
-                            <dd data-value="c2h3000001"><a href="/my/release?game=糖豆人">糖豆人</a></dd>
-                            <dd data-value="261000008"><a href="/my/release?game=逆战">逆战</a></dd>
-                            <dd data-value="26100000a"><a href="/my/release?game=QQ飞车(手游)">QQ飞车(手游)</a></dd>
-                            <dd data-value="c2eh000001"><a href="/my/release?game=人类：一败涂地">人类：一败涂地</a></dd>
-                            <dd data-value="26100000g"><a href="/my/release?game=GTA5online">GTA5online</a></dd>
-                            <dd data-value="c2dy000001"><a href="/my/release?game=球球大作战">球球大作战</a></dd>
-                            <dd data-value="c2f3000001"><a href="/my/release?game=CSOL">CSOL</a></dd>
-                            <dd data-value="c2i2000001"><a href="/my/release?game=雨中冒险2">雨中冒险2</a></dd>
-                            <dd data-value="26100000h"><a href="/my/release?game=黎明杀机">黎明杀机</a></dd>
-                            <dd data-value="c2gh000001"><a href="/my/release?game=生死狙击">生死狙击</a></dd>
-                            <dd data-value="c2i2000002"><a href="/my/release?game=方舟：生存进化">方舟：生存进化</a></dd>
-                            <dd data-value="c2i4000001"><a href="/my/release?game=盗贼之海">盗贼之海</a></dd>
-                            <dd data-value="c2i4000002"><a href="/my/release?game=彩虹6号：围攻">彩虹6号：围攻</a></dd>
-                        </dl>
-                        <input id="game-id" type="hidden" name="game_id" value="">
+                        <select name="region_id" id=""  lay-filter="region_select" lay-verType="tips">
+                        </select>
                     </div>
-
-
                 </div>
             </div>
 
-            <div class="form-item-kv inline small">
-                <label>选择游戏：</label>
+            <div class="form-item-kv inline small service_id" style="display: none">
+                <label>选择服务器：</label>
                 <div class="form-item">
                     <div class="dropmenu">
-                        <div class="drop-title">
-                            <input class="extraInfo-need" autocomplete="off" name="game_name" type="text"
-                                   placeholder="选择游戏" readonly="readonly" value="">
-                            <i class="edge"></i>
-                        </div>
-                        <dl class="drop-menu" style="">
-                            <dd data-value="25n000002"><a href="/my/release?game=英雄联盟">英雄联盟</a></dd>
-                            <dd data-value="25n000003"><a href="/my/release?game=绝地求生">绝地求生</a></dd>
-                            <dd data-value="261000004"><a href="/my/release?game=王者荣耀">王者荣耀</a></dd>
-                            <dd data-value="261000003"><a href="/my/release?game=穿越火线">穿越火线</a></dd>
-                            <dd data-value="c2ch000001"><a href="/my/release?game=和平精英">和平精英</a></dd>
-                            <dd data-value="c2cy000002"><a href="/my/release?game=火影忍者">火影忍者</a></dd>
-                            <dd data-value="c2cy000001"><a href="/my/release?game=穿越火线-枪战王者">穿越火线-枪战王者</a></dd>
-                            <dd data-value="c2h3000001"><a href="/my/release?game=糖豆人">糖豆人</a></dd>
-                            <dd data-value="261000008"><a href="/my/release?game=逆战">逆战</a></dd>
-                            <dd data-value="26100000a"><a href="/my/release?game=QQ飞车(手游)">QQ飞车(手游)</a></dd>
-                            <dd data-value="c2eh000001"><a href="/my/release?game=人类：一败涂地">人类：一败涂地</a></dd>
-                            <dd data-value="26100000g"><a href="/my/release?game=GTA5online">GTA5online</a></dd>
-                            <dd data-value="c2dy000001"><a href="/my/release?game=球球大作战">球球大作战</a></dd>
-                            <dd data-value="c2f3000001"><a href="/my/release?game=CSOL">CSOL</a></dd>
-                            <dd data-value="c2i2000001"><a href="/my/release?game=雨中冒险2">雨中冒险2</a></dd>
-                            <dd data-value="26100000h"><a href="/my/release?game=黎明杀机">黎明杀机</a></dd>
-                            <dd data-value="c2gh000001"><a href="/my/release?game=生死狙击">生死狙击</a></dd>
-                            <dd data-value="c2i2000002"><a href="/my/release?game=方舟：生存进化">方舟：生存进化</a></dd>
-                            <dd data-value="c2i4000001"><a href="/my/release?game=盗贼之海">盗贼之海</a></dd>
-                            <dd data-value="c2i4000002"><a href="/my/release?game=彩虹6号：围攻">彩虹6号：围攻</a></dd>
-                        </dl>
-                        <input id="game-id" type="hidden" name="game_id" value="">
+                        <select name="service_id" lay-filter="service_select" id=""  lay-verType="tips">
+                        </select>
                     </div>
-
-
                 </div>
             </div>
 
@@ -122,15 +65,13 @@
             <div class="form-item-kv middle">
                 <label>游戏账号：</label>
                 <div class="form-item">
-                    <input class="extraInfo-need layui-input" name="account" type="text" placeholder="请输入账号" value=""
-                           autocomplete="off">
+                    <input class="extraInfo-need layui-input" name="account" type="text" placeholder="请输入账号" value="" autocomplete="off">
                 </div>
             </div>
             <div class="form-item-kv middle">
                 <label>游戏密码：</label>
                 <div class="form-item">
-                    <input class="extraInfo-need" autocomplete="off" name="password" type="text" placeholder="请输入密码"
-                           value="">
+                    <input class="extraInfo-need" autocomplete="off" name="password" type="text" placeholder="请输入密码" value="">
                 </div>
             </div>
 
@@ -143,13 +84,13 @@
             <div class="form-item-kv large">
                 <label>账号标题：</label>
                 <div class="form-item">
-                    <input class="words-filter" name="goods_name" value="" type="text" placeholder="请输入账号标题">
+                    <input class="words-filter" name="title" value="" type="text" placeholder="请输入账号标题">
                 </div>
             </div>
             <div class="form-item-kv large">
                 <label>账号描述：</label>
                 <div class="form-item">
-                    <textarea class="words-filter" name="goods_desc" rows="10" placeholder="请输入账号描述"></textarea>
+                    <textarea class="words-filter" name="descript" rows="10" placeholder="请输入账号描述"></textarea>
                 </div>
             </div>
             <div class="form-item-kv not-require">
@@ -250,7 +191,7 @@
                     <button class="main-btn submit">立即发布</button>
                 </div>
             </div>
-            
+
         </form>
     </div>
 </div>
@@ -267,6 +208,69 @@
             b = $.extend({elem: this, trigger: 'click'}, a);
             laydate.render(b);
         });
+
+        form.on('select(game_select)', function(data) {
+
+            $.ajax({
+                type:"post",
+                url:"{{url('public/get-game-spu')}}",
+                data:{game_id:data.value},
+                headers:{
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success:function (res) {
+                    $("select[name='region_id']").empty();
+
+                    if (res.status == SUCCESS) {
+                        $('.region_id').css('display', 'inline-block');
+                        $("select[name='region_id']").append(new Option("请选择大区", ""));
+                        $.each(res.data, function (index, item) {
+                            $("select[name='region_id']").append(new Option(item.region_name, item.id));
+                        });
+                        form.render("select");
+                    }else{
+                        $('.region_id').css('display', 'none');
+                        $('.service_id').css('display', 'none');
+                    }
+
+                },
+            })
+
+        });
+
+
+        form.on('select(region_select)', function(data) {
+
+            $.ajax({
+                type:"post",
+                url:"{{url('public/get-game-spu')}}",
+                data:{region_id:data.value},
+                headers:{
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success:function (res) {
+                    $("select[name='service_id']").empty();
+
+                    if (res.status == SUCCESS) {
+                        $('.service_id').css('display', 'inline-block');
+                        $("select[name='service_id']").append(new Option("请选择服务器", ""));
+                        $.each(res.data, function (index, item) {
+                            $("select[name='service_id']").append(new Option(item.service_name, item.id));
+                        });
+
+                        form.render("select");
+                    }else{
+                        $('.service_id').css('display', 'none');
+                    }
+
+                },
+            })
+
+        });
+
+        function dealRegion(res) {
+
+        }
     });
 
 </script>
