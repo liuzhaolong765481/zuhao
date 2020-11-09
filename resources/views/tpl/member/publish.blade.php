@@ -144,7 +144,7 @@
             <div class="form-item-kv inline middle">
                 <label>出租单价：</label>
                 <div class="form-item">
-                    <label class="pos-after" for="hour_price">元/小时</label>
+                    <label class="pos-after" for="amount">元/小时</label>
                     <input id="hour_price" name="hour_price" value="" type="text" placeholder="出租单价">
                 </div>
             </div>
@@ -168,16 +168,6 @@
             </div>
             <div class="form-item-after">&emsp; * 包夜时长为每日的22:00-08:00,单位支持到分</div>
             <br>
-            <div class="form-item-kv inline middle">
-                <label>最短租时：</label>
-                <div class="form-item">
-                    <label class="pos-after" for="least_hour">小时</label>
-                    <input id="least_hour" name="least_hour" value="1" type="text" placeholder="最短租用时间">
-                </div>
-            </div>
-            <div class="form-item-after">&emsp; * 用户进行租用时，最少的租用时长，只可设置整数（不包含日租、包夜）</div>
-            <br>
-
 
             <div class="form-item-kv not-require">
                 <label><!--提交--></label>
