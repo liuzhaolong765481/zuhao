@@ -98,23 +98,7 @@
                 <div class="form-item">
                     <div class="file-box">
                         <div class="file-item">
-                            <input type="file" name="picture[]" accept="image/jpeg,image/jpg,image/png">
-                        </div>
-
-                        <div class="file-item">
-                            <input type="file" name="picture[]" accept="image/jpeg,image/jpg,image/png">
-                        </div>
-
-                        <div class="file-item">
-                            <input type="file" name="picture[]" accept="image/jpeg,image/jpg,image/png">
-                        </div>
-
-                        <div class="file-item">
-                            <input type="file" name="picture[]" accept="image/jpeg,image/jpg,image/png">
-                        </div>
-
-                        <div class="file-item">
-                            <input type="file" name="picture[]" accept="image/jpeg,image/jpg,image/png">
+                            <i></i>
                         </div>
 
                         <div class="previewTem" style="display: none;">
@@ -123,6 +107,7 @@
                                 <button class="delete-btn">-</button>
                             </div>
                         </div>
+
                     </div>
                     <p class="tip">上传说明：每张图片大小不超过5M，格式为jpg、jpeg、png</p>
                 </div>
