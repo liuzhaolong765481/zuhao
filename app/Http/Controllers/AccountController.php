@@ -85,7 +85,10 @@ class AccountController extends Controller
             'deposit'      => 'present',
             'tags'         => 'nullable',
             'specs'        => 'nullable',
-            'is_upper'     => 'present'
+            'is_upper'     => 'present',
+            'account'      => 'required',
+            'password'     => 'required|string'
+
         ];
 
         $this->validateInput($rules);
