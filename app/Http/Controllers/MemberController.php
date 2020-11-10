@@ -45,7 +45,6 @@ class MemberController extends Controller
        return $this->rView('member.carbon');
     }
 
-
     /**
      * 更新用户信息
      * @return mixed
@@ -65,4 +64,11 @@ class MemberController extends Controller
 
         return $this->successOrFailed(AuthService::updateUser($this->validated));
     }
+
+    public function myAccount()
+    {
+        return $this->rView('member.my_account');
+    }
+
+
 }

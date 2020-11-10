@@ -72,6 +72,7 @@ Route::group([],function($r){
              */
             $r->get('/', 'MemberController@index');
             $r->get('publish', 'MemberController@publish');
+            $r->get('my-account','MemberController@myAccount');
             $r->get('carbon','MemberController@carbon');
             $r->post('up-user','MemberController@upUser');
 
