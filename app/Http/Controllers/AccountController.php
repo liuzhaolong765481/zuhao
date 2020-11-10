@@ -88,7 +88,6 @@ class AccountController extends Controller
             'is_upper'     => 'present',
             'account'      => 'required',
             'password'     => 'required|string'
-
         ];
 
         $this->validateInput($rules);
