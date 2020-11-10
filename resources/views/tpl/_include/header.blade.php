@@ -1,4 +1,3 @@
-<!doctype html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -11,67 +10,12 @@
     <link type="text/css" rel="stylesheet" href="{{asset('css/public.css')}}"/>
     <link type="text/css" rel="stylesheet" href="{{asset('css/animate.min.css')}}"/>
     <link type="text/css" rel="stylesheet" href="{{asset('plugin/layui/css/layui.css')}}"/>
-    <script>
-        //低于IE10前往浏览器升级
-        if (/msie/i.test(navigator.userAgent) && navigator.userAgent.match(/msie (\d+\.\d+)/i)[1] < 10)
-            location.replace('/ieupdate.html');
-
-        //Zuhao定义
-        window.ZuhaoClient = window.ZuhaoClient || null;
-        window.Zuhao = {
-            config: {
-                webAddr: 'https://www.zuhao.com/',
-                apiAddr: 'https://api.zuhao.com/',
-                agreement: '2ev63a4s9442',
-                cashFeeRatio: {"1": 5, "2": 2}
-            },
-            isMobile: document.documentElement.offsetWidth < 768,
-            getBrowserName: function () {
-                var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
-                var isOpera = userAgent.indexOf("Opera") > -1;
-
-                if (isOpera) return "Opera";
-                if (userAgent.indexOf("Firefox") > -1) return "FF";
-                if (userAgent.indexOf("Chrome") > -1) return "Chrome";
-                if (userAgent.indexOf("Safari") > -1) return "Safari";
-                //判断是否IE10-11浏览器
-                if (userAgent.indexOf("Trident") > -1) {
-                    if (userAgent.indexOf("Trident/6.0") > -1) {
-                        return "IE10";
-                    }
-                    if (userAgent.indexOf("Trident/7.0") > -1) {
-                        return "IE11";
-                    }
-                }
-                //判断是否IE6-9浏览器
-                if (userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1) {
-                    if (userAgent.indexOf("MSIE 6.0") > -1) {
-                        return "IE6";
-                    }
-                    if (userAgent.indexOf("MSIE 7.0") > -1) {
-                        return "IE7";
-                    }
-                    if (userAgent.indexOf("MSIE 8.0") > -1) {
-                        return "IE8";
-                    }
-                    if (userAgent.indexOf("MSIE 9.0") > -1) {
-                        return "IE9";
-                    }
-                    if (userAgent.indexOf("MSIE 10.0") > -1) {
-                        return "IE10";
-                    }
-                    return "IE";
-                } else {
-                    return userAgent;
-                }
-            }
-        };
-    </script>
-
+    <link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}">
     <!--加载iconfont-->
     <script src="{{asset('js/zuhao/font.js')}}"></script>
     <!--加载JS-->
     <script type="text/javascript" src="{{asset('js/jquery-1.12.4.min.js')}}"></script>
+    <script type="text/javascript"  src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('plugin/layui/layui.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/base.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/zuhao/lodash_swiper.js')}}"></script>

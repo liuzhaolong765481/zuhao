@@ -202,3 +202,47 @@ function setTime(obj) {
 function is_ssl(str) {
     return str;
 }
+
+/**
+ * 处理上传图片/文件（单图）
+ * @param element
+ * @param url
+ * @param callback
+ * @param suffix
+ * @param param
+ */
+function upload(element, url, callback, param = {}, suffix = 'image/*' ) {
+    var load;
+    layui.use('upload', function () {
+
+        var upload = layui.upload;
+
+        upload.render({
+            elem:element, //绑定元素
+            url: url, //上传接口
+            multiple: false,  //是否允许多图上传
+            accept: 'file',  //指定允许上传时校验的文件类型，可选值有：images（图片）、file（所有文件）、video（视频）、audio（音频）
+            before: function () {
+                load = loading()
+            },
+            acceptMime: suffix, //打开文件类型
+            field: 'file',  //上传文件参数名
+            data:param,
+            exts:'.*',  //允许上传文件后缀名
+            done: function (res) {
+                if(res.status == SUCCESS){
+                    layer.close(load);
+                    callback(res);
+                }else{
+                    layer.msg(res.message);
+                    layer.close(load);
+                }
+
+            },
+            error: function (res) {
+                layer.close(load);
+            }
+        });
+    });
+
+}

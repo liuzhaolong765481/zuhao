@@ -7,6 +7,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AccountSpec;
 use App\Models\Game;
 use App\Services\AuthService;
 
@@ -30,8 +31,9 @@ class MemberController extends Controller
     {
         $game = Game::where('status',Game::IN_USE_STATUS)->orderBy('sort','desc')->get();
 
+        $specs = AccountSpec::all();
 
-        return $this->rView('member.publish', compact('game'));
+        return $this->rView('member.publish', compact('game','specs'));
     }
 
     /**

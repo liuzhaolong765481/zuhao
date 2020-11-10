@@ -65,13 +65,13 @@
             <div class="form-item-kv middle">
                 <label>游戏账号：</label>
                 <div class="form-item">
-                    <input class="extraInfo-need layui-input" name="account" type="text" placeholder="请输入账号" value="" autocomplete="off">
+                    <input class="extraInfo-need layui-input" name="account" type="text" placeholder="请输入账号" value="" autocomplete="off" lay-verify="required" lay-verType="tips">
                 </div>
             </div>
             <div class="form-item-kv middle">
                 <label>游戏密码：</label>
                 <div class="form-item">
-                    <input class="extraInfo-need" autocomplete="off" name="password" type="text" placeholder="请输入密码" value="">
+                    <input class="extraInfo-need" autocomplete="off" name="password" type="text" placeholder="请输入密码" value="" lay-verify="required" lay-verType="tips">
                 </div>
             </div>
 
@@ -84,7 +84,7 @@
             <div class="form-item-kv large">
                 <label>账号标题：</label>
                 <div class="form-item">
-                    <input class="words-filter" name="title" value="" type="text" placeholder="请输入账号标题">
+                    <input class="words-filter" name="title" value="" type="text" placeholder="请输入账号标题" lay-verify="required" lay-verType="tips">
                 </div>
             </div>
             <div class="form-item-kv large">
@@ -97,17 +97,10 @@
                 <label>账号封面：</label>
                 <div class="form-item">
                     <div class="file-box">
-                        <div class="file-item">
-                            <i></i>
+                        <div class="file-show">
                         </div>
-
-                        <div class="previewTem" style="display: none;">
-                            <div class="preview-item">
-                                <img src="" alt="预览图">
-                                <button class="delete-btn">-</button>
-                            </div>
+                        <div class="file-item lay-upload">
                         </div>
-
                     </div>
                     <p class="tip">上传说明：每张图片大小不超过5M，格式为jpg、jpeg、png</p>
                 </div>
@@ -126,33 +119,17 @@
             </div>
             <div class="form-item-after">&emsp; * 押金是指用户租用此账号需缴纳的金额，保障交易安全</div>
             <br>
+
+            @foreach($specs as $k => $item)
             <div class="form-item-kv inline middle">
-                <label>出租单价：</label>
-                <div class="form-item">
-                    <label class="pos-after" for="amount">元/小时</label>
-                    <input id="hour_price" name="hour_price" value="" type="text" placeholder="出租单价">
-                </div>
-            </div>
-            <div class="form-item-after">&emsp; * 出租按小时计算</div>
-            <br>
-            <div class="form-item-kv inline middle">
-                <label> 日 租 价：</label>
+                <label> {{$item->specs_name}}：</label>
                 <div class="form-item">
                     <label class="pos-after" for="day_price">元</label>
-                    <input id="day_price" name="day_price" value="" type="text" placeholder="日租价格">
+                    <input id="day_price" name="specs[{{$item->id}}]" value="" type="number" placeholder="{{$item->specs_name}}价格">
                 </div>
             </div>
-            <div class="form-item-after">&emsp; * 日租时长为24小时</div>
             <br>
-            <div class="form-item-kv inline middle">
-                <label> 包 夜 价：</label>
-                <div class="form-item">
-                    <label class="pos-after" for="overnight_price">元</label>
-                    <input id="overnight_price" name="overnight_price" value="" type="text" placeholder="包夜价格">
-                </div>
-            </div>
-            <div class="form-item-after">&emsp; * 包夜时长为每日的22:00-08:00,单位支持到分</div>
-            <br>
+            @endforeach
 
             <div class="form-item-kv not-require">
                 <label><!--提交--></label>
@@ -161,9 +138,9 @@
                         <label class="checkbox">
                             <input id="publish-agree" lay-skin="primary" name="agree" type="checkbox" checked value="1">
                         </label>
-                        <label for="publish-agree">我已阅读并接受<a href="">《租号网用户协议》</a></label>
+                        <label for="publish-agree">我已阅读并接受<a href="" target="_blank">《租号网用户协议》</a></label>
                     </p>
-                    <button class="main-btn submit">立即发布</button>
+                    <button lay-submit lay-filter="account_add" class="main-btn submit">立即发布</button>
                 </div>
             </div>
 
@@ -172,6 +149,9 @@
 </div>
 
 <script>
+
+    erLarge();
+
     layui.use(['form','laydate', 'layer'],function () {
         // 复选框
         var form = layui.form;
@@ -213,7 +193,6 @@
 
         });
 
-
         form.on('select(region_select)', function(data) {
 
             $.ajax({
@@ -243,9 +222,32 @@
 
         });
 
-        function dealRegion(res) {
+        upload($('.lay-upload'), "{{url('public/upload')}}", uploadCall);
 
+        function uploadCall(res) {
+            var count = $('.file-show div').length;
+            if(count > 4){
+                layer.msg('最多允许上传5张图片');
+                return false;
+            }
+            $('.file-show').append("<div><img src='"+res.data +"' class='enlarge' alt='' title='点击放大查看'><em class='file-close'></em><input  name='images[]' value='"+res.data+"' type='hidden'></div>");
+            erLarge();
         }
+
+        form.on('submit(account_add)', function(data) {
+            console.log(data.field);
+            ajaxRequest("{{url('account/publish')}}", publishCall, data.field);
+
+        });
+
+        function publishCall() {
+            layer.msg('发布成功，等待后台管理员审核',function () {
+                location.href = '/';
+            })
+        }
+    });
+    $(document).on("click", ".file-close", function(){
+        $(this).parent().remove();
     });
 
 </script>
