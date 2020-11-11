@@ -1,3 +1,4 @@
+<!doctype html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -18,8 +19,8 @@
     <script type="text/javascript"  src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('plugin/layui/layui.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/base.js')}}"></script>
-{{--    <script type="text/javascript" src="{{asset('js/zuhao/lodash_swiper.js')}}"></script>--}}
-{{--    <script type="text/javascript" src="{{asset('js/zuhao/menuaim_swiper.js')}}"></script>--}}
+    <script type="text/javascript" src="{{asset('js/zuhao/lodash_swiper.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/zuhao/menuaim_swiper.js')}}"></script>
 </head>
 <style>
     .layui-layer{
