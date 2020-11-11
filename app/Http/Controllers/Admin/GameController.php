@@ -13,6 +13,7 @@ use App\Models\GameCate;
 use App\Models\GameRegion;
 use App\Models\GameService;
 use App\Models\GameSku;
+use App\Services\CacheService;
 
 class GameController extends Controller
 {
@@ -73,10 +74,14 @@ class GameController extends Controller
         $game = Game::findOrNew($this->validated['id'] ?? 0);
 
         if($this->request->isMethod('post')){
+            //todo 后期改为监听器
+            CacheService::refresh('header');
             return $this->successOrFailed(Game::updateOrCreate(['id' => $this->validated['id']], $this->validated));
         }
 
         $game_cate = GameCate::all();
+
+
 
         return $this->rView('game.add_game', compact('game','game_cate'));
 

@@ -254,7 +254,7 @@
                     </div>
                     <ul class="menu">
                         <li><a href="{{url('member/order')}}">我的订单</a></li>
-                        <li><a href="{{url('member/rentorder')}}">我的出租订单</a></li>
+                        <li><a href="{{url('member/rent-order')}}">我的出租订单</a></li>
                     </ul>
                     <ul class="menu">
                         <li><a class="to-logout" href="{{'auth/logout'}}">退出登录</a></li>
