@@ -15,7 +15,8 @@
         "laravel/framework": "^6.18.35",
         "laravel/tinker": "^2.0",
         "mews/captcha": "^3.2",
-        "mrgoon/aliyun-sms": "dev-master"
+        "mrgoon/aliyun-sms": "dev-master",
+        "zgldh/qiniu-laravel-storage": "^0.10.3"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

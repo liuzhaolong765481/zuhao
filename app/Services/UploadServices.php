@@ -10,6 +10,7 @@ namespace App\Services;
 
 
 use App\Exceptions\RequestException;
+use zgldh\QiniuStorage\QiniuStorage;
 
 /**
  * Class UploadServices
@@ -29,17 +30,16 @@ class UploadServices
      */
     public static function upload($file)
     {
-        // 获取文件相关信息
-        $ext = $file->getClientOriginalExtension();     // 扩展名
-        $realPath = $file->getRealPath();   //临时文件的绝对路径
 
-        // 上传文件路径文件
-        $filename = self::BASE_PATH. '/' . date('Ymd') . '/' . \Str::Random(32) . '.' . $ext;
+        $disk = QiniuStorage::disk('qiniu');
 
-        // 上传
-        if (\Storage::put($filename, file_get_contents($realPath))) {
-            
-            return  $filename;
+        $fileName = md5($file->getClientOriginalName().time().rand()).'.'.$file->getClientOriginalExtension();
+
+        // 上传到七牛
+        if ($disk->put($fileName, file_get_contents($file->getRealPath()))) {
+
+            return $disk->downloadUrl($fileName);
+
         }
 
         throw new RequestException(trans('message.file.error'));
