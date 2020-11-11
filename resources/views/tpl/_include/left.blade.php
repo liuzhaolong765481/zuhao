@@ -26,7 +26,7 @@
         <a>我是号主</a>
         <div>
             <a class="" href="/my/rentOrder">我的出租订单</a>
-            <a class="" href="/my/inventory">我的出租帐号</a>
+            <a class="" href="{{url('member/my-account')}}">我的出租帐号</a>
             <a class="" href="{{url('member/publish')}}">发布帐号</a>
         </div>
     </li>

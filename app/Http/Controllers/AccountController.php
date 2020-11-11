@@ -7,6 +7,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use App\Models\Game;
 use App\Services\AccountService;
 
@@ -73,19 +74,18 @@ class AccountController extends Controller
     public function publish()
     {
         $rules = [
-            'id'           => 'present',
+            'id'           => 'nullable',
             'title'        => 'required',
             'descript'     => 'present',
-            'explain'      => 'present',
+            'explain'      => 'nullable',
             'game_id'      => 'required|integer',
             'region_id'    => 'required|integer',
             'service_id'   => 'required|integer',
-            'images'       => 'required',
-            'amount'       => 'present',
+            'images'       => 'required|array',
+            'amount'       => 'nullable',
             'deposit'      => 'present',
             'tags'         => 'nullable',
             'specs'        => 'nullable',
-            'is_upper'     => 'present',
             'account'      => 'required',
             'password'     => 'required|string'
         ];
@@ -97,7 +97,6 @@ class AccountController extends Controller
         return $this->successOrFailed(AccountService::createAccount($this->validated));
 
     }
-
 
 
 

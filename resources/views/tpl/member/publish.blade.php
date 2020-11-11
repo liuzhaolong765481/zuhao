@@ -20,6 +20,7 @@
         </span>
         </div>
         <form class="comm-form layui-form" id="publishForm" novalidate="novalidate">
+            <input type="hidden" name="id">
             <h2>
                 <span>1</span>
                 <span>选择游戏区服</span>
@@ -120,8 +121,18 @@
             <div class="form-item-after">&emsp; * 押金是指用户租用此账号需缴纳的金额，保障交易安全</div>
             <br>
 
+            <div class="form-item-kv inline middle ">
+                <label>&emsp; 出租单价：</label>
+                <div class="form-item">
+                    <label class="pos-after" for="amount">元</label>
+                    <input id="deposit" name="amount" value="0" type="text" placeholder="出租单价">
+                </div>
+            </div>
+            <div class="form-item-after">&emsp; * 单价是指账号出租单小时价格</div>
+            <br>
+
             @foreach($specs as $k => $item)
-            <div class="form-item-kv inline middle">
+            <div class="form-item-kv inline middle not-require">
                 <label> {{$item->specs_name}}：</label>
                 <div class="form-item">
                     <label class="pos-after" for="day_price">元</label>
@@ -140,7 +151,7 @@
                         </label>
                         <label for="publish-agree">我已阅读并接受<a href="" target="_blank">《租号网用户协议》</a></label>
                     </p>
-                    <button lay-submit lay-filter="account_add" class="main-btn submit">立即发布</button>
+                    <button lay-submit lay-filter="account_add" type="button" class="main-btn submit">立即发布</button>
                 </div>
             </div>
 

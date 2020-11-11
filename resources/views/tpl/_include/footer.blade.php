@@ -140,7 +140,7 @@
                         </svg>
                         <div class="hover-pop top">
                             <div>
-                                <img src="picture/qrcode-wb.jpg" alt="微博二维码">
+                                <img src="" alt="微博二维码">
                                 <p>扫码关注微博</p>
                             </div>
                         </div>
@@ -151,7 +151,7 @@
                         </svg>
                         <div class="hover-pop top">
                             <div>
-                                <img src="picture/qrcode-gzh.jpg" alt="微信二维码">
+                                <img src="" alt="微信二维码">
                                 <p>扫码关注公众号</p>
                             </div>
                         </div>
