@@ -274,8 +274,28 @@
         });
 
         $('.minor-tab-head li').on('click', function () {
+
             var choose = $(this).text();
 
+            console.log(choose);
+            debugger;
+
+            console.log( $(this).parent().next(' li ').length);
+
+            if(choose === '全部'){
+                $(this).parent().next('.minor-tab-content li').css('display', 'block')
+            }else{
+
+                $(this).parent().next('.minor-tab-content li').each(function (k, v) {
+                    console.log(v.data('value'))
+                    // if(v.data('value') != choose){
+                    //     v.css('display', 'none')
+                    // }else{
+                    //     v.css('display', 'block')
+                    // }
+                });
+
+            }
 
         });
     })
