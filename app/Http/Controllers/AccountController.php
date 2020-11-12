@@ -9,7 +9,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Account;
 use App\Models\Game;
+use App\Models\GameCate;
 use App\Services\AccountService;
+use Overtrue\Pinyin\Pinyin;
 
 class AccountController extends Controller
 {
@@ -21,6 +23,7 @@ class AccountController extends Controller
      */
     public function hall()
     {
+
         $rules = [
             'game_id'     => 'nullable',
             'o'           => 'nullable',
@@ -50,11 +53,13 @@ class AccountController extends Controller
             $order['sort'] = 'desc';
         }
 
-        $game_cate = Game::where($where)
+        $game = Game::where($where)
             ->orderBy(array_key_first($order), $order[array_key_first($order)])
             ->get();
 
-        return $this->rView('hall', compact('game_cate'));
+        $game_cate = GameCate::all();
+
+        return $this->rView('hall', compact('game','game_cate'));
     }
 
     /**

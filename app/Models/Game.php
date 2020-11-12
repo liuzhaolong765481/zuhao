@@ -8,6 +8,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Overtrue\Pinyin\Pinyin;
 
 /**
  * Class Game
@@ -27,7 +28,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Carbon|null $create_time
  * @property Carbon|null $update_time
  * @property Carbon|null $delete_time
- *
+ * @property string $first_number
  * @package App\Models
  */
 class Game extends BaseModel
@@ -76,7 +77,8 @@ class Game extends BaseModel
         'is_hot',
         'is_index',
         'index_poster',
-        'icon'
+        'icon',
+        'first_number'
 	];
 
     protected $appends = ['cate_string'];
@@ -87,6 +89,12 @@ class Game extends BaseModel
 	public function setTagAttribute($v)
     {
         $this->attributes['tag'] = is_array($v) ? json_encode($v ,JSON_UNESCAPED_UNICODE) : [];
+    }
+
+    public function setFirstNumberAttribute($v)
+    {
+        $this->attributes['first_number'] =
+            strtoupper(substr((preg_match_all("/^[a-zA-Z]/", $v) ? $v : (new Pinyin)->abbr($v)), 0, 1));
     }
 
     /**

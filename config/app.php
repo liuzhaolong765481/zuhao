@@ -177,7 +177,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        zgldh\QiniuStorage\QiniuFilesystemServiceProvider::class
+        zgldh\QiniuStorage\QiniuFilesystemServiceProvider::class,
+        Overtrue\LaravelPinyin\ServiceProvider::class,
+
     ],
 
     /*
@@ -230,6 +232,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Captcha' => Mews\Captcha\Facades\Captcha::class,
         'AliSms'=>Mrgoon\AliSms\ServiceProvider::class,
+        'Pinyin' => Overtrue\LaravelPinyin\Facades\Pinyin::class,
 
     ],
 

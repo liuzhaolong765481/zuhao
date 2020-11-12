@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.0",
         "mews/captcha": "^3.2",
         "mrgoon/aliyun-sms": "dev-master",
+        "overtrue/laravel-pinyin": "^4.0",
         "zgldh/qiniu-laravel-storage": "^0.10.3"
     },
     "require-dev": {

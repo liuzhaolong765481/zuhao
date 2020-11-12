@@ -76,15 +76,15 @@ class GameController extends Controller
         if($this->request->isMethod('post')){
             //todo 后期改为监听器
             CacheService::refresh('header');
+            if(isset($this->validated['name'])){
+                $this->validated['first_number'] = $this->validated['name'];
+            }
             return $this->successOrFailed(Game::updateOrCreate(['id' => $this->validated['id']], $this->validated));
         }
 
         $game_cate = GameCate::all();
 
-
-
         return $this->rView('game.add_game', compact('game','game_cate'));
-
     }
 
 
