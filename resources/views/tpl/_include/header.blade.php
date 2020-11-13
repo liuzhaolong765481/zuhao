@@ -206,7 +206,6 @@
     <nav class="ver-center nav">
         <a class="" href="{{url('')}}">首页</a>
         <a class="" href="{{url('hall')}}">租号大厅</a>
-        <a class="" href="" target="_blank">游戏陪玩</a>
         <a class="" href="">游戏百科</a>
     </nav>
     <div class="ver-center">

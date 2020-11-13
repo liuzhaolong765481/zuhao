@@ -6,6 +6,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\MemberController;
 use Carbon\Carbon;
 
 /**
@@ -45,6 +46,10 @@ class Account extends BaseModel
 	const CREATED_AT = 'create_time';
 
 	const UPDATED_AT = 'update_time';
+
+	const IN_SHELF = 1;
+
+	const UN_SHELF = 0;
 
 	protected $casts = [
 		'uid' => 'int',
@@ -178,5 +183,10 @@ class Account extends BaseModel
         return $this->hasMany(AccountSpcesRelation::class,'account_id','id');
     }
 
+
+    public function user()
+    {
+        return $this->hasOne(User::class,'id','uid');
+    }
 
 }

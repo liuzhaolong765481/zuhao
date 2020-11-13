@@ -8,7 +8,7 @@
             <div class="games space-between">
                 <div class="hot-games">
                     @foreach($game as $item)
-                        <a class="center-center @if($item->cate_id == 2) mobile @else client @endif " href="{{url('hall')}}">
+                        <a class="center-center @if($item->cate_id == 2) mobile @else client @endif " href="javascript:;">
                             <img src="{{$item->poster}}" alt="{{$item->name}}"/>
                             <div class="center-center">{{$item->name}}</div>
                         </a>
@@ -58,7 +58,7 @@
                             <ul class="minor-tab-content">
                                 @foreach($game as $item)
                                     <li class="" data-value="{{$item->first_number}}">
-                                        <a href="">{{$item->name}}</a>
+                                        <a href="javascript:;">{{$item->name}}</a>
                                     </li>
                                 @endforeach
                             </ul>
@@ -98,7 +98,7 @@
                             <ul class="minor-tab-content">
                                 @foreach($item->game as $item2)
                                 <li class="" data-value="{{$item2->first_number}}">
-                                    <a href="">{{$item2->name}}</a>
+                                    <a href="javascript:;">{{$item2->name}}</a>
                                 </li>
                                 @endforeach
                             </ul>
@@ -118,15 +118,15 @@
 
                 <div class="item-head space-between">
                     <div class="filter ver-center">
-                        <label class="checkbox">
-                            <input id="rentAble" name="state" type="checkbox" value="1" autocomplete="off">
-                            <i></i>
-                        </label>
-                        <label for="rentAble">可立即租用</label>
+{{--                        <label class="checkbox">--}}
+{{--                            <input id="rentAble" name="state" type="checkbox" value="1" autocomplete="off">--}}
+{{--                            <i></i>--}}
+{{--                        </label>--}}
+{{--                        <label for="rentAble">可立即租用</label>--}}
                     </div>
                     <div class="sort ver-center">
                         <span  class="on">综合排序</span>
-                        <span data-name="-itime">最新上架</span>
+                        <span data-name="{{}}">最新上架</span>
                         <span data-name="-rent_num">销量</span>
                         <span data-name="hour_price">价格</span>
                     </div>
@@ -134,43 +134,44 @@
 
 
                 <ul class="account-list js-mainContent">
+                    @foreach($list as $k => $v)
                     <li>
-                        <a class="account-item" href="/glory/0286ad6effd2b50f">
-                            <div class="tit" title="贵8，200多个皮肤，（还有别的限定号需要可➕🐧)卸载🐧不需要验证码，描述有联系方式">
-                                <span class="tag ios">苹果</span>
-                                贵8，200多个皮肤，（还有别的限定号需要可➕🐧)卸载🐧不需要验证码，描述有联系方式                                    </div>
+                        <a class="account-item" href="">
+                            <div class="tit" title="{{$v->title}}">
+{{--                                <span class="tag ios">苹果</span>--}}
+                                {{$v->title}}
+                            </div>
                             <div class="content space-between">
                                 <div class="ver-center">
-                                    <img class="img"
-                                         src="picture/5ee318c614681_240x0.jpg"
-                                         alt="贵8，200多个皮肤，（还有别的限定号需要可➕🐧)卸载🐧不需要验证码，描述有联系方式">
+                                    <img class="img" src="{{$v->images[0]}}" alt="{{$v->title}}">
                                     <div class="content-left">
                                         <div class="game-region">
-                                            <span>王者手游</span>
-                                            /
-                                            苹果系统
-                                            /
-                                            手Q1区-苍天翔龙                                                                                                    </div>
+                                            <span>{{$v->game_name}}</span>
+                                            {{$v->region_name ? '/'.$v->region_name :''}}
+                                            {{$v->service_name ? '/'.$v->service_name : ''}}                                                                                                    </div>
                                         <div class="tags">
+                                            @foreach($v->tags as $item)
+                                            <span>{{$item}}</span>
+                                            @endforeach
                                         </div>
                                         <div class="renter ver-center">
                                             <svg class="symbolIcon" aria-hidden="true">
                                                 <use xlink:href="#icon-consumer"></use>
                                             </svg>
-                                            <span>➕2643998808</span>
+                                            <span>{{$v->user ? $v->user->nick_name : '平台出租'}}</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="content-right space-between-column">
-                                    <div class="price"><strong>5</strong> 元 / 小时</div>
+                                    <div class="price"><strong>{{$v->amount}}</strong> 元 / 小时</div>
                                     <div class="rent-count">近期出租
-                                        <span>1370</span> 次
+                                        <span>{{$v->lease_times}}</span> 次
                                     </div>
                                 </div>
                             </div>
                         </a>
                     </li>
-                    <li>
+                    @endforeach
                 </ul>
 
                 <ul class="pagination">
@@ -191,8 +192,7 @@
 
             <aside>
                 <section class="aside-btn center-center">
-                    <a class="center-center"
-                       href="javascript: Zuhao.checkLogin(function(){window.open('/my/release')});void(0);">
+                    <a class="center-center" href="{{url('member/publish')}}">
                         <svg class="symbolIcon" aria-hidden="true">
                             <use xlink:href="#icon-edit"></use>
                         </svg>
@@ -217,7 +217,6 @@
                                 </div>
                             </a>
                         </li>
-
                     </ul>
                 </section>
 

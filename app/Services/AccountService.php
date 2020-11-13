@@ -62,5 +62,37 @@ class AccountService extends BaseServices
 
     }
 
+    /**
+     * 租号大厅列表筛选
+     * @param $validate
+     * @return mixed
+     */
+    public static function getList($validate)
+    {
+        $where['is_upper'] = Account::IN_SHELF;
+
+        //筛选条件
+        if (isset($validate['game_id'])) {
+            $where['game_id'] = $validate['game_id'];
+        }
+
+        if (isset($validate['o'])) {
+
+            if ($validate['o'] == 'amount') {
+                $order['amount'] = 'asc';
+            } else {
+                $order[$validate['o']] = 'desc';
+            }
+
+        } else {
+            //默认排序浏览次数
+            $order['browse_times'] = 'desc';
+        }
+
+        return Account::where($where)
+            ->orderBy(array_key_first($order), $order[array_key_first($order)])
+            ->paginate(15);
+    }
+
 
 }

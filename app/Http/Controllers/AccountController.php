@@ -11,7 +11,6 @@ use App\Models\Account;
 use App\Models\Game;
 use App\Models\GameCate;
 use App\Services\AccountService;
-use Overtrue\Pinyin\Pinyin;
 
 class AccountController extends Controller
 {
@@ -27,39 +26,20 @@ class AccountController extends Controller
         $rules = [
             'game_id'     => 'nullable',
             'o'           => 'nullable',
-//            'lease_times' => 'nullable',
-//            'create_time' => 'nullable',
-//            'amount'      => 'nullable',
         ];
 
         $this->validateInput($rules);
 
-        $where['status'] = Game::IN_USE_STATUS;
+        $list = AccountService::getList($this->validated);
 
-        //筛选条件
-        if(isset($this->validated['game_id'])){
-            $where['game_id'] = $this->validated['game_id'];
-        }
-
-        if(isset($this->validated['o'])){
-
-            if($this->validated['o'] == 'amount'){
-                $order['amount'] = 'asc';
-            }else{
-                $order[$this->validated['o']] = 'desc';
-            }
-
-        }else{
-            $order['sort'] = 'desc';
-        }
-
-        $game = Game::where($where)
-            ->orderBy(array_key_first($order), $order[array_key_first($order)])
-            ->get();
+        //数据渲染
+        $game = Game::where('status', Game::IN_USE_STATUS)->orderBy('sort', 'desc')->get();
 
         $game_cate = GameCate::all();
 
-        return $this->rView('hall', compact('game','game_cate'));
+        return $this->rView('hall', compact('game', 'game_cate', 'list'))
+            ->with('o', $this->validated['o'] ?? '');
+
     }
 
     /**
