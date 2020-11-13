@@ -8,7 +8,7 @@
             <div class="games space-between">
                 <div class="hot-games">
                     @foreach($game as $item)
-                        <a class="center-center @if($item->cate_id == 2) mobile @else client @endif " href="">
+                        <a class="center-center @if($item->cate_id == 2) mobile @else client @endif " href="{{url('hall')}}">
                             <img src="{{$item->poster}}" alt="{{$item->name}}"/>
                             <div class="center-center">{{$item->name}}</div>
                         </a>
@@ -274,29 +274,20 @@
         });
 
         $('.minor-tab-head li').on('click', function () {
-
             var choose = $(this).text();
-
-            console.log(choose);
-            debugger;
-
-            console.log( $(this).parent().next(' li ').length);
-
             if(choose === '全部'){
-                $(this).parent().next('.minor-tab-content li').css('display', 'block')
+                $(this).parent().next('.minor-tab-content').find('li').css('display', 'inline-block')
             }else{
-
-                $(this).parent().next('.minor-tab-content li').each(function (k, v) {
-                    console.log(v.data('value'))
-                    // if(v.data('value') != choose){
-                    //     v.css('display', 'none')
-                    // }else{
-                    //     v.css('display', 'block')
-                    // }
+                $(this).parent().next().find('li').each(function () {
+                    if($(this).data('value') != choose){
+                        $(this).css('display', 'none')
+                    }else{
+                        $(this).css('display', 'inline-block')
+                    }
                 });
-
             }
 
+            $(this).addClass('on').siblings().removeClass('on')
         });
     })
 </script>
