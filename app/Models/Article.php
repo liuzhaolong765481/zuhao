@@ -22,6 +22,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string|null $image
  * @property string|null $content
  * @property string|null $description
+ * @property string|null $sort
+ * @property string|null $follow
  * @property Carbon|null $create_time
  * @property Carbon|null $update_time
  * @property Carbon|null $delete_time
@@ -67,6 +69,7 @@ class Article extends BaseModel
 		'delete_time',
         'sort',
         'description',
+        'follow'
 	];
 
 	protected $appends = ['cate_name'];

@@ -108,9 +108,7 @@
                     </div>
                 </div>
             </div>
-
-            <div class="hidden-options" style="display: none;">
-            </div>
+            
         </div>
 
         <div class="asideLayout-wrap">
@@ -126,53 +124,53 @@
                     </div>
                     <div class="sort ver-center">
                         <span  class="on">综合排序</span>
-                        <span data-name="{{}}">最新上架</span>
-                        <span data-name="-rent_num">销量</span>
-                        <span data-name="hour_price">价格</span>
+                        <span data-name="create_time">最新上架</span>
+                        <span data-name="lease_times">销量</span>
+                        <span data-name="amount">价格</span>
                     </div>
                 </div>
 
 
-                <ul class="account-list js-mainContent">
-                    @foreach($list as $k => $v)
-                    <li>
-                        <a class="account-item" href="">
-                            <div class="tit" title="{{$v->title}}">
+{{--                <ul class="account-list js-mainContent">--}}
+{{--                    @foreach($list as $k => $v)--}}
+{{--                    <li>--}}
+{{--                        <a class="account-item" href="">--}}
+{{--                            <div class="tit" title="{{$v->title}}">--}}
 {{--                                <span class="tag ios">苹果</span>--}}
-                                {{$v->title}}
-                            </div>
-                            <div class="content space-between">
-                                <div class="ver-center">
-                                    <img class="img" src="{{$v->images[0]}}" alt="{{$v->title}}">
-                                    <div class="content-left">
-                                        <div class="game-region">
-                                            <span>{{$v->game_name}}</span>
-                                            {{$v->region_name ? '/'.$v->region_name :''}}
-                                            {{$v->service_name ? '/'.$v->service_name : ''}}                                                                                                    </div>
-                                        <div class="tags">
-                                            @foreach($v->tags as $item)
-                                            <span>{{$item}}</span>
-                                            @endforeach
-                                        </div>
-                                        <div class="renter ver-center">
-                                            <svg class="symbolIcon" aria-hidden="true">
-                                                <use xlink:href="#icon-consumer"></use>
-                                            </svg>
-                                            <span>{{$v->user ? $v->user->nick_name : '平台出租'}}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="content-right space-between-column">
-                                    <div class="price"><strong>{{$v->amount}}</strong> 元 / 小时</div>
-                                    <div class="rent-count">近期出租
-                                        <span>{{$v->lease_times}}</span> 次
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    @endforeach
-                </ul>
+{{--                                {{$v->title}}--}}
+{{--                            </div>--}}
+{{--                            <div class="content space-between">--}}
+{{--                                <div class="ver-center">--}}
+{{--                                    <img class="img" src="{{$v->images[0]}}" alt="{{$v->title}}">--}}
+{{--                                    <div class="content-left">--}}
+{{--                                        <div class="game-region">--}}
+{{--                                            <span>{{$v->game_name}}</span>--}}
+{{--                                            {{$v->region_name ? '/'.$v->region_name :''}}--}}
+{{--                                            {{$v->service_name ? '/'.$v->service_name : ''}}                                                                                                    </div>--}}
+{{--                                        <div class="tags">--}}
+{{--                                            @foreach($v->tags as $item)--}}
+{{--                                            <span>{{$item}}</span>--}}
+{{--                                            @endforeach--}}
+{{--                                        </div>--}}
+{{--                                        <div class="renter ver-center">--}}
+{{--                                            <svg class="symbolIcon" aria-hidden="true">--}}
+{{--                                                <use xlink:href="#icon-consumer"></use>--}}
+{{--                                            </svg>--}}
+{{--                                            <span>{{$v->user ? $v->user->nick_name : '平台出租'}}</span>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="content-right space-between-column">--}}
+{{--                                    <div class="price"><strong>{{$v->amount}}</strong> 元 / 小时</div>--}}
+{{--                                    <div class="rent-count">近期出租--}}
+{{--                                        <span>{{$v->lease_times}}</span> 次--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                    @endforeach--}}
+{{--                </ul>--}}
 
                 <ul class="pagination">
                     <li class="page-first disabled"><a href="/all/" class="page-link">首页</a></li>
@@ -205,44 +203,44 @@
                         <h3>大家都在租</h3>
                     </div>
                     <ul class="aside-account-list everyoneRentAccount-list">
+                        @foreach($account_most as $item)
                         <li>
-                            <a href="/gp/d3912cec416cacaf">
-                                <img class="account-img"
-                                     src="picture/5ee33ff936a5e_65x0.jpg" alt="账号封面">
+                            <a href="">
+                                <img class="account-img" src="{{$item->images[0]}}" alt="{{$item->title}}">
                                 <div class="account-info">
-                                    <div class="tit">黑色特斯拉粉色玛莎金风玉露花仙子全套7极五爪最新手册已买</div>
+                                    <div class="tit">{{$item->title}}</div>
                                     <div class="sec-tit">
-                                        <span class="price">6元/小时 </span>
+                                        <span class="price">{{$item->amount}}元/小时 </span>
                                     </div>
                                 </div>
                             </a>
                         </li>
+                        @endforeach
                     </ul>
                 </section>
 
                 <section>
                     <div class="aside-tit">
                         <h3>大家都在看</h3>
-                        <a href="/wiki/">
+                        <a href="">
                             <span>更多&nbsp;</span>
                             <i class="icon icon-more"></i>
                         </a>
                     </div>
                     <ul class="wiki-list aside">
+                        @foreach($article_most as $item)
                         <li>
-                            <a href="/wiki/news-c2f5000002"
-                               title="拳头新作《Valorant》于今日正式上线">
-                                <img class="wiki-img" src="picture/5ed618461074a.jpg"
-                                     alt="拳头新作《Valorant》于今日正式上线">
+                            <a href="" title="">
+                                <img class="wiki-img" src="{{$item->image}}" alt="{{$item->title}}">
                                 <div class="wiki-main">
-                                    <h2 class="wiki-tit">拳头新作《Valorant》于今日正式上线</h2>
+                                    <h2 class="wiki-tit">{{$item->title}}</h2>
                                     <p class="sec-tit">
-                                        <span><i class="icon icon-view"></i>418</span>
+                                        <span><i class="icon icon-view"></i>{{$item->follow}}</span>
                                     </p>
                                 </div>
                             </a>
                         </li>
-
+                        @endforeach
 
                     </ul>
                 </section>

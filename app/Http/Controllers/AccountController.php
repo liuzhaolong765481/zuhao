@@ -8,6 +8,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
+use App\Models\Article;
 use App\Models\Game;
 use App\Models\GameCate;
 use App\Services\AccountService;
@@ -22,24 +23,35 @@ class AccountController extends Controller
      */
     public function hall()
     {
+        //数据渲染
+        $game = Game::where('status', Game::IN_USE_STATUS)->orderBy('sort', 'desc')->get();
+
+        $game_cate = GameCate::all();
+
+        $account_most = Account::where('is_upper', Account::IN_SHELF)->orderBy('lease_times', 'desc')->limit(5)->get();
+
+        $article_most = Article::orderBy('sort', 'desc')->limit(5)->get();
+
+        return $this->rView('hall', compact('game', 'game_cate', 'account_most', 'article_most'));
+
+    }
+
+
+    public function hallList()
+    {
 
         $rules = [
             'game_id'     => 'nullable',
             'o'           => 'nullable',
+            'page'        => 'nullable',
+            'limit'       => 'nullable',
         ];
 
         $this->validateInput($rules);
 
         $list = AccountService::getList($this->validated);
 
-        //数据渲染
-        $game = Game::where('status', Game::IN_USE_STATUS)->orderBy('sort', 'desc')->get();
-
-        $game_cate = GameCate::all();
-
-        return $this->rView('hall', compact('game', 'game_cate', 'list'))
-            ->with('o', $this->validated['o'] ?? '');
-
+        return $this->successOrNodata($list);
     }
 
     /**
