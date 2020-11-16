@@ -92,7 +92,7 @@ class AccountService extends BaseServices
         return Account::where($where)
             ->orderBy(array_key_first($order), $order[array_key_first($order)])
             ->page($validate['page'], $validate['limit'])
-            ->get();
+            ->get(['id', 'title', 'tags', 'images', 'region_name', 'service_name', 'amount', 'lease_times']);
     }
 
 

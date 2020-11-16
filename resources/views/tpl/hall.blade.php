@@ -257,7 +257,7 @@
     }
 
     function listCallback(res) {
-        
+
 
         loadList(res.data.count);
     }

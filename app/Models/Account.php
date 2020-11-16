@@ -98,7 +98,7 @@ class Account extends BaseModel
 	];
 
 
-	protected $appends = ['game_name', 'user_phone', 'region', 'service'];
+	protected $appends = ['game_name', 'user_phone'];
 
     /**
      * 游戏名称
@@ -116,24 +116,6 @@ class Account extends BaseModel
     public function getUserPhoneAttribute()
     {
         return User::whereKey($this->uid)->value('user_phone') ?: '系统发布';
-    }
-
-    /**
-     * 大区名称
-     * @return mixed|null|string
-     */
-    public function getRegionAttribute()
-    {
-        return GameRegion::whereKey($this->region_id)->value('region_name');
-    }
-
-    /**
-     * 游戏服务器
-     * @return mixed|null|string
-     */
-    public function getServiceAttribute()
-    {
-        return GameService::whereKey($this->service_id)->value('service_name');
     }
 
     /**
