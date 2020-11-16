@@ -91,7 +91,8 @@ class AccountService extends BaseServices
 
         return Account::where($where)
             ->orderBy(array_key_first($order), $order[array_key_first($order)])
-            ->paginate(15);
+            ->page($validate['page'], $validate['limit'])
+            ->get();
     }
 
 

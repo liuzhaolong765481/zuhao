@@ -161,5 +161,19 @@ trait Format
         return view('template.jump' , ['msg' => $msg , 'url' => $url , 'ok' => false]);
     }
 
+    /**
+     * layui 格式输出
+     * @param object $list
+     * @return mixed
+     */
+    public function showJsonLayui($list)
+    {
+        return $this->successOrNodata(
+            [
+                'data'  => $list->toArray(),
+                'count' => defined('PAGE_COUNT') ? PAGE_COUNT : 0,
+            ]
+        );
+    }
 
 }

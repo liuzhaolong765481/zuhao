@@ -131,7 +131,7 @@
                 </div>
 
 
-{{--                <ul class="account-list js-mainContent">--}}
+                <ul class="account-list js-mainContent">
 {{--                    @foreach($list as $k => $v)--}}
 {{--                    <li>--}}
 {{--                        <a class="account-item" href="">--}}
@@ -170,20 +170,9 @@
 {{--                        </a>--}}
 {{--                    </li>--}}
 {{--                    @endforeach--}}
-{{--                </ul>--}}
+                </ul>
 
                 <ul class="pagination">
-                    <li class="page-first disabled"><a href="/all/" class="page-link">首页</a></li>
-                    <li class="page-prev disabled"><a href="/all/" class="page-link">上一页</a></li>
-                    <li class="page-item on"><a href="/all/" class="page-link">1</a></li>
-                    <li class="page-item"><a href="/all/p2/" class="page-link">2</a></li>
-                    <li class="page-item"><a href="/all/p3/" class="page-link">3</a></li>
-                    <li class="page-item"><a href="/all/p4/" class="page-link">4</a></li>
-                    <li class="page-item"><a href="/all/p5/" class="page-link">5</a></li>
-                    <li class="page-item"><a href="/all/p6/" class="page-link">6</a></li>
-                    <li class="page-item"><a href="/all/p7/" class="page-link">7</a></li>
-                    <li class="page-next"><a href="/all/p2/" class="page-link">下一页</a></li>
-                    <li class="page-last"><a href="/all/p62/" class="page-link">尾页</a></li>
                 </ul>
 
             </main>
@@ -249,6 +238,108 @@
     </div>
 </div>
 
+<script type="text/javascript">
+
+
+
+    //ajax分页开始
+    var limit = 1;//每页显示的条数
+    var page = 1;//当前页
+    var total = 0;
+
+    layui.use(['form', 'layer'],function () {
+        load();
+    });
+
+
+    function load(){
+        ajaxNoLoading("{{url('account/list')}}", listCallback, {limit:limit,page:page});
+    }
+
+    function listCallback(res) {
+        
+
+        loadList(res.data.count);
+    }
+    //加载分页列表
+    function loadList(count){
+        var str = '';
+        //总页数
+        var total_page = Math.ceil(count/limit);
+        total = total_page;
+
+        if(total_page>1) {
+            //上一页
+            if(page == 1){
+                str += "<li class='page-first disabled'><a href='javascript:;' class='page-link'>首页</a></li>" +
+                    "<li class='page-prev disabled'><a href='javascript:;' class='page-link'>上一页</a></li>";
+            }else{
+                str += "<li class='page-first'><a href='javascript:;' class='page-link'>首页</a></li>" +
+                    "<li class='page-prev'><a href='javascript:;' class='page-link'>上一页</a></li>";
+            }
+
+            if(page<=3){
+                var start_page = 1;
+                var end_page = 6;
+            }else{
+                var start_page = page - 2 ;
+                var end_page = page + 3
+            }
+
+            for (var i = start_page; i < end_page; i++) {
+                //限制条件
+                if (i > 0 && i <= total_page) {
+                    //判断当前页
+                    if (i == page) {
+                        str += "<li class='page-item on'><a href='javascript:;' class='page-link'>"+i+"</a></li>";
+                    } else {
+                        str += "<li class='page-item'><a href='javascript:;' class='page-link'>"+i+"</a></li>";
+                    }
+                }
+            }
+            //下一页
+            if(page == total_page){
+                str += "<li class='page-next disabled'><a href='javascript:;' class='page-link'>下一页</a></li>" +
+                    "<li class='page-last disabled'><a href='javascript:;' class='page-link'>尾页</a></li>";
+            }else{
+                str += "<li class='page-next'><a href='javascript:;' class='page-link'>下一页</a></li>" +
+                    "<li class='page-last'><a href='javascript:;' class='page-link'>尾页</a></li>";
+            }
+
+            $(".pagination").html(str);
+        }
+    }
+
+
+    $("body").on('click','.page-prev',function(){
+        if(page>1){
+            page--;
+        }
+        load();
+    });
+    $("body").on('click','.page-item',function(){
+        var p = $(this).text();//取到的是字符串,转化为整数
+        page = parseInt(p);
+        load();
+    });
+    $("body").on('click',".page-next",function(){
+        if(page < total){
+            page++;
+        }
+        load();
+    });
+
+    $("body").on('click',".page-first",function(){
+        page = 1;
+        load();
+    });
+
+    $("body").on('click',".page-last",function(){
+        page = total;
+        load();
+    });
+
+</script>
 
 <script>
     $(function () {
@@ -288,4 +379,5 @@
         });
     })
 </script>
+
 @include('tpl._include.footer')

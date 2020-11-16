@@ -37,21 +37,23 @@ class AccountController extends Controller
     }
 
 
+    /**
+     * @return mixed
+     * @throws \App\Exceptions\RequestException
+     */
     public function hallList()
     {
 
         $rules = [
             'game_id'     => 'nullable',
             'o'           => 'nullable',
-            'page'        => 'nullable',
-            'limit'       => 'nullable',
+            'page'        => 'required|integer',
+            'limit'       => 'required|integer',
         ];
 
         $this->validateInput($rules);
 
-        $list = AccountService::getList($this->validated);
-
-        return $this->successOrNodata($list);
+        return $this->showJsonLayui( AccountService::getList($this->validated) );
     }
 
     /**

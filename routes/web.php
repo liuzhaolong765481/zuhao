@@ -44,6 +44,13 @@ Route::group([],function($r){
         $r->post('reset-psd','AuthController@resetPsd');
     });
 
+    $r->group(['prefix' => 'account'], function ($r) {
+        /**
+         * @var $r Route
+         */
+        $r->post('list', 'AccountController@hallList');
+    });
+
     /**
      * 公共部分
      */

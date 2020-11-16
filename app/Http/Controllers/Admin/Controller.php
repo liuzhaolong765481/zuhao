@@ -59,7 +59,7 @@ class Controller extends BaseController
 
     /**
      * layui 格式输出
-     * @param $list
+     * @param object $list
      * @return mixed
      */
     public function showJsonLayui($list)

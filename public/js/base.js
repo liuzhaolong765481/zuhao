@@ -117,10 +117,12 @@ function ajaxRequest(url,  callback, param = {}, ) {
                 callback(res);
             }else if(res.status === AUTH_ERROR){
                 layer.msg('请先登录',function () {
-                    $('.to-login').click();
-                })
+                    mask($('.login-box'));
+                },1000)
+            }else{
+                layer.msg(res.message)
             }
-            layer.msg(res.message)
+
         },
         error:function () {
             layer.close(load);
