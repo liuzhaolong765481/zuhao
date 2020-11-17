@@ -229,6 +229,7 @@
                "                                    <div class='content-left'>\n" +
                "                                        <div class='game-region'>\n" +
                "                                            <span>"+v.game_name+"</span>"+ (v.region_name ? '/'+v.region_name: '') + (v.service_name ? '/'+v.service_name: '') +"\n" +
+               "                                        </div>\n" +
                "                                        <div class=\"tags\">\n";
             $.each(v.tags, function (k, v) {
                 str += "<span>"+v+"</span>"
