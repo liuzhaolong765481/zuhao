@@ -72,11 +72,11 @@ class AccountService extends BaseServices
         $where['is_upper'] = Account::IN_SHELF;
 
         //筛选条件
-        if (isset($validate['game_id'])) {
+        if (isset($validate['game_id']) && $validate['game_id']) {
             $where['game_id'] = $validate['game_id'];
         }
 
-        if (isset($validate['o'])) {
+        if (isset($validate['o']) && $validate['o']) {
 
             if ($validate['o'] == 'amount') {
                 $order['amount'] = 'asc';
@@ -92,7 +92,7 @@ class AccountService extends BaseServices
         return Account::where($where)
             ->orderBy(array_key_first($order), $order[array_key_first($order)])
             ->page($validate['page'], $validate['limit'])
-            ->get(['id', 'title', 'tags', 'images', 'region_name', 'service_name', 'amount', 'lease_times']);
+            ->get(['id', 'game_id', 'title', 'tags', 'images', 'region_name', 'service_name', 'amount', 'lease_times']);
     }
 
 

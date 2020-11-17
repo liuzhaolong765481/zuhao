@@ -58,7 +58,7 @@
                             <ul class="minor-tab-content">
                                 @foreach($game as $item)
                                     <li class="" data-value="{{$item->first_number}}">
-                                        <a href="javascript:;">{{$item->name}}</a>
+                                        <a href="javascript:;" class="gameChoose" data-id="{{$item->id}}">{{$item->name}}</a>
                                     </li>
                                 @endforeach
                             </ul>
@@ -98,7 +98,7 @@
                             <ul class="minor-tab-content">
                                 @foreach($item->game as $item2)
                                 <li class="" data-value="{{$item2->first_number}}">
-                                    <a href="javascript:;">{{$item2->name}}</a>
+                                    <a href="javascript:;" class="gameChoose" data-id="{{$item2->id}}">{{$item2->name}}</a>
                                 </li>
                                 @endforeach
                             </ul>
@@ -132,44 +132,7 @@
 
 
                 <ul class="account-list js-mainContent">
-{{--                    @foreach($list as $k => $v)--}}
-{{--                    <li>--}}
-{{--                        <a class="account-item" href="">--}}
-{{--                            <div class="tit" title="{{$v->title}}">--}}
-{{--                                <span class="tag ios">苹果</span>--}}
-{{--                                {{$v->title}}--}}
-{{--                            </div>--}}
-{{--                            <div class="content space-between">--}}
-{{--                                <div class="ver-center">--}}
-{{--                                    <img class="img" src="{{$v->images[0]}}" alt="{{$v->title}}">--}}
-{{--                                    <div class="content-left">--}}
-{{--                                        <div class="game-region">--}}
-{{--                                            <span>{{$v->game_name}}</span>--}}
-{{--                                            {{$v->region_name ? '/'.$v->region_name :''}}--}}
-{{--                                            {{$v->service_name ? '/'.$v->service_name : ''}}                                                                                                    </div>--}}
-{{--                                        <div class="tags">--}}
-{{--                                            @foreach($v->tags as $item)--}}
-{{--                                            <span>{{$item}}</span>--}}
-{{--                                            @endforeach--}}
-{{--                                        </div>--}}
-{{--                                        <div class="renter ver-center">--}}
-{{--                                            <svg class="symbolIcon" aria-hidden="true">--}}
-{{--                                                <use xlink:href="#icon-consumer"></use>--}}
-{{--                                            </svg>--}}
-{{--                                            <span>{{$v->user ? $v->user->nick_name : '平台出租'}}</span>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="content-right space-between-column">--}}
-{{--                                    <div class="price"><strong>{{$v->amount}}</strong> 元 / 小时</div>--}}
-{{--                                    <div class="rent-count">近期出租--}}
-{{--                                        <span>{{$v->lease_times}}</span> 次--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-{{--                    @endforeach--}}
+
                 </ul>
 
                 <ul class="pagination">
@@ -239,26 +202,58 @@
 </div>
 
 <script type="text/javascript">
-
-
-
-    //ajax分页开始
-    var limit = 1;//每页显示的条数
+    var limit = 14;//每页显示的条数
     var page = 1;//当前页
     var total = 0;
+    var o , game_id;
 
     layui.use(['form', 'layer'],function () {
         load();
     });
 
-
     function load(){
-        ajaxNoLoading("{{url('account/list')}}", listCallback, {limit:limit,page:page});
+        ajaxNoLoading("{{url('account/list')}}", listCallback, {limit:limit,page:page,o:o,game_id:game_id});
     }
 
     function listCallback(res) {
+        var list = res.data.data;
+        var str = '';
+        $.each(list, function (k, v) {
 
+           str += "   <li>\n" +
+               "                        <a class='account-item' href=''>\n" +
+               "                            <div class='tit' title='"+v.title+"'>"+v.title+"</div>" +
+               "                            <div class='content space-between'>\n" +
+               "                                <div class='ver-center'>\n" +
+               "                                    <img class='img' src='"+v.images[0]+"' alt='"+v.title+"'>\n" +
+               "                                    <div class='content-left'>\n" +
+               "                                        <div class='game-region'>\n" +
+               "                                            <span>"+v.game_name+"</span>"+ (v.region_name ? '/'+v.region_name: '') + (v.service_name ? '/'+v.service_name: '') +"\n" +
+               "                                        <div class=\"tags\">\n";
+            $.each(v.tags, function (k, v) {
+                str += "<span>"+v+"</span>"
+            });
 
+            str += "                                        </div>\n" +
+               "                                        <div class='renter ver-center'>\n" +
+               "                                            <svg class='symbolIcon' aria-hidden='true'>\n" +
+               "                                                <use xlink:href='#icon-consumer'></use>\n" +
+               "                                            </svg>\n" +
+               "                                            <span>平台出租</span>\n" +
+               "                                        </div>\n" +
+               "                                    </div>\n" +
+               "                                </div>\n" +
+               "                                <div class='content-right space-between-column'>\n" +
+               "                                    <div class='price'><strong>"+v.amount+"</strong> 元 / 小时</div>\n" +
+               "                                    <div class='rent-count'>近期出租\n" +
+               "                                        <span>"+v.lease_times+"</span> 次\n" +
+               "                                    </div>\n" +
+               "                                </div>\n" +
+               "                            </div>\n" +
+               "                        </a>\n" +
+               "                    </li>"
+        });
+        $('.account-list').html(str);
         loadList(res.data.count);
     }
     //加载分页列表
@@ -339,6 +334,17 @@
         load();
     });
 
+    $('.ver-center span').on('click', function () {
+        o = $(this).data('name');
+        load();
+        $(this).addClass('on').siblings().removeClass('on');
+    });
+
+    $('.gameChoose').on('click', function () {
+        game_id = $(this).data('id');
+        load();
+        $(this).parent().addClass('on').siblings().removeClass('on');
+    })
 </script>
 
 <script>
