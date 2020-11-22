@@ -63,7 +63,7 @@ class AccountController extends Controller
     {
         $game = Game::whereKey($id)->first();
 
-        return $this->rView('game.detail', compact('game'));
+        return $this->rView('account.detail', compact('game'));
     }
 
     /**

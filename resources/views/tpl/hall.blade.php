@@ -221,7 +221,7 @@
         $.each(list, function (k, v) {
 
            str += "   <li>\n" +
-               "                        <a class='account-item' href=''>\n" +
+               "                        <a class='account-item' href='"+'{{url('account/detail')}}/'+v.id+"'>\n" +
                "                            <div class='tit' title='"+v.title+"'>"+v.title+"</div>" +
                "                            <div class='content space-between'>\n" +
                "                                <div class='ver-center'>\n" +
