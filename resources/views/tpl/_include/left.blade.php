@@ -12,7 +12,7 @@
 </script>
 <ul class="aside-minor-menu">
     <li class="has-sub show-sub">
-        <a  href="/my">个人中心</a>
+        <a  href="{{'member'}}">个人中心</a>
     </li>
     <li class="has-sub show-sub">
         <a>我的租号</a>
@@ -35,7 +35,7 @@
         <div>
             <a class="" href="/my/moneyStatistics">资金概况</a>
             <a class="" href="/my/moneyDetail">资金明细</a>
-            <a class="" href="/my/coupons">红包卡券</a>
+            <a class="" href="{{url('member/carbon')}}">红包卡券</a>
         </div>
     </li>
     {{--<li class="has-sub show-sub">--}}
