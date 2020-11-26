@@ -207,6 +207,7 @@
         <a class="" href="{{url('')}}">首页</a>
         <a class="" href="{{url('hall')}}">租号大厅</a>
         <a class="" href="">游戏百科</a>
+        <a class="" href="">问答中心</a>
     </nav>
     <div class="ver-center">
         <form class="search" action="{{url('search')}}" method="get" target="_blank">
