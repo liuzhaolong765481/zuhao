@@ -11,11 +11,6 @@
 |
 */
 
-//Route::group(['middleware' => 'auth'], function ($r) {
-
-
-
-//});
 Route::group([],function($r){
     /**
      * @var $r Route
