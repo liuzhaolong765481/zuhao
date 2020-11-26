@@ -98,7 +98,7 @@ class Account extends BaseModel
 	];
 
 
-	protected $appends = ['game_name', 'user_phone'];
+	protected $appends = ['game_name', 'user_phone', 'user_nick'];
 
     /**
      * 游戏名称
@@ -116,6 +116,15 @@ class Account extends BaseModel
     public function getUserPhoneAttribute()
     {
         return User::whereKey($this->uid)->value('user_phone') ?: '系统发布';
+    }
+
+    /**
+     * 账号所有者
+     * @return mixed
+     */
+    public function getUserNickAttribute()
+    {
+        return User::whereKey($this->uid)->value('nick_name') ?: '平台出租';
     }
 
     /**

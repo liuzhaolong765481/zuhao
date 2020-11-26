@@ -61,9 +61,14 @@ class AccountController extends Controller
      */
     public function detail($id)
     {
-        $game = Game::whereKey($id)->first();
+        $account = Account::whereKey($id)->first();
 
-        return $this->rView('account.detail', compact('game'));
+        $recommend = Account::where('is_upper', Account::IN_SHELF)
+            ->where('game_id', $account->game_id)
+            ->orderBy('lease_times', 'desc')
+            ->limit(4)
+            ->get();
+        return $this->rView('account.detail', compact('account','recommend'));
     }
 
     /**

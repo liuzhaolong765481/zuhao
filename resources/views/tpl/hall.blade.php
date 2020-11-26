@@ -240,7 +240,7 @@
                "                                            <svg class='symbolIcon' aria-hidden='true'>\n" +
                "                                                <use xlink:href='#icon-consumer'></use>\n" +
                "                                            </svg>\n" +
-               "                                            <span>平台出租</span>\n" +
+               "                                            <span>"+v.user_nick+"</span>\n" +
                "                                        </div>\n" +
                "                                    </div>\n" +
                "                                </div>\n" +

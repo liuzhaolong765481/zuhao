@@ -49,6 +49,7 @@ Route::group([],function($r){
          * @var $r Route
          */
         $r->post('list', 'AccountController@hallList');
+        $r->get('detail/{id}', 'AccountController@detail');
     });
 
     /**
@@ -93,7 +94,7 @@ Route::group([],function($r){
              * @var $r Route
              */
             $r->post('publish','AccountController@publish');
-            $r->get('detail/{id}', 'AccountController@detail');
+
 
         });
 
