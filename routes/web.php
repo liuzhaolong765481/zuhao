@@ -94,7 +94,7 @@ Route::group([],function($r){
              * @var $r Route
              */
             $r->post('publish','AccountController@publish');
-
+            $r->post('focus','AccountController@focusAccount');
 
         });
 

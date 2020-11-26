@@ -11,7 +11,9 @@ use App\Models\Account;
 use App\Models\Article;
 use App\Models\Game;
 use App\Models\GameCate;
+use App\Models\UserFollow;
 use App\Services\AccountService;
+use App\Services\AuthService;
 
 class AccountController extends Controller
 {
@@ -100,6 +102,34 @@ class AccountController extends Controller
 
         return $this->successOrFailed(AccountService::createAccount($this->validated));
 
+    }
+
+    /**
+     * 关注/取消关注
+     * @throws \App\Exceptions\RequestException
+     */
+    public function focusAccount()
+    {
+        $rules = [
+            'obj_id' => 'required'
+        ];
+
+        $this->validateInput($rules);
+
+        //判断是否存在，存在则取消关注
+        $exists = UserFollow::where('obj_id', $this->validated['obj_id'])->where('uid', auth()->id())->get();
+
+        if($exists){
+            return $this->successOrFailed($exists->delete());
+        }
+
+        $this->validated['uid'] = auth()->id();
+        $this->validated['obj_title'] = Account::whereKey($this->validated['obj_id'])->value('title');
+
+        //添加用户行为
+        AuthService::addBehavior(7, $this->validated['obj_title']);
+
+        return $this->successOrFailed(UserFollow::create($this->validated));
     }
 
 
