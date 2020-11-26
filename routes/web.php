@@ -20,7 +20,9 @@ Route::group([],function($r){
     /**
      * @var $r Route
      */
+    //首页
     $r->get('/', 'IndexController@index')->name('index');
+    //租号大厅
     $r->get('hall', 'AccountController@hall');
 
 
@@ -37,10 +39,15 @@ Route::group([],function($r){
          * @var $r Route
          */
         $r->get('login','AuthController@login')->name('login');
+        //账密登录
         $r->post('login-psd','AuthController@loginPsd');
+        //短信验证码登录
         $r->post('login-code','AuthController@loginCode');
+        //退出登录
         $r->get('logout','AuthController@logout');
+        //注册
         $r->post('register','AuthController@register');
+        //忘记密码
         $r->post('reset-psd','AuthController@resetPsd');
     });
 
@@ -48,7 +55,9 @@ Route::group([],function($r){
         /**
          * @var $r Route
          */
+        //租号大厅数据接口
         $r->post('list', 'AccountController@hallList');
+        //账号详情
         $r->get('detail/{id}', 'AccountController@detail');
     });
 
@@ -59,9 +68,13 @@ Route::group([],function($r){
         /**
          * @var $r Route
          */
+        //发送短信
         $r->post('send-sms','PublicController@sendSms');
+        //单文件上传
         $r->post('upload','PublicController@upload');
+        //多文件上传
         $r->post('uploads','PublicController@uploads');
+        //获取游戏区服
         $r->post('get-game-spu','PublicController@getGameSpu');
 
     });
@@ -78,10 +91,15 @@ Route::group([],function($r){
             /**
              * @var $r Route
              */
+            //个人中心
             $r->get('/', 'MemberController@index');
+            //发布账号
             $r->get('publish', 'MemberController@publish');
+            //我的账号
             $r->get('my-account','MemberController@myAccount');
+            //我的优惠券
             $r->get('carbon','MemberController@carbon');
+            //更新用户信息
             $r->post('up-user','MemberController@upUser');
 
         });
@@ -93,7 +111,9 @@ Route::group([],function($r){
             /**
              * @var $r Route
              */
+            //发布账号
             $r->post('publish','AccountController@publish');
+            //关注/取消关注账号
             $r->post('focus','AccountController@focusAccount');
 
         });
