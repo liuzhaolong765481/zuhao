@@ -36,14 +36,7 @@ class MemberController extends Controller
         return $this->rView('member.publish', compact('game','specs'));
     }
 
-    /**
-     * 我的优惠券
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function carbon()
-    {
-       return $this->rView('member.carbon');
-    }
+
 
     /**
      * 更新用户信息
@@ -65,10 +58,30 @@ class MemberController extends Controller
         return $this->successOrFailed(AuthService::updateUser($this->validated));
     }
 
+    /**
+     * 我的优惠券
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function carbon()
+    {
+        return $this->rView('member.carbon');
+    }
+
+    /**
+     * 我的发布账号
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function myAccount()
     {
         return $this->rView('member.my_account');
     }
 
-
+    /**
+     * 我的收藏
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function myCollect()
+    {
+        return $this->rView('member.my_collect');
+    }
 }
