@@ -143,7 +143,7 @@ class Account extends BaseModel
      */
     public function getTagsAttribute($v)
     {
-        return  json_decode($v, true);
+        return  json_decode($v, true) ?: [];
     }
 
     /**

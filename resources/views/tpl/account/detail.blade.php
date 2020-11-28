@@ -16,54 +16,24 @@
             <div class="media-swiper">
                 <div class="media-main swiper-container swiper-no-swiping swiper-container-horizontal">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide swiper-slide-active" style="width: 484px; margin-right: 10px;"><img src="picture/5ee318c614681.jpg"
-                                                                            alt="贵8，200多个皮肤，（还有别的限定号需要可➕🐧)卸载🐧不需要验证码，描述有联系方式"></div>
-                        <div class="swiper-slide"
-                             style="width: 484px; margin-right: 10px;"><img src="picture/5f63220a5aecd.jpg"
-                                                                            alt="贵8，200多个皮肤，（还有别的限定号需要可➕🐧)卸载🐧不需要验证码，描述有联系方式"></div>
-                        <div class="swiper-slide"
-                             style="width: 484px; margin-right: 10px;"><img src="picture/5eed9f919389c.jpg"
-                                                                            alt="贵8，200多个皮肤，（还有别的限定号需要可➕🐧)卸载🐧不需要验证码，描述有联系方式"></div>
-                        <div class="swiper-slide"
-                             style="width: 484px; margin-right: 10px;"><img src="picture/5f11cab607eb1.jpg"
-                                                                            alt="贵8，200多个皮肤，（还有别的限定号需要可➕🐧)卸载🐧不需要验证码，描述有联系方式"></div>
-                        <div class="swiper-slide"
-                             style="width: 484px; margin-right: 10px;"><img src="picture/5f11cab6082e9.jpg"
-                                                                            alt="贵8，200多个皮肤，（还有别的限定号需要可➕🐧)卸载🐧不需要验证码，描述有联系方式"></div>
-                        <div class="swiper-slide"
-                             style="width: 484px; margin-right: 10px;"><img src="picture/5f26413cc0dad.jpg"
-                                                                            alt="贵8，200多个皮肤，（还有别的限定号需要可➕🐧)卸载🐧不需要验证码，描述有联系方式"></div>
+                        @foreach($account->images as $k => $item)
+                        <div class="swiper-slide @if($k == 0)swiper-slide-active"@endif style="width: 484px; margin-right: 10px;">
+                            <img src="{{$item}}" alt="{{$account->title}}">
+                        </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="thumbs">
-                    <div class="media-btn-prev swiper-button-disabled"><i class="icon icon-media-prev-disabled"></i>
+                    <div class="media-btn-prev swiper-button-disabled">
+                        <i class="icon icon-media-prev-disabled"></i>
                     </div>
                     <div class="media-thumbs swiper-container swiper-container-horizontal">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide active swiper-slide-active"
-                                 style="width: 70.2393px; margin-right: 6px;"><img src="picture/5ee318c614681.jpg"
-                                                                                   alt="贵8，200多个皮肤，（还有别的限定号需要可➕🐧)卸载🐧不需要验证码，描述有联系方式">
-                            </div>
-                            <div class="swiper-slide"
-                                 style="width: 70.2393px; margin-right: 6px;"><img src="picture/5f63220a5aecd.jpg"
-                                                                                   alt="贵8，200多个皮肤，（还有别的限定号需要可➕🐧)卸载🐧不需要验证码，描述有联系方式">
-                            </div>
-                            <div class="swiper-slide"
-                                 style="width: 70.2393px; margin-right: 6px;"><img src="picture/5eed9f919389c.jpg"
-                                                                                   alt="贵8，200多个皮肤，（还有别的限定号需要可➕🐧)卸载🐧不需要验证码，描述有联系方式">
-                            </div>
-                            <div class="swiper-slide"
-                                 style="width: 70.2393px; margin-right: 6px;"><img src="picture/5f11cab607eb1.jpg"
-                                                                                   alt="贵8，200多个皮肤，（还有别的限定号需要可➕🐧)卸载🐧不需要验证码，描述有联系方式">
-                            </div>
-                            <div class="swiper-slide"
-                                 style="width: 70.2393px; margin-right: 6px;"><img src="picture/5f11cab6082e9.jpg"
-                                                                                   alt="贵8，200多个皮肤，（还有别的限定号需要可➕🐧)卸载🐧不需要验证码，描述有联系方式">
-                            </div>
-                            <div class="swiper-slide"
-                                 style="width: 70.2393px; margin-right: 6px;"><img src="picture/5f26413cc0dad.jpg"
-                                                                                   alt="贵8，200多个皮肤，（还有别的限定号需要可➕🐧)卸载🐧不需要验证码，描述有联系方式">
-                            </div>
+                            @foreach($account->images as $k => $item)
+                                <div class="swiper-slide @if($k == 0) active swiper-slide-active @endif " style="width: 70.239px; margin-right: 6px;">
+                                    <img src="{{$item}}" alt="{{$account->title}}">
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="media-btn-next"><i class="icon icon-media-next"></i></div>
@@ -71,34 +41,33 @@
             </div>
             <div class="tools cf">
                 <div class="up fl">
-                    <div class="share">
-                        <i class="icon icon-share"></i>分享
-                        <div class="hover-pop right">
-                            <div class="bdsharebuttonbox">
-                                <a class="js-hoverSwitchIcon" data-cmd="weixin" title="分享到微信">
-                                    <i class="icon icon-friendcircle-sm"></i>
-                                </a>
-                                <a class="js-hoverSwitchIcon"
-                                   title="分享到QQ好友" target="_blank"
-                                   href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.zuhao.com/glory/0286ad6effd2b50f&title=王者手游租号-贵8，200多个皮肤，（还有别的限定号需要可➕🐧)卸载🐧不需要验证码，描述有联系方式-账号已租1370次-租号网&summary=王者手游租号什么平台好？来租号网,限时稀有皮肤应有尽有,此王者手游账号已出租0小时,安全可靠。&pics=picture/5ee318c614681.jpg">
-                                    <i class="icon icon-qq-sm"></i>
-                                </a>
-                                <a class="js-hoverSwitchIcon"
-                                   title="分享到新浪微博" target="_blank"
-                                   href="http://service.weibo.com/share/share.php?url=https://www.zuhao.com/glory/0286ad6effd2b50f&title=王者手游租号-贵8，200多个皮肤，（还有别的限定号需要可➕🐧)卸载🐧不需要验证码，描述有联系方式-账号已租1370次-租号网&summary=王者手游租号什么平台好？来租号网,限时稀有皮肤应有尽有,此王者手游账号已出租0小时,安全可靠。&pics=picture/5ee318c614681.jpg">
-                                    <i class="icon icon-weibo-sm"></i>
-                                </a>
-                                <a class="js-hoverSwitchIcon"
-                                   title="分享到QQ空间" target="_blank"
-                                   href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.zuhao.com/glory/0286ad6effd2b50f&title=王者手游租号-贵8，200多个皮肤，（还有别的限定号需要可➕🐧)卸载🐧不需要验证码，描述有联系方式-账号已租1370次-租号网&summary=王者手游租号什么平台好？来租号网,限时稀有皮肤应有尽有,此王者手游账号已出租0小时,安全可靠。&pics=picture/5ee318c614681.jpg">
-                                    <i class="icon icon-qzone-sm"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    {{--<div class="share">--}}
+                        {{--<i class="icon icon-share"></i>分享--}}
+                        {{--<div class="hover-pop right">--}}
+                            {{--<div class="bdsharebuttonbox">--}}
+                                {{--<a class="js-hoverSwitchIcon" data-cmd="weixin" title="分享到微信">--}}
+                                    {{--<i class="icon icon-friendcircle-sm"></i>--}}
+                                {{--</a>--}}
+                                {{--<a class="js-hoverSwitchIcon"--}}
+                                   {{--title="分享到QQ好友" target="_blank"--}}
+                                   {{--href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.zuhao.com/glory/0286ad6effd2b50f&title=王者手游租号-贵8，200多个皮肤，（还有别的限定号需要可➕🐧)卸载🐧不需要验证码，描述有联系方式-账号已租1370次-租号网&summary=王者手游租号什么平台好？来租号网,限时稀有皮肤应有尽有,此王者手游账号已出租0小时,安全可靠。&pics=picture/5ee318c614681.jpg">--}}
+                                    {{--<i class="icon icon-qq-sm"></i>--}}
+                                {{--</a>--}}
+                                {{--<a class="js-hoverSwitchIcon"--}}
+                                   {{--title="分享到新浪微博" target="_blank"--}}
+                                   {{--href="http://service.weibo.com/share/share.php?url=https://www.zuhao.com/glory/0286ad6effd2b50f&title=王者手游租号-贵8，200多个皮肤，（还有别的限定号需要可➕🐧)卸载🐧不需要验证码，描述有联系方式-账号已租1370次-租号网&summary=王者手游租号什么平台好？来租号网,限时稀有皮肤应有尽有,此王者手游账号已出租0小时,安全可靠。&pics=picture/5ee318c614681.jpg">--}}
+                                    {{--<i class="icon icon-weibo-sm"></i>--}}
+                                {{--</a>--}}
+                                {{--<a class="js-hoverSwitchIcon"--}}
+                                   {{--title="分享到QQ空间" target="_blank"--}}
+                                   {{--href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.zuhao.com/glory/0286ad6effd2b50f&title=王者手游租号-贵8，200多个皮肤，（还有别的限定号需要可➕🐧)卸载🐧不需要验证码，描述有联系方式-账号已租1370次-租号网&summary=王者手游租号什么平台好？来租号网,限时稀有皮肤应有尽有,此王者手游账号已出租0小时,安全可靠。&pics=picture/5ee318c614681.jpg">--}}
+                                    {{--<i class="icon icon-qzone-sm"></i>--}}
+                                {{--</a>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                     <div class="collect"><i class="icon icon-collect"></i>关注</div>
                 </div>
-                <div class="report fr" style="display: none;">举报</div>
             </div>
         </div>
         <div class="info">
@@ -164,7 +133,7 @@
                 <div class="form-item-kv">
                     <label>租用类型</label>
                     <ul class="form-item rent-type">
-                        <li data-type="hour">
+                        <li data-type="hour" class="on">
                             <div>
                                 <div class="type">时租</div>
                                 <div class="unit">2 小时起租</div>
@@ -357,6 +326,10 @@
             $(this).addClass("on");
             $(".mainTab-contents>div:eq(" + index + ")").show().siblings().hide();
         });
+    });
+
+    $(".rent-type li").on('click', function () {
+        $(this).addClass("on").siblings().removeClass("on")
     });
 </script>
 
