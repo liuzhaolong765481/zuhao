@@ -139,6 +139,7 @@
                     <input id="day_price" name="specs[{{$item->id}}]" value="" type="number" placeholder="{{$item->specs_name}}价格">
                 </div>
             </div>
+            <div class="form-item-after">&emsp; * {{$item->descripition}}</div>
             <br>
             @endforeach
 
