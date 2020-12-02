@@ -8551,6 +8551,7 @@ body .layui-layer:not(.layui-layer-msg):not(.layui-layer-tips):not(.layui-layer-
     max-width: 180px;
     padding: 10px;
     margin-right: 2%;
+    margin-bottom: 18px;
     line-height: 100%;
     vertical-align: top;
     font-size: 12px;

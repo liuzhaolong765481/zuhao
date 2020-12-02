@@ -133,33 +133,26 @@
                 <div class="form-item-kv">
                     <label>租用类型</label>
                     <ul class="form-item rent-type">
-                        <li data-type="hour" class="on">
+                        <li class="on">
                             <div>
                                 <div class="type">时租</div>
-                                <div class="unit">2 小时起租</div>
+                                <div class="unit">1小时起租</div>
                             </div>
-                            <div class="fee">¥<span>5</span></div>
+                            <div class="fee">¥<span>{{$account->amount}}</span></div>
                         </li>
-                        <li data-type="day">
+                        @foreach($account->account_specs as $item)
+                        <li>
                             <div>
-                                <div class="type">日租</div>
-                                <div class="unit">2元/小时</div>
+                                <div class="type">{{$item->specs->specs_name}}</div>
+                                <div class="unit">{{number_format($item->price / $item->specs->hours, 2)}}元/小时</div>
                             </div>
-                            <div class="fee">¥<span>48</span></div>
+                            <div class="fee">¥<span>{{$item->price}}</span></div>
                             <div class="hover-pop bottom">
-                                <div>日租时长为24小时</div>
+                                <div>{{$item->specs->descripition}}</div>
                             </div>
                         </li>
-                        <li data-type="overnight">
-                            <div>
-                                <div class="type">包夜</div>
-                                <div class="unit">3元/小时</div>
-                            </div>
-                            <div class="fee">¥<span>30</span></div>
-                            <div class="hover-pop bottom">
-                                <div>包夜时间：22:00-08:00</div>
-                            </div>
-                        </li>
+                        @endforeach
+
                     </ul>
                 </div>
 
@@ -331,6 +324,103 @@
     $(".rent-type li").on('click', function () {
         $(this).addClass("on").siblings().removeClass("on")
     });
+
+    /**
+     * Swiper初始化
+     */
+    (function () {
+        var $body = $('body'),
+            $prevBtn = $('.media-btn-prev'),
+            $nextBtn = $('.media-btn-next'),
+            $prev = $prevBtn.children('i'),
+            $next = $nextBtn.children('i'),
+
+            mediaMain = new Swiper('.media-main', {
+                observer: true,
+                observeParents: true,
+                slidesPerView: 1,
+                spaceBetween: 10,
+                prevButton: '.media-btn-prev',
+                nextButton: '.media-btn-next'
+            }),
+            mediaThumbs = new Swiper('.media-thumbs', {
+                observer: true,
+                observeParents: true,
+                slideToClickedSlide: true,
+                breakpoints: {
+                    424: {
+                        slidesPerView: 4.85,
+                        spaceBetween: 6
+                    },
+                    1200: {
+                        slidesPerView: 3.85,
+                        spaceBetween: 6
+                    },
+                    1450: {
+                        slidesPerView: 5.85,
+                        spaceBetween: 6
+                    },
+                    4096: {
+                        slidesPerView: 5.85,
+                        spaceBetween: 6
+                    }
+                }
+            }),
+
+            mainList = $('.media-main .swiper-wrapper').children(),
+            thumbsList = $('.media-thumbs .swiper-wrapper').children(),
+
+            switchBtn = function () {
+                if ($prevBtn.hasClass('swiper-button-disabled')) {
+                    $prev.addClass('icon-media-prev-disabled').removeClass('icon-media-prev')
+                } else {
+                    $prev.addClass('icon-media-prev').removeClass('icon-media-prev-disabled')
+                }
+                if ($nextBtn.hasClass('swiper-button-disabled')) {
+                    $next.addClass('icon-media-next-disabled').removeClass('icon-media-next')
+                } else {
+                    $next.addClass('icon-media-next').removeClass('icon-media-next-disabled')
+                }
+            };
+
+        // thumbs点击图片与main联动
+        $body.on('click', ".media-thumbs .swiper-slide", function () {
+            $(".media-thumbs .swiper-slide").removeClass('active');
+            $(this).addClass('active');
+            var $this = $(this);
+
+            mainList.each(function (index) {
+                if (index === $this.index()) {
+                    mediaMain.slideTo(index, 500, false);
+                } else {
+                }
+            });
+
+            switchBtn();
+        });
+
+        // main分页与thumbs联动
+        $body.on('click', ".media-swiper .media-btn-prev, .media-swiper .media-btn-next", function () {
+            thumbsList.each(function (index) {
+                if (mediaMain.activeIndex === index) {
+                    $(this).addClass('active');
+                    thumbsActiceIndex = index;
+                } else {
+                    $(this).removeClass('active')
+                }
+            });
+            mediaThumbs.slideTo(thumbsActiceIndex, 500, false);
+            switchBtn();
+        });
+        switchBtn();
+
+        var $assetsMedia = $('.assets');
+        new Swiper($('.swiper-container', $assetsMedia), {
+            prevButton: $('.swiper-button-prev', $assetsMedia),
+            nextButton: $('.swiper-button-next', $assetsMedia)
+        });
+    })();
+
 </script>
 
 @include("tpl._include.footer")
