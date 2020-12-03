@@ -421,6 +421,10 @@
         });
     })();
 
+    $('.icon-collect').on('click', function () {
+            
+    });
+
 </script>
 
 @include("tpl._include.footer")
