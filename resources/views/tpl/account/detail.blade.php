@@ -422,7 +422,7 @@
     })();
 
     $('.icon-collect').on('click', function () {
-            
+
     });
 
 </script>
